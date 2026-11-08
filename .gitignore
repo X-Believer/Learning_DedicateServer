@@ -1,0 +1,27 @@
+# Unreal Engine generated files
+Binaries/
+Intermediate/
+DerivedDataCache/
+Saved/
+.vs/
+
+# IDE files
+.idea/
+.vscode/
+*.VC.db
+*.VC.opendb
+*.suo
+*.sln
+
+# Build files
+*.obj
+*.pdb
+*.log
+*.tmp
+
+# Unreal generated project files
+*.VC.db
+*.opensdf
+
+# Large asset to exclude
+/Content/Effects/Textures/Flipbooks/SmokeSwirl_3_Flipbook_CHANNELPACK.uasset
