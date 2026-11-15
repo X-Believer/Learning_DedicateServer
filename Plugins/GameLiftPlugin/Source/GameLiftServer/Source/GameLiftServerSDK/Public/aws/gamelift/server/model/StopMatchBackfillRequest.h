@@ -28,8 +28,8 @@ namespace Model {
 /**
  * <p>A request to be used for making a StopMatchBackfill call.
  * For more information, see the <a
- * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon GameLift Servers
- * Developer Guide</a>.</p>
+ * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon
+ * GameLift Developer Guide</a>.</p>
  */
 class AWS_GAMELIFT_API StopMatchBackfillRequest {
 #ifdef GAMELIFT_USE_STD

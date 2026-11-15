@@ -43,52 +43,159 @@ namespace Model
     AWS_LAMBDA_API Aws::Utils::Json::JsonValue Jsonize() const;
 
 
-    ///@{
     /**
      * <p>Whether to allow cookies or other credentials in requests to your function
      * URL. The default is <code>false</code>.</p>
      */
     inline bool GetAllowCredentials() const{ return m_allowCredentials; }
-    inline bool AllowCredentialsHasBeenSet() const { return m_allowCredentialsHasBeenSet; }
-    inline void SetAllowCredentials(bool value) { m_allowCredentialsHasBeenSet = true; m_allowCredentials = value; }
-    inline Cors& WithAllowCredentials(bool value) { SetAllowCredentials(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Whether to allow cookies or other credentials in requests to your function
+     * URL. The default is <code>false</code>.</p>
+     */
+    inline bool AllowCredentialsHasBeenSet() const { return m_allowCredentialsHasBeenSet; }
+
+    /**
+     * <p>Whether to allow cookies or other credentials in requests to your function
+     * URL. The default is <code>false</code>.</p>
+     */
+    inline void SetAllowCredentials(bool value) { m_allowCredentialsHasBeenSet = true; m_allowCredentials = value; }
+
+    /**
+     * <p>Whether to allow cookies or other credentials in requests to your function
+     * URL. The default is <code>false</code>.</p>
+     */
+    inline Cors& WithAllowCredentials(bool value) { SetAllowCredentials(value); return *this;}
+
+
     /**
      * <p>The HTTP headers that origins can include in requests to your function URL.
      * For example: <code>Date</code>, <code>Keep-Alive</code>,
      * <code>X-Custom-Header</code>.</p>
      */
     inline const Aws::Vector<Aws::String>& GetAllowHeaders() const{ return m_allowHeaders; }
-    inline bool AllowHeadersHasBeenSet() const { return m_allowHeadersHasBeenSet; }
-    inline void SetAllowHeaders(const Aws::Vector<Aws::String>& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders = value; }
-    inline void SetAllowHeaders(Aws::Vector<Aws::String>&& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders = std::move(value); }
-    inline Cors& WithAllowHeaders(const Aws::Vector<Aws::String>& value) { SetAllowHeaders(value); return *this;}
-    inline Cors& WithAllowHeaders(Aws::Vector<Aws::String>&& value) { SetAllowHeaders(std::move(value)); return *this;}
-    inline Cors& AddAllowHeaders(const Aws::String& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders.push_back(value); return *this; }
-    inline Cors& AddAllowHeaders(Aws::String&& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders.push_back(std::move(value)); return *this; }
-    inline Cors& AddAllowHeaders(const char* value) { m_allowHeadersHasBeenSet = true; m_allowHeaders.push_back(value); return *this; }
-    ///@}
 
-    ///@{
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline bool AllowHeadersHasBeenSet() const { return m_allowHeadersHasBeenSet; }
+
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline void SetAllowHeaders(const Aws::Vector<Aws::String>& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders = value; }
+
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline void SetAllowHeaders(Aws::Vector<Aws::String>&& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders = std::move(value); }
+
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& WithAllowHeaders(const Aws::Vector<Aws::String>& value) { SetAllowHeaders(value); return *this;}
+
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& WithAllowHeaders(Aws::Vector<Aws::String>&& value) { SetAllowHeaders(std::move(value)); return *this;}
+
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& AddAllowHeaders(const Aws::String& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders.push_back(value); return *this; }
+
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& AddAllowHeaders(Aws::String&& value) { m_allowHeadersHasBeenSet = true; m_allowHeaders.push_back(std::move(value)); return *this; }
+
+    /**
+     * <p>The HTTP headers that origins can include in requests to your function URL.
+     * For example: <code>Date</code>, <code>Keep-Alive</code>,
+     * <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& AddAllowHeaders(const char* value) { m_allowHeadersHasBeenSet = true; m_allowHeaders.push_back(value); return *this; }
+
+
     /**
      * <p>The HTTP methods that are allowed when calling your function URL. For
      * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
      * wildcard character (<code>*</code>).</p>
      */
     inline const Aws::Vector<Aws::String>& GetAllowMethods() const{ return m_allowMethods; }
-    inline bool AllowMethodsHasBeenSet() const { return m_allowMethodsHasBeenSet; }
-    inline void SetAllowMethods(const Aws::Vector<Aws::String>& value) { m_allowMethodsHasBeenSet = true; m_allowMethods = value; }
-    inline void SetAllowMethods(Aws::Vector<Aws::String>&& value) { m_allowMethodsHasBeenSet = true; m_allowMethods = std::move(value); }
-    inline Cors& WithAllowMethods(const Aws::Vector<Aws::String>& value) { SetAllowMethods(value); return *this;}
-    inline Cors& WithAllowMethods(Aws::Vector<Aws::String>&& value) { SetAllowMethods(std::move(value)); return *this;}
-    inline Cors& AddAllowMethods(const Aws::String& value) { m_allowMethodsHasBeenSet = true; m_allowMethods.push_back(value); return *this; }
-    inline Cors& AddAllowMethods(Aws::String&& value) { m_allowMethodsHasBeenSet = true; m_allowMethods.push_back(std::move(value)); return *this; }
-    inline Cors& AddAllowMethods(const char* value) { m_allowMethodsHasBeenSet = true; m_allowMethods.push_back(value); return *this; }
-    ///@}
 
-    ///@{
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline bool AllowMethodsHasBeenSet() const { return m_allowMethodsHasBeenSet; }
+
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline void SetAllowMethods(const Aws::Vector<Aws::String>& value) { m_allowMethodsHasBeenSet = true; m_allowMethods = value; }
+
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline void SetAllowMethods(Aws::Vector<Aws::String>&& value) { m_allowMethodsHasBeenSet = true; m_allowMethods = std::move(value); }
+
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline Cors& WithAllowMethods(const Aws::Vector<Aws::String>& value) { SetAllowMethods(value); return *this;}
+
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline Cors& WithAllowMethods(Aws::Vector<Aws::String>&& value) { SetAllowMethods(std::move(value)); return *this;}
+
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline Cors& AddAllowMethods(const Aws::String& value) { m_allowMethodsHasBeenSet = true; m_allowMethods.push_back(value); return *this; }
+
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline Cors& AddAllowMethods(Aws::String&& value) { m_allowMethodsHasBeenSet = true; m_allowMethods.push_back(std::move(value)); return *this; }
+
+    /**
+     * <p>The HTTP methods that are allowed when calling your function URL. For
+     * example: <code>GET</code>, <code>POST</code>, <code>DELETE</code>, or the
+     * wildcard character (<code>*</code>).</p>
+     */
+    inline Cors& AddAllowMethods(const char* value) { m_allowMethodsHasBeenSet = true; m_allowMethods.push_back(value); return *this; }
+
+
     /**
      * <p>The origins that can access your function URL. You can list any number of
      * specific origins, separated by a comma. For example:
@@ -97,44 +204,172 @@ namespace Model
      * character (<code>*</code>).</p>
      */
     inline const Aws::Vector<Aws::String>& GetAllowOrigins() const{ return m_allowOrigins; }
-    inline bool AllowOriginsHasBeenSet() const { return m_allowOriginsHasBeenSet; }
-    inline void SetAllowOrigins(const Aws::Vector<Aws::String>& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins = value; }
-    inline void SetAllowOrigins(Aws::Vector<Aws::String>&& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins = std::move(value); }
-    inline Cors& WithAllowOrigins(const Aws::Vector<Aws::String>& value) { SetAllowOrigins(value); return *this;}
-    inline Cors& WithAllowOrigins(Aws::Vector<Aws::String>&& value) { SetAllowOrigins(std::move(value)); return *this;}
-    inline Cors& AddAllowOrigins(const Aws::String& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins.push_back(value); return *this; }
-    inline Cors& AddAllowOrigins(Aws::String&& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins.push_back(std::move(value)); return *this; }
-    inline Cors& AddAllowOrigins(const char* value) { m_allowOriginsHasBeenSet = true; m_allowOrigins.push_back(value); return *this; }
-    ///@}
 
-    ///@{
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline bool AllowOriginsHasBeenSet() const { return m_allowOriginsHasBeenSet; }
+
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline void SetAllowOrigins(const Aws::Vector<Aws::String>& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins = value; }
+
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline void SetAllowOrigins(Aws::Vector<Aws::String>&& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins = std::move(value); }
+
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline Cors& WithAllowOrigins(const Aws::Vector<Aws::String>& value) { SetAllowOrigins(value); return *this;}
+
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline Cors& WithAllowOrigins(Aws::Vector<Aws::String>&& value) { SetAllowOrigins(std::move(value)); return *this;}
+
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline Cors& AddAllowOrigins(const Aws::String& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins.push_back(value); return *this; }
+
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline Cors& AddAllowOrigins(Aws::String&& value) { m_allowOriginsHasBeenSet = true; m_allowOrigins.push_back(std::move(value)); return *this; }
+
+    /**
+     * <p>The origins that can access your function URL. You can list any number of
+     * specific origins, separated by a comma. For example:
+     * <code>https://www.example.com</code>, <code>http://localhost:60905</code>.</p>
+     * <p>Alternatively, you can grant access to all origins using the wildcard
+     * character (<code>*</code>).</p>
+     */
+    inline Cors& AddAllowOrigins(const char* value) { m_allowOriginsHasBeenSet = true; m_allowOrigins.push_back(value); return *this; }
+
+
     /**
      * <p>The HTTP headers in your function response that you want to expose to origins
      * that call your function URL. For example: <code>Date</code>,
      * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
      */
     inline const Aws::Vector<Aws::String>& GetExposeHeaders() const{ return m_exposeHeaders; }
-    inline bool ExposeHeadersHasBeenSet() const { return m_exposeHeadersHasBeenSet; }
-    inline void SetExposeHeaders(const Aws::Vector<Aws::String>& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders = value; }
-    inline void SetExposeHeaders(Aws::Vector<Aws::String>&& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders = std::move(value); }
-    inline Cors& WithExposeHeaders(const Aws::Vector<Aws::String>& value) { SetExposeHeaders(value); return *this;}
-    inline Cors& WithExposeHeaders(Aws::Vector<Aws::String>&& value) { SetExposeHeaders(std::move(value)); return *this;}
-    inline Cors& AddExposeHeaders(const Aws::String& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders.push_back(value); return *this; }
-    inline Cors& AddExposeHeaders(Aws::String&& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders.push_back(std::move(value)); return *this; }
-    inline Cors& AddExposeHeaders(const char* value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders.push_back(value); return *this; }
-    ///@}
 
-    ///@{
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline bool ExposeHeadersHasBeenSet() const { return m_exposeHeadersHasBeenSet; }
+
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline void SetExposeHeaders(const Aws::Vector<Aws::String>& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders = value; }
+
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline void SetExposeHeaders(Aws::Vector<Aws::String>&& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders = std::move(value); }
+
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& WithExposeHeaders(const Aws::Vector<Aws::String>& value) { SetExposeHeaders(value); return *this;}
+
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& WithExposeHeaders(Aws::Vector<Aws::String>&& value) { SetExposeHeaders(std::move(value)); return *this;}
+
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& AddExposeHeaders(const Aws::String& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders.push_back(value); return *this; }
+
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& AddExposeHeaders(Aws::String&& value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders.push_back(std::move(value)); return *this; }
+
+    /**
+     * <p>The HTTP headers in your function response that you want to expose to origins
+     * that call your function URL. For example: <code>Date</code>,
+     * <code>Keep-Alive</code>, <code>X-Custom-Header</code>.</p>
+     */
+    inline Cors& AddExposeHeaders(const char* value) { m_exposeHeadersHasBeenSet = true; m_exposeHeaders.push_back(value); return *this; }
+
+
     /**
      * <p>The maximum amount of time, in seconds, that web browsers can cache results
      * of a preflight request. By default, this is set to <code>0</code>, which means
      * that the browser doesn't cache results.</p>
      */
     inline int GetMaxAge() const{ return m_maxAge; }
+
+    /**
+     * <p>The maximum amount of time, in seconds, that web browsers can cache results
+     * of a preflight request. By default, this is set to <code>0</code>, which means
+     * that the browser doesn't cache results.</p>
+     */
     inline bool MaxAgeHasBeenSet() const { return m_maxAgeHasBeenSet; }
+
+    /**
+     * <p>The maximum amount of time, in seconds, that web browsers can cache results
+     * of a preflight request. By default, this is set to <code>0</code>, which means
+     * that the browser doesn't cache results.</p>
+     */
     inline void SetMaxAge(int value) { m_maxAgeHasBeenSet = true; m_maxAge = value; }
+
+    /**
+     * <p>The maximum amount of time, in seconds, that web browsers can cache results
+     * of a preflight request. By default, this is set to <code>0</code>, which means
+     * that the browser doesn't cache results.</p>
+     */
     inline Cors& WithMaxAge(int value) { SetMaxAge(value); return *this;}
-    ///@}
+
   private:
 
     bool m_allowCredentials;

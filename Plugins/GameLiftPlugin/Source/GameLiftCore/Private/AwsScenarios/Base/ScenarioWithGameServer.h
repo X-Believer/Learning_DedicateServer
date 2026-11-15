@@ -15,26 +15,26 @@ namespace AwsScenarios
 	{
 	public:
 		virtual int UploadGameServer(
-			IAWSAccountInstance* AwsAccountInstance,
-			const std::string& ServerFolderPath,
+			IAWSAccountInstance* AwsAccountInstance, 
+			const std::string& ServerFolderPath, 
 			const std::string& ExtraServerResourcesPath
 		) override
 		{
 			auto Callback = [](DISPATCH_RECEIVER_HANDLE DispatchReceiver, const char* CharPtr)
-				{
-					static_cast<ScenarioWithGameServer*>(DispatchReceiver)->SetBuildS3Path(CharPtr);
-				};
+			{
+				static_cast<ScenarioWithGameServer*>(DispatchReceiver)->SetBuildS3Path(CharPtr);
+			};
 
 			return GameLiftAccountUploadGameServerEx(AwsAccountInstance->GetInstance(), ServerFolderPath.c_str(), ExtraServerResourcesPath.c_str(), this, Callback);
 		}
 
-		int CreateLaunchPathParameter(
-			const FString& InBuildOperatingSystem,
-			const FString& InBuildFolderPath,
+		virtual int CreateLaunchPathParameter(
+			const FString& InBuildOperatingSystem, 
+			const FString& InBuildFolderPath, 
 			const FString& InBuildFilePath,
 			std::string& InStdLaunchPathParameter
-		)
-		{
+		) override
+		{	
 			FString RelativePath = InBuildFilePath;
 
 			if (!FPaths::IsUnderDirectory(InBuildFilePath, InBuildFolderPath) || !FPaths::MakePathRelativeTo(RelativePath, *InBuildFolderPath))
@@ -52,7 +52,7 @@ namespace AwsScenarios
 				return GameLift::GAMELIFT_ERROR_GENERAL;
 			}
 
-			if (InBuildOperatingSystem.StartsWith(TEXT("WINDOWS")))
+			if (InBuildOperatingSystem == "WINDOWS_2016")
 			{
 				// Windows
 				InStdLaunchPathParameter = "C:/game/" + StdServerFileRelPath.substr(StdServerFileRelPathPosition + 1);

@@ -19,7 +19,7 @@ namespace GameLift {
 namespace Internal {
 
 /**
- * ActivateGameSessionRequest Request. This request is sent to the Amazon GameLift Servers WebSocket during
+ * ActivateGameSessionRequest Request. This request is sent to the GameLift WebSocket during
  * ActivateGameSession
  */
 class ActivateGameSessionRequest : public Message {

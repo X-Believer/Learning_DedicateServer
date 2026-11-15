@@ -46,59 +46,163 @@ namespace Model
     AWS_S3_API void AddToNode(Aws::Utils::Xml::XmlNode& parentNode) const;
 
 
-    ///@{
     /**
      * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
      */
     inline const Aws::String& GetId() const{ return m_id; }
-    inline bool IdHasBeenSet() const { return m_idHasBeenSet; }
-    inline void SetId(const Aws::String& value) { m_idHasBeenSet = true; m_id = value; }
-    inline void SetId(Aws::String&& value) { m_idHasBeenSet = true; m_id = std::move(value); }
-    inline void SetId(const char* value) { m_idHasBeenSet = true; m_id.assign(value); }
-    inline IntelligentTieringConfiguration& WithId(const Aws::String& value) { SetId(value); return *this;}
-    inline IntelligentTieringConfiguration& WithId(Aws::String&& value) { SetId(std::move(value)); return *this;}
-    inline IntelligentTieringConfiguration& WithId(const char* value) { SetId(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
+     */
+    inline bool IdHasBeenSet() const { return m_idHasBeenSet; }
+
+    /**
+     * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
+     */
+    inline void SetId(const Aws::String& value) { m_idHasBeenSet = true; m_id = value; }
+
+    /**
+     * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
+     */
+    inline void SetId(Aws::String&& value) { m_idHasBeenSet = true; m_id = std::move(value); }
+
+    /**
+     * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
+     */
+    inline void SetId(const char* value) { m_idHasBeenSet = true; m_id.assign(value); }
+
+    /**
+     * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
+     */
+    inline IntelligentTieringConfiguration& WithId(const Aws::String& value) { SetId(value); return *this;}
+
+    /**
+     * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
+     */
+    inline IntelligentTieringConfiguration& WithId(Aws::String&& value) { SetId(std::move(value)); return *this;}
+
+    /**
+     * <p>The ID used to identify the S3 Intelligent-Tiering configuration.</p>
+     */
+    inline IntelligentTieringConfiguration& WithId(const char* value) { SetId(value); return *this;}
+
+
     /**
      * <p>Specifies a bucket filter. The configuration only includes objects that meet
      * the filter's criteria.</p>
      */
     inline const IntelligentTieringFilter& GetFilter() const{ return m_filter; }
-    inline bool FilterHasBeenSet() const { return m_filterHasBeenSet; }
-    inline void SetFilter(const IntelligentTieringFilter& value) { m_filterHasBeenSet = true; m_filter = value; }
-    inline void SetFilter(IntelligentTieringFilter&& value) { m_filterHasBeenSet = true; m_filter = std::move(value); }
-    inline IntelligentTieringConfiguration& WithFilter(const IntelligentTieringFilter& value) { SetFilter(value); return *this;}
-    inline IntelligentTieringConfiguration& WithFilter(IntelligentTieringFilter&& value) { SetFilter(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Specifies a bucket filter. The configuration only includes objects that meet
+     * the filter's criteria.</p>
+     */
+    inline bool FilterHasBeenSet() const { return m_filterHasBeenSet; }
+
+    /**
+     * <p>Specifies a bucket filter. The configuration only includes objects that meet
+     * the filter's criteria.</p>
+     */
+    inline void SetFilter(const IntelligentTieringFilter& value) { m_filterHasBeenSet = true; m_filter = value; }
+
+    /**
+     * <p>Specifies a bucket filter. The configuration only includes objects that meet
+     * the filter's criteria.</p>
+     */
+    inline void SetFilter(IntelligentTieringFilter&& value) { m_filterHasBeenSet = true; m_filter = std::move(value); }
+
+    /**
+     * <p>Specifies a bucket filter. The configuration only includes objects that meet
+     * the filter's criteria.</p>
+     */
+    inline IntelligentTieringConfiguration& WithFilter(const IntelligentTieringFilter& value) { SetFilter(value); return *this;}
+
+    /**
+     * <p>Specifies a bucket filter. The configuration only includes objects that meet
+     * the filter's criteria.</p>
+     */
+    inline IntelligentTieringConfiguration& WithFilter(IntelligentTieringFilter&& value) { SetFilter(std::move(value)); return *this;}
+
+
     /**
      * <p>Specifies the status of the configuration.</p>
      */
     inline const IntelligentTieringStatus& GetStatus() const{ return m_status; }
-    inline bool StatusHasBeenSet() const { return m_statusHasBeenSet; }
-    inline void SetStatus(const IntelligentTieringStatus& value) { m_statusHasBeenSet = true; m_status = value; }
-    inline void SetStatus(IntelligentTieringStatus&& value) { m_statusHasBeenSet = true; m_status = std::move(value); }
-    inline IntelligentTieringConfiguration& WithStatus(const IntelligentTieringStatus& value) { SetStatus(value); return *this;}
-    inline IntelligentTieringConfiguration& WithStatus(IntelligentTieringStatus&& value) { SetStatus(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Specifies the status of the configuration.</p>
+     */
+    inline bool StatusHasBeenSet() const { return m_statusHasBeenSet; }
+
+    /**
+     * <p>Specifies the status of the configuration.</p>
+     */
+    inline void SetStatus(const IntelligentTieringStatus& value) { m_statusHasBeenSet = true; m_status = value; }
+
+    /**
+     * <p>Specifies the status of the configuration.</p>
+     */
+    inline void SetStatus(IntelligentTieringStatus&& value) { m_statusHasBeenSet = true; m_status = std::move(value); }
+
+    /**
+     * <p>Specifies the status of the configuration.</p>
+     */
+    inline IntelligentTieringConfiguration& WithStatus(const IntelligentTieringStatus& value) { SetStatus(value); return *this;}
+
+    /**
+     * <p>Specifies the status of the configuration.</p>
+     */
+    inline IntelligentTieringConfiguration& WithStatus(IntelligentTieringStatus&& value) { SetStatus(std::move(value)); return *this;}
+
+
     /**
      * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
      * configuration.</p>
      */
     inline const Aws::Vector<Tiering>& GetTierings() const{ return m_tierings; }
+
+    /**
+     * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
+     * configuration.</p>
+     */
     inline bool TieringsHasBeenSet() const { return m_tieringsHasBeenSet; }
+
+    /**
+     * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
+     * configuration.</p>
+     */
     inline void SetTierings(const Aws::Vector<Tiering>& value) { m_tieringsHasBeenSet = true; m_tierings = value; }
+
+    /**
+     * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
+     * configuration.</p>
+     */
     inline void SetTierings(Aws::Vector<Tiering>&& value) { m_tieringsHasBeenSet = true; m_tierings = std::move(value); }
+
+    /**
+     * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
+     * configuration.</p>
+     */
     inline IntelligentTieringConfiguration& WithTierings(const Aws::Vector<Tiering>& value) { SetTierings(value); return *this;}
+
+    /**
+     * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
+     * configuration.</p>
+     */
     inline IntelligentTieringConfiguration& WithTierings(Aws::Vector<Tiering>&& value) { SetTierings(std::move(value)); return *this;}
+
+    /**
+     * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
+     * configuration.</p>
+     */
     inline IntelligentTieringConfiguration& AddTierings(const Tiering& value) { m_tieringsHasBeenSet = true; m_tierings.push_back(value); return *this; }
+
+    /**
+     * <p>Specifies the S3 Intelligent-Tiering storage class tier of the
+     * configuration.</p>
+     */
     inline IntelligentTieringConfiguration& AddTierings(Tiering&& value) { m_tieringsHasBeenSet = true; m_tierings.push_back(std::move(value)); return *this; }
-    ///@}
+
   private:
 
     Aws::String m_id;

@@ -42,8 +42,8 @@ namespace Model {
  * <p>A single player attribute value to be used when making a StartMatchBackfill
  * request.  This could be a string, number, string list, or string/number map.
  * For more information, see the <a
- * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon GameLift Servers 
- * Developer Guide</a>.</p>
+ * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon
+ * GameLift Developer Guide</a>.</p>
  */
 class AWS_GAMELIFT_API AttributeValue {
 public:

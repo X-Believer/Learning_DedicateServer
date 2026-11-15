@@ -43,7 +43,6 @@ namespace Model
     AWS_GAMELIFT_API Aws::Utils::Json::JsonValue Jsonize() const;
 
 
-    ///@{
     /**
      * <p>Length of time, in seconds, it takes for a new instance to start new game
      * server processes and register with Amazon GameLift FleetIQ. Specifying a warm-up
@@ -51,12 +50,32 @@ namespace Model
      * start up, because it avoids prematurely starting new instances. </p>
      */
     inline int GetEstimatedInstanceWarmup() const{ return m_estimatedInstanceWarmup; }
-    inline bool EstimatedInstanceWarmupHasBeenSet() const { return m_estimatedInstanceWarmupHasBeenSet; }
-    inline void SetEstimatedInstanceWarmup(int value) { m_estimatedInstanceWarmupHasBeenSet = true; m_estimatedInstanceWarmup = value; }
-    inline GameServerGroupAutoScalingPolicy& WithEstimatedInstanceWarmup(int value) { SetEstimatedInstanceWarmup(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Length of time, in seconds, it takes for a new instance to start new game
+     * server processes and register with Amazon GameLift FleetIQ. Specifying a warm-up
+     * time can be useful, particularly with game servers that take a long time to
+     * start up, because it avoids prematurely starting new instances. </p>
+     */
+    inline bool EstimatedInstanceWarmupHasBeenSet() const { return m_estimatedInstanceWarmupHasBeenSet; }
+
+    /**
+     * <p>Length of time, in seconds, it takes for a new instance to start new game
+     * server processes and register with Amazon GameLift FleetIQ. Specifying a warm-up
+     * time can be useful, particularly with game servers that take a long time to
+     * start up, because it avoids prematurely starting new instances. </p>
+     */
+    inline void SetEstimatedInstanceWarmup(int value) { m_estimatedInstanceWarmupHasBeenSet = true; m_estimatedInstanceWarmup = value; }
+
+    /**
+     * <p>Length of time, in seconds, it takes for a new instance to start new game
+     * server processes and register with Amazon GameLift FleetIQ. Specifying a warm-up
+     * time can be useful, particularly with game servers that take a long time to
+     * start up, because it avoids prematurely starting new instances. </p>
+     */
+    inline GameServerGroupAutoScalingPolicy& WithEstimatedInstanceWarmup(int value) { SetEstimatedInstanceWarmup(value); return *this;}
+
+
     /**
      * <p>Settings for a target-based scaling policy applied to Auto Scaling group.
      * These settings are used to create a target-based policy that tracks the Amazon
@@ -66,12 +85,57 @@ namespace Model
      * value. </p>
      */
     inline const TargetTrackingConfiguration& GetTargetTrackingConfiguration() const{ return m_targetTrackingConfiguration; }
+
+    /**
+     * <p>Settings for a target-based scaling policy applied to Auto Scaling group.
+     * These settings are used to create a target-based policy that tracks the Amazon
+     * GameLift FleetIQ metric <code>"PercentUtilizedGameServers"</code> and specifies
+     * a target value for the metric. As player usage changes, the policy triggers to
+     * adjust the game server group capacity so that the metric returns to the target
+     * value. </p>
+     */
     inline bool TargetTrackingConfigurationHasBeenSet() const { return m_targetTrackingConfigurationHasBeenSet; }
+
+    /**
+     * <p>Settings for a target-based scaling policy applied to Auto Scaling group.
+     * These settings are used to create a target-based policy that tracks the Amazon
+     * GameLift FleetIQ metric <code>"PercentUtilizedGameServers"</code> and specifies
+     * a target value for the metric. As player usage changes, the policy triggers to
+     * adjust the game server group capacity so that the metric returns to the target
+     * value. </p>
+     */
     inline void SetTargetTrackingConfiguration(const TargetTrackingConfiguration& value) { m_targetTrackingConfigurationHasBeenSet = true; m_targetTrackingConfiguration = value; }
+
+    /**
+     * <p>Settings for a target-based scaling policy applied to Auto Scaling group.
+     * These settings are used to create a target-based policy that tracks the Amazon
+     * GameLift FleetIQ metric <code>"PercentUtilizedGameServers"</code> and specifies
+     * a target value for the metric. As player usage changes, the policy triggers to
+     * adjust the game server group capacity so that the metric returns to the target
+     * value. </p>
+     */
     inline void SetTargetTrackingConfiguration(TargetTrackingConfiguration&& value) { m_targetTrackingConfigurationHasBeenSet = true; m_targetTrackingConfiguration = std::move(value); }
+
+    /**
+     * <p>Settings for a target-based scaling policy applied to Auto Scaling group.
+     * These settings are used to create a target-based policy that tracks the Amazon
+     * GameLift FleetIQ metric <code>"PercentUtilizedGameServers"</code> and specifies
+     * a target value for the metric. As player usage changes, the policy triggers to
+     * adjust the game server group capacity so that the metric returns to the target
+     * value. </p>
+     */
     inline GameServerGroupAutoScalingPolicy& WithTargetTrackingConfiguration(const TargetTrackingConfiguration& value) { SetTargetTrackingConfiguration(value); return *this;}
+
+    /**
+     * <p>Settings for a target-based scaling policy applied to Auto Scaling group.
+     * These settings are used to create a target-based policy that tracks the Amazon
+     * GameLift FleetIQ metric <code>"PercentUtilizedGameServers"</code> and specifies
+     * a target value for the metric. As player usage changes, the policy triggers to
+     * adjust the game server group capacity so that the metric returns to the target
+     * value. </p>
+     */
     inline GameServerGroupAutoScalingPolicy& WithTargetTrackingConfiguration(TargetTrackingConfiguration&& value) { SetTargetTrackingConfiguration(std::move(value)); return *this;}
-    ///@}
+
   private:
 
     int m_estimatedInstanceWarmup;

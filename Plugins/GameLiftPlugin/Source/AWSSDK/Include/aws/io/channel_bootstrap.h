@@ -42,9 +42,10 @@ typedef void(aws_client_bootstrap_on_channel_event_fn)(
  * If ALPN is being used this function will be invoked by the channel once an ALPN message is received. The returned
  * channel_handler will be added to, and managed by, the channel.
  */
-typedef struct aws_channel_handler *(aws_channel_on_protocol_negotiated_fn)(struct aws_channel_slot *new_slot,
-                                                                            struct aws_byte_buf *protocol,
-                                                                            void *user_data);
+typedef struct aws_channel_handler *(aws_channel_on_protocol_negotiated_fn)(
+    struct aws_channel_slot *new_slot,
+    struct aws_byte_buf *protocol,
+    void *user_data);
 
 struct aws_tls_connection_options;
 
@@ -177,7 +178,7 @@ struct aws_server_bootstrap {
 struct aws_socket_channel_bootstrap_options {
     struct aws_client_bootstrap *bootstrap;
     const char *host_name;
-    uint32_t port;
+    uint16_t port;
     const struct aws_socket_options *socket_options;
     const struct aws_tls_connection_options *tls_options;
     aws_client_bootstrap_on_channel_event_fn *creation_callback;
@@ -207,7 +208,7 @@ struct aws_socket_channel_bootstrap_options {
 struct aws_server_socket_channel_bootstrap_options {
     struct aws_server_bootstrap *bootstrap;
     const char *host_name;
-    uint32_t port;
+    uint16_t port;
     const struct aws_socket_options *socket_options;
     const struct aws_tls_connection_options *tls_options;
     aws_server_bootstrap_on_accept_channel_setup_fn *incoming_callback;

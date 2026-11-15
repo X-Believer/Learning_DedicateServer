@@ -30,8 +30,8 @@ namespace Model {
  * <p>Set of key-value pairs containing information your game server requires to
  * set up sessions. This object allows you to pass in any set of data needed for
  * your game. For more information, see the <a
- * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon GameLift Servers 
- * Developer Guide</a>.</p>
+ * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon
+ * GameLift Developer Guide</a>.</p>
  */
 class AWS_GAMELIFT_API GameProperty {
 #ifdef GAMELIFT_USE_STD

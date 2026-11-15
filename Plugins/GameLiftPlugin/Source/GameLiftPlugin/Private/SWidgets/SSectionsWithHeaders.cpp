@@ -10,8 +10,6 @@
 
 void SSectionsWithHeaders::Construct(const FArguments& InArgs)
 {
-	ShowDefaultColor = InArgs._ShowDefaultColor;
-
 	AddSlot().Padding(SPadding::Left2x_Right2x).FillWidth(1)
 		[
 			SAssignNew(VerticalContainer, SVerticalBox)
@@ -20,16 +18,10 @@ void SSectionsWithHeaders::Construct(const FArguments& InArgs)
 
 void SSectionsWithHeaders::AddSection(const FText& InHeaderTitle, TSharedRef<SWidget> InBodyContent, bool InCollapsed)
 {
-	TSharedRef<SExpandableArea> expandableArea = StaticCastSharedRef<SExpandableArea, SWidget>(CreateExpandableArea(InHeaderTitle, InBodyContent, InCollapsed));
-	ExpandableAreaMap.Add(InHeaderTitle.ToString(), expandableArea);
 	VerticalContainer->AddSlot().AutoHeight().Padding(SPadding::Top_Bottom)
 		[
-			expandableArea
+			CreateExpandableArea(InHeaderTitle, InBodyContent, InCollapsed)
 		];
-}
-
-void SSectionsWithHeaders::ExpandSection(const FString& headerTitle) {
-	ExpandableAreaMap[headerTitle]->SetExpanded_Animated(true);
 }
 
 void SSectionsWithHeaders::AddSection(const FSectionInfo& SectionInfo)
@@ -48,10 +40,10 @@ TSharedRef<SWidget> SSectionsWithHeaders::CreateExpandableArea(const FText& InHe
 		.HeaderPadding(SPadding::Left2x_Right2x + SPadding::Top_Bottom)
 		.Padding(ContentAreaLeftIndent + SPadding::Right2x + SPadding::Top2x + SPadding::Bottom)
 		.AreaTitleFont(FGameLiftPluginStyle::Get().GetFontStyle(Style::Text::kSectionHeaderFontStyleName))
-		.BorderImage(ShowDefaultColor ? FStyleDefaults::GetNoBrush() : FGameLiftPluginStyle::GetAppStyle().GetBrush("WhiteTexture"))
-		.BodyBorderImage(ShowDefaultColor ? FStyleDefaults::GetNoBrush() : FGameLiftPluginStyle::GetAppStyle().GetBrush("WhiteTexture"))
-		.BorderBackgroundColor(ShowDefaultColor ? FLinearColor::Transparent: FGameLiftPluginStyle::Get().GetSlateColor(Style::Color::kSectionHeaderBackground))
-		.BodyBorderBackgroundColor(ShowDefaultColor ? FLinearColor::Transparent : FGameLiftPluginStyle::Get().GetSlateColor(Style::Color::kPanelBackground))
+		.BorderImage(FGameLiftPluginStyle::GetAppStyle().GetBrush("WhiteTexture"))
+		.BodyBorderImage(FGameLiftPluginStyle::GetAppStyle().GetBrush("WhiteTexture"))
+		.BorderBackgroundColor(FGameLiftPluginStyle::Get().GetSlateColor(Style::Color::kSectionHeaderBackground))
+		.BodyBorderBackgroundColor(FGameLiftPluginStyle::Get().GetSlateColor(Style::Color::kPanelBackground))
 		.BodyContent()
 		[
 			InBodyContent

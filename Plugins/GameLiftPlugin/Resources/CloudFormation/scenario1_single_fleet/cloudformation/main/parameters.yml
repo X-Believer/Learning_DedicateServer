@@ -26,7 +26,7 @@ BuildVersionParameter:
 BuildOperatingSystemParameter:
   value: "{{AWSGAMELIFT::VARS::BuildOperatingSystemParameter}}"
 BuildServerSdkVersionParameter:
-  value: "5.6.1"
+  value: "5.0.2"
 FleetTcpFromPortParameter:
   value: "7770"
 FleetTcpToPortParameter:
@@ -37,11 +37,4 @@ FleetUdpToPortParameter:
   value: "7780"
 FleetNameParameter:
   value: "Single-Region Fleet"
-UnrealEngineVersionParameter:
-  value: "{{AWSGAMELIFT::VARS::UnrealEngineVersionParameter}}"
-EnableMetricsParameter:
-  value: "{{AWSGAMELIFT::VARS::EnableMetricsParameter}}"
-EnablePlayerGatewayParameter:
-  value: "{{AWSGAMELIFT::VARS::EnablePlayerGatewayParameter}}"
-GameServerIpProtocolSupportedParameter:
-  value: "{{AWSGAMELIFT::VARS::GameServerIpProtocolSupportedParameter}}"
+

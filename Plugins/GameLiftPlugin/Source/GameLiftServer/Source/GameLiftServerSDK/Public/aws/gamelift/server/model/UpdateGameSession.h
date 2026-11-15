@@ -34,8 +34,8 @@ namespace Model {
 /**
  * <p>Represents the data provided to the OnUpdateGameSession callback.
  * For more information, see the <a
- * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon GameLift Servers
- * Developer Guide</a>.</p>
+ * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon
+ * GameLift Developer Guide</a>.</p>
  */
 class AWS_GAMELIFT_API UpdateGameSession {
 #ifdef GAMELIFT_USE_STD

@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "AWSConfigFileProfile.h"
-
 #include "GameLiftCoreLog.h"
+
 #include "Utils/StringConvertors.h"
 
 #define LOCTEXT_NAMESPACE "AWSConfigFileProfile"

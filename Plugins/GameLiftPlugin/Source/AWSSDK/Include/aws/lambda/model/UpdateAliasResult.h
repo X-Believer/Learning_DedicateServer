@@ -40,94 +40,243 @@ namespace Model
     AWS_LAMBDA_API UpdateAliasResult& operator=(const Aws::AmazonWebServiceResult<Aws::Utils::Json::JsonValue>& result);
 
 
-    ///@{
     /**
      * <p>The Amazon Resource Name (ARN) of the alias.</p>
      */
     inline const Aws::String& GetAliasArn() const{ return m_aliasArn; }
-    inline void SetAliasArn(const Aws::String& value) { m_aliasArn = value; }
-    inline void SetAliasArn(Aws::String&& value) { m_aliasArn = std::move(value); }
-    inline void SetAliasArn(const char* value) { m_aliasArn.assign(value); }
-    inline UpdateAliasResult& WithAliasArn(const Aws::String& value) { SetAliasArn(value); return *this;}
-    inline UpdateAliasResult& WithAliasArn(Aws::String&& value) { SetAliasArn(std::move(value)); return *this;}
-    inline UpdateAliasResult& WithAliasArn(const char* value) { SetAliasArn(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The Amazon Resource Name (ARN) of the alias.</p>
+     */
+    inline void SetAliasArn(const Aws::String& value) { m_aliasArn = value; }
+
+    /**
+     * <p>The Amazon Resource Name (ARN) of the alias.</p>
+     */
+    inline void SetAliasArn(Aws::String&& value) { m_aliasArn = std::move(value); }
+
+    /**
+     * <p>The Amazon Resource Name (ARN) of the alias.</p>
+     */
+    inline void SetAliasArn(const char* value) { m_aliasArn.assign(value); }
+
+    /**
+     * <p>The Amazon Resource Name (ARN) of the alias.</p>
+     */
+    inline UpdateAliasResult& WithAliasArn(const Aws::String& value) { SetAliasArn(value); return *this;}
+
+    /**
+     * <p>The Amazon Resource Name (ARN) of the alias.</p>
+     */
+    inline UpdateAliasResult& WithAliasArn(Aws::String&& value) { SetAliasArn(std::move(value)); return *this;}
+
+    /**
+     * <p>The Amazon Resource Name (ARN) of the alias.</p>
+     */
+    inline UpdateAliasResult& WithAliasArn(const char* value) { SetAliasArn(value); return *this;}
+
+
     /**
      * <p>The name of the alias.</p>
      */
     inline const Aws::String& GetName() const{ return m_name; }
-    inline void SetName(const Aws::String& value) { m_name = value; }
-    inline void SetName(Aws::String&& value) { m_name = std::move(value); }
-    inline void SetName(const char* value) { m_name.assign(value); }
-    inline UpdateAliasResult& WithName(const Aws::String& value) { SetName(value); return *this;}
-    inline UpdateAliasResult& WithName(Aws::String&& value) { SetName(std::move(value)); return *this;}
-    inline UpdateAliasResult& WithName(const char* value) { SetName(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The name of the alias.</p>
+     */
+    inline void SetName(const Aws::String& value) { m_name = value; }
+
+    /**
+     * <p>The name of the alias.</p>
+     */
+    inline void SetName(Aws::String&& value) { m_name = std::move(value); }
+
+    /**
+     * <p>The name of the alias.</p>
+     */
+    inline void SetName(const char* value) { m_name.assign(value); }
+
+    /**
+     * <p>The name of the alias.</p>
+     */
+    inline UpdateAliasResult& WithName(const Aws::String& value) { SetName(value); return *this;}
+
+    /**
+     * <p>The name of the alias.</p>
+     */
+    inline UpdateAliasResult& WithName(Aws::String&& value) { SetName(std::move(value)); return *this;}
+
+    /**
+     * <p>The name of the alias.</p>
+     */
+    inline UpdateAliasResult& WithName(const char* value) { SetName(value); return *this;}
+
+
     /**
      * <p>The function version that the alias invokes.</p>
      */
     inline const Aws::String& GetFunctionVersion() const{ return m_functionVersion; }
-    inline void SetFunctionVersion(const Aws::String& value) { m_functionVersion = value; }
-    inline void SetFunctionVersion(Aws::String&& value) { m_functionVersion = std::move(value); }
-    inline void SetFunctionVersion(const char* value) { m_functionVersion.assign(value); }
-    inline UpdateAliasResult& WithFunctionVersion(const Aws::String& value) { SetFunctionVersion(value); return *this;}
-    inline UpdateAliasResult& WithFunctionVersion(Aws::String&& value) { SetFunctionVersion(std::move(value)); return *this;}
-    inline UpdateAliasResult& WithFunctionVersion(const char* value) { SetFunctionVersion(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The function version that the alias invokes.</p>
+     */
+    inline void SetFunctionVersion(const Aws::String& value) { m_functionVersion = value; }
+
+    /**
+     * <p>The function version that the alias invokes.</p>
+     */
+    inline void SetFunctionVersion(Aws::String&& value) { m_functionVersion = std::move(value); }
+
+    /**
+     * <p>The function version that the alias invokes.</p>
+     */
+    inline void SetFunctionVersion(const char* value) { m_functionVersion.assign(value); }
+
+    /**
+     * <p>The function version that the alias invokes.</p>
+     */
+    inline UpdateAliasResult& WithFunctionVersion(const Aws::String& value) { SetFunctionVersion(value); return *this;}
+
+    /**
+     * <p>The function version that the alias invokes.</p>
+     */
+    inline UpdateAliasResult& WithFunctionVersion(Aws::String&& value) { SetFunctionVersion(std::move(value)); return *this;}
+
+    /**
+     * <p>The function version that the alias invokes.</p>
+     */
+    inline UpdateAliasResult& WithFunctionVersion(const char* value) { SetFunctionVersion(value); return *this;}
+
+
     /**
      * <p>A description of the alias.</p>
      */
     inline const Aws::String& GetDescription() const{ return m_description; }
-    inline void SetDescription(const Aws::String& value) { m_description = value; }
-    inline void SetDescription(Aws::String&& value) { m_description = std::move(value); }
-    inline void SetDescription(const char* value) { m_description.assign(value); }
-    inline UpdateAliasResult& WithDescription(const Aws::String& value) { SetDescription(value); return *this;}
-    inline UpdateAliasResult& WithDescription(Aws::String&& value) { SetDescription(std::move(value)); return *this;}
-    inline UpdateAliasResult& WithDescription(const char* value) { SetDescription(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>A description of the alias.</p>
+     */
+    inline void SetDescription(const Aws::String& value) { m_description = value; }
+
+    /**
+     * <p>A description of the alias.</p>
+     */
+    inline void SetDescription(Aws::String&& value) { m_description = std::move(value); }
+
+    /**
+     * <p>A description of the alias.</p>
+     */
+    inline void SetDescription(const char* value) { m_description.assign(value); }
+
+    /**
+     * <p>A description of the alias.</p>
+     */
+    inline UpdateAliasResult& WithDescription(const Aws::String& value) { SetDescription(value); return *this;}
+
+    /**
+     * <p>A description of the alias.</p>
+     */
+    inline UpdateAliasResult& WithDescription(Aws::String&& value) { SetDescription(std::move(value)); return *this;}
+
+    /**
+     * <p>A description of the alias.</p>
+     */
+    inline UpdateAliasResult& WithDescription(const char* value) { SetDescription(value); return *this;}
+
+
     /**
      * <p>The <a
      * href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing
      * configuration</a> of the alias.</p>
      */
     inline const AliasRoutingConfiguration& GetRoutingConfig() const{ return m_routingConfig; }
-    inline void SetRoutingConfig(const AliasRoutingConfiguration& value) { m_routingConfig = value; }
-    inline void SetRoutingConfig(AliasRoutingConfiguration&& value) { m_routingConfig = std::move(value); }
-    inline UpdateAliasResult& WithRoutingConfig(const AliasRoutingConfiguration& value) { SetRoutingConfig(value); return *this;}
-    inline UpdateAliasResult& WithRoutingConfig(AliasRoutingConfiguration&& value) { SetRoutingConfig(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The <a
+     * href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing
+     * configuration</a> of the alias.</p>
+     */
+    inline void SetRoutingConfig(const AliasRoutingConfiguration& value) { m_routingConfig = value; }
+
+    /**
+     * <p>The <a
+     * href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing
+     * configuration</a> of the alias.</p>
+     */
+    inline void SetRoutingConfig(AliasRoutingConfiguration&& value) { m_routingConfig = std::move(value); }
+
+    /**
+     * <p>The <a
+     * href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing
+     * configuration</a> of the alias.</p>
+     */
+    inline UpdateAliasResult& WithRoutingConfig(const AliasRoutingConfiguration& value) { SetRoutingConfig(value); return *this;}
+
+    /**
+     * <p>The <a
+     * href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">routing
+     * configuration</a> of the alias.</p>
+     */
+    inline UpdateAliasResult& WithRoutingConfig(AliasRoutingConfiguration&& value) { SetRoutingConfig(std::move(value)); return *this;}
+
+
     /**
      * <p>A unique identifier that changes when you update the alias.</p>
      */
     inline const Aws::String& GetRevisionId() const{ return m_revisionId; }
-    inline void SetRevisionId(const Aws::String& value) { m_revisionId = value; }
-    inline void SetRevisionId(Aws::String&& value) { m_revisionId = std::move(value); }
-    inline void SetRevisionId(const char* value) { m_revisionId.assign(value); }
-    inline UpdateAliasResult& WithRevisionId(const Aws::String& value) { SetRevisionId(value); return *this;}
-    inline UpdateAliasResult& WithRevisionId(Aws::String&& value) { SetRevisionId(std::move(value)); return *this;}
-    inline UpdateAliasResult& WithRevisionId(const char* value) { SetRevisionId(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>A unique identifier that changes when you update the alias.</p>
+     */
+    inline void SetRevisionId(const Aws::String& value) { m_revisionId = value; }
+
+    /**
+     * <p>A unique identifier that changes when you update the alias.</p>
+     */
+    inline void SetRevisionId(Aws::String&& value) { m_revisionId = std::move(value); }
+
+    /**
+     * <p>A unique identifier that changes when you update the alias.</p>
+     */
+    inline void SetRevisionId(const char* value) { m_revisionId.assign(value); }
+
+    /**
+     * <p>A unique identifier that changes when you update the alias.</p>
+     */
+    inline UpdateAliasResult& WithRevisionId(const Aws::String& value) { SetRevisionId(value); return *this;}
+
+    /**
+     * <p>A unique identifier that changes when you update the alias.</p>
+     */
+    inline UpdateAliasResult& WithRevisionId(Aws::String&& value) { SetRevisionId(std::move(value)); return *this;}
+
+    /**
+     * <p>A unique identifier that changes when you update the alias.</p>
+     */
+    inline UpdateAliasResult& WithRevisionId(const char* value) { SetRevisionId(value); return *this;}
+
+
     
     inline const Aws::String& GetRequestId() const{ return m_requestId; }
+
+    
     inline void SetRequestId(const Aws::String& value) { m_requestId = value; }
+
+    
     inline void SetRequestId(Aws::String&& value) { m_requestId = std::move(value); }
+
+    
     inline void SetRequestId(const char* value) { m_requestId.assign(value); }
+
+    
     inline UpdateAliasResult& WithRequestId(const Aws::String& value) { SetRequestId(value); return *this;}
+
+    
     inline UpdateAliasResult& WithRequestId(Aws::String&& value) { SetRequestId(std::move(value)); return *this;}
+
+    
     inline UpdateAliasResult& WithRequestId(const char* value) { SetRequestId(value); return *this;}
-    ///@}
+
   private:
 
     Aws::String m_aliasArn;

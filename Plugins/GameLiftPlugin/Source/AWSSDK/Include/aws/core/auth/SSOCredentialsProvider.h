@@ -21,7 +21,6 @@ namespace Aws {
         public:
             SSOCredentialsProvider();
             explicit SSOCredentialsProvider(const Aws::String& profile);
-            explicit SSOCredentialsProvider(const Aws::String& profile, std::shared_ptr<const Aws::Client::ClientConfiguration> config);
             /**
              * Retrieves the credentials if found, otherwise returns empty credential set.
              */
@@ -43,8 +42,6 @@ namespace Aws {
             Aws::Utils::DateTime m_expiresAt;
             // The SSO Token Provider
             Aws::Auth::SSOBearerTokenProvider m_bearerTokenProvider;
-            // The client configuration to use
-            std::shared_ptr<const Aws::Client::ClientConfiguration> m_config;
 
             void Reload() override;
             void RefreshIfExpired();

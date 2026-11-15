@@ -25,7 +25,7 @@ namespace GameLift {
 namespace Internal {
 
 /**
- * Base Message class representing a message that is sent to and from the Amazon GameLift Servers WebSocket. All
+ * Base Message class representing a message that is sent to and from the GameLift WebSocket. All
  * messages have a request ID, which represents the following:
  * - For outgoing messages: A randomly generated ID
  * - For incoming messages: The ID of the outgoing message which triggered the incoming
@@ -38,7 +38,7 @@ public:
     Message(Message &&) = default;
     Message &operator=(const Message &) = default;
     Message &operator=(Message &&) = default;
-    virtual ~Message() = default;
+    ~Message() = default;
 
     inline const std::string &GetAction() const { return m_action; }
 

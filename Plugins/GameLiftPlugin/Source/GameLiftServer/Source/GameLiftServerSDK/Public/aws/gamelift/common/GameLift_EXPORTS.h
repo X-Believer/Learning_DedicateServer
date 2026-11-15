@@ -11,17 +11,7 @@
  */
 #pragma once
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4101)
-#elif defined(__GNUC__) || defined(__clang__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdelete-non-abstract-non-virtual-dtor"
-#endif
 #include <string>
-#if defined(__GNUC__) || defined(__clang__)
-#pragma GCC diagnostic pop
-#endif
 #include <vector>
 
 #ifdef _WIN32

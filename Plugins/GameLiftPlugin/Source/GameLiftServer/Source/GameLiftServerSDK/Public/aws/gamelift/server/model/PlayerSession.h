@@ -461,19 +461,19 @@ public:
     }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline int GetPort() const { return m_port; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetPort(int value) { m_port = value; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline PlayerSession &WithPort(int value) {
@@ -901,19 +901,19 @@ public:
     }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline int GetPort() const { return m_port; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetPort(int value) { m_port = value; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline PlayerSession &WithPort(int value) {

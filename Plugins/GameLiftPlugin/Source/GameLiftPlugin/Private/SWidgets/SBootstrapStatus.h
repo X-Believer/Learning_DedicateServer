@@ -15,10 +15,17 @@
 
 class SBootstrapStatus;
 
+DECLARE_DELEGATE_RetVal_OneParam(EBootstrapMessageState, FOnUpdateBootstrapState, EBootstrapMessageState);
+
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnBootstrapStatusChanged, const SBootstrapStatus* /* Sender */);
+
 // Display the profile bootstraping information.
 class SBootstrapStatus : public SCompoundWidget
 {
 	SLATE_BEGIN_ARGS(SBootstrapStatus) {}
+
+	SLATE_EVENT(FOnUpdateBootstrapState, OnUpdateState)
+
 	SLATE_END_ARGS()
 
 public:
@@ -26,19 +33,28 @@ public:
 
 	void OnNeedBootstrap();
 	void OnBootstrap();
-	void OnFailure();
+	void OnFailure(const FText& ErrorMessage);
+	void OnSucceeded(const FString& BucketName);
 	void OnSucceeded();
 
-	void UpdateState(int NewState);
+	// Callback that handles bootstrap status changes from another instance
+	void OnBootstrapStatusChanged(const SBootstrapStatus* sender);
+
+	void UpdateState(EBootstrapMessageState);
 
 	static TSharedRef<SBootstrapStatus> CastToSharedRef(TSharedPtr<SWidget> WidgetToCast)
 	{
 		return StaticCastSharedRef<SBootstrapStatus>(WidgetToCast.ToSharedRef());
 	}
 
-private:
-	int32 GetSetupStateAsInt() const;
+	static FOnBootstrapStatusChanged OnBootstrapStatusChangedMultiDelegate;
 
 private:
-	EBootstrapMessageState BootstrapState;
+	int32 GetSetupStateAsInt() const;
+	
+	void UpdateCache();
+
+private:
+	EBootstrapMessageState CachedSetupState;
+	FOnUpdateBootstrapState OnUpdateState;
 };

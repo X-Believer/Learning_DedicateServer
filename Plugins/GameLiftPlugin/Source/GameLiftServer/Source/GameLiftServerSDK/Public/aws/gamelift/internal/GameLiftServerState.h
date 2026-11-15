@@ -15,8 +15,6 @@
 #include <aws/gamelift/internal/network/GameLiftWebSocketClientManager.h>
 #include <aws/gamelift/internal/network/IGameLiftMessageHandler.h>
 #include <aws/gamelift/internal/network/IWebSocketClientWrapper.h>
-#include <aws/gamelift/internal/util/HttpClient.h>
-#include <aws/gamelift/metrics/IMetricsProcessor.h>
 #include <aws/gamelift/internal/network/callback/CreateGameSessionCallback.h>
 #include <aws/gamelift/internal/network/callback/DescribePlayerSessionsCallback.h>
 #include <aws/gamelift/internal/network/callback/GetComputeCertificateCallback.h>
@@ -48,41 +46,16 @@ public:
 
 private:
     static constexpr const char *ENV_VAR_WEBSOCKET_URL = "GAMELIFT_SDK_WEBSOCKET_URL";
-    static constexpr const char *ENV_VAR_COMPUTE_TYPE = "GAMELIFT_COMPUTE_TYPE";
     static constexpr const char *ENV_VAR_AUTH_TOKEN = "GAMELIFT_SDK_AUTH_TOKEN";
     static constexpr const char *ENV_VAR_PROCESS_ID = "GAMELIFT_SDK_PROCESS_ID";
     static constexpr const char *ENV_VAR_HOST_ID = "GAMELIFT_SDK_HOST_ID";
     static constexpr const char *ENV_VAR_FLEET_ID = "GAMELIFT_SDK_FLEET_ID";
-    static constexpr const char *ENV_VAR_AWS_REGION = "GAMELIFT_REGION";
-    static constexpr const char *ENV_VAR_ACCESS_KEY = "GAMELIFT_ACCESS_KEY";
-    static constexpr const char *ENV_VAR_SECRET_KEY = "GAMELIFT_SECRET_KEY";
-    static constexpr const char *ENV_VAR_SESSION_TOKEN = "GAMELIFT_SESSION_TOKEN";
-    static constexpr const char *ENV_VAR_SDK_TOOL_NAME = "GAMELIFT_SDK_TOOL_NAME";
-    static constexpr const char *ENV_VAR_SDK_TOOL_VERSION = "GAMELIFT_SDK_TOOL_VERSION";
-    static constexpr const char *COMPUTE_TYPE_CONTAINER = "CONTAINER";
-    static constexpr const char *AGENTLESS_CONTAINER_PROCESS_ID = "ManagedResource";
-    static constexpr const char *ENV_VAR_CONTAINER_DISCOVERY_SERVER_ENDPOINT = "GAMELIFT_CONTAINER_DISCOVERY_SERVER_ENDPOINT";
-    static constexpr const char *ENV_VAR_CONTAINER_METADATA_URI = "ECS_CONTAINER_METADATA_URI_V4";
-    static constexpr const int DISCOVERY_SERVER_PORT = 4092;
 
     static constexpr const int HEALTHCHECK_INTERVAL_MILLIS = 60 * 1000;
     static constexpr const int HEALTHCHECK_MAX_JITTER_MILLIS = 10 * 1000;
     static constexpr const int HEALTHCHECK_TIMEOUT_MILLIS = HEALTHCHECK_INTERVAL_MILLIS - HEALTHCHECK_MAX_JITTER_MILLIS;
 
-    void GetOverrideParams(char **webSocketUrl,
-                           char **authToken,
-                           char **processId,
-                           char **hostId,
-                           char **fleetId,
-                           char **computeType,
-                           char **awsRegion,
-                           char **accessKey,
-                           char **secretKey,
-                           char **sessionToken);
-    Outcome<std::map<std::string, std::string>, std::string> GetSigV4QueryParameters(char *awsRegion,
-                           char *accessKey,
-                           char *secretKey,
-                           char *sessionToken);
+    void GetOverrideParams(char **webSocketUrl, char **authToken, char **processId, char **hostId, char **fleetId);
     void ReportHealth();
     void HealthCheck();
     int GetNextHealthCheckIntervalMillis();
@@ -212,20 +185,12 @@ private:
 public:
     GetFleetRoleCredentialsOutcome GetFleetRoleCredentials(const Aws::GameLift::Server::Model::GetFleetRoleCredentialsRequest &request);
 
-    ListContainersNetworkInfoOutcome ListContainersNetworkInfo();
-
-    void SetGlobalProcessor(Aws::GameLift::Metrics::IMetricsProcessor* processor);
-
     // When within 15 minutes of expiration we retrieve new instance role credentials
     static constexpr const time_t INSTANCE_ROLE_CREDENTIAL_TTL_MIN = 60 * 15;
 
 private:
     bool AssertNetworkInitialized();
     void SetUpCallbacks();
-    std::string ResolveDiscoveryEndpointFromMetadata(HttpClient &httpClient);
-    Outcome<HttpResponse, std::string> FetchDiscoveryServerResponse(HttpClient &httpClient);
-    ListContainersNetworkInfoOutcome ParseDiscoveryServerResponse(HttpResponse &response);
-    static void DetectGameLiftTools();
 
     bool m_processReady;
 
@@ -253,16 +218,13 @@ private:
     std::string m_hostId;
     std::string m_processId;
     // Assume we're on managed EC2, if GetFleetRoleCredentials fails we know to set this to false
-    bool m_onManagedEC2OrContainers = true;
+    bool m_onManagedEC2 = true;
     std::map<std::string, GetFleetRoleCredentialsResult> m_instanceRoleResultCache;
 
     std::unique_ptr<std::thread> m_healthCheckThread;
     std::condition_variable m_healthCheckConditionVariable;
     std::mutex m_healthCheckMutex;
     bool m_healthCheckInterrupted;
-
-    // GlobalProcessor reference for metrics
-    Aws::GameLift::Metrics::IMetricsProcessor* m_globalProcessor;
 };
 
 } // namespace Internal

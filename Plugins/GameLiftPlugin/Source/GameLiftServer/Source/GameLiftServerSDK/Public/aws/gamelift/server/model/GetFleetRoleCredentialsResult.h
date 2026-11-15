@@ -34,9 +34,6 @@
 #ifndef MAX_SECRET_ACCESS_KEY_LENGTH
 #define MAX_SECRET_ACCESS_KEY_LENGTH 128
 #endif
-#ifndef MAX_SESSION_TOKEN_LENGTH
-#define MAX_SESSION_TOKEN_LENGTH 4098
-#endif
 
 #endif
 
@@ -222,13 +219,16 @@ private:
 #else
 public:
     GetFleetRoleCredentialsResult()
-        : m_assumedUserRoleArn{'\0'}, m_assumedRoleId{'\0'}, m_accessKeyId{'\0'}, m_secretAccessKey{'\0'}, m_sessionToken{'\0'}, m_expiration(0) {}
+        : m_assumedUserRoleArn{'\0'}, m_assumedRoleId{'\0'}, m_accessKeyId{'\0'}, m_secretAccessKey{'\0'}, m_sessionToken(new char[1]{'\0'}), m_expiration(0) {}
 
-    ~GetFleetRoleCredentialsResult() {}
+    ~GetFleetRoleCredentialsResult() {
+        delete[] m_sessionToken;
+        m_sessionToken = nullptr;
+    }
 
-    GetFleetRoleCredentialsResult(const GetFleetRoleCredentialsResult &other) { *this = other; }
+    GetFleetRoleCredentialsResult(const GetFleetRoleCredentialsResult &other) : m_sessionToken(nullptr) { *this = other; }
 
-    GetFleetRoleCredentialsResult(GetFleetRoleCredentialsResult &&other) noexcept { *this = std::move(other); }
+    GetFleetRoleCredentialsResult(GetFleetRoleCredentialsResult &&other) noexcept : m_sessionToken(nullptr) { *this = std::move(other); }
 
     GetFleetRoleCredentialsResult &operator=(const GetFleetRoleCredentialsResult &other) {
         // Don't allow self-assignment
@@ -237,15 +237,20 @@ public:
             strncpy(m_assumedRoleId, other.m_assumedRoleId, sizeof(m_assumedRoleId));
             strncpy(m_accessKeyId, other.m_accessKeyId, sizeof(m_accessKeyId));
             strncpy(m_secretAccessKey, other.m_secretAccessKey, sizeof(m_secretAccessKey));
-            strncpy(m_sessionToken, other.m_sessionToken, sizeof(m_sessionToken));
 
             m_assumedUserRoleArn[sizeof(m_assumedUserRoleArn) - 1] = '\0';
             m_assumedRoleId[sizeof(m_assumedRoleId) - 1] = '\0';
             m_accessKeyId[sizeof(m_accessKeyId) - 1] = '\0';
             m_secretAccessKey[sizeof(m_secretAccessKey) - 1] = '\0';
-            m_sessionToken[sizeof(m_sessionToken) - 1] = '\0';
 
             m_expiration = other.m_expiration;
+
+            delete[] m_sessionToken;
+            m_sessionToken = nullptr;
+            if (other.m_sessionToken != nullptr) {
+                m_sessionToken = new char[strlen(other.m_sessionToken) + 1];
+                strcpy(m_sessionToken, other.m_sessionToken);
+            }
         }
 
         return *this;
@@ -256,15 +261,20 @@ public:
         strncpy(m_assumedRoleId, other.m_assumedRoleId, sizeof(m_assumedRoleId));
         strncpy(m_accessKeyId, other.m_accessKeyId, sizeof(m_accessKeyId));
         strncpy(m_secretAccessKey, other.m_secretAccessKey, sizeof(m_secretAccessKey));
-        strncpy(m_sessionToken, other.m_sessionToken, sizeof(m_sessionToken));
 
         m_assumedUserRoleArn[sizeof(m_assumedUserRoleArn) - 1] = '\0';
         m_assumedRoleId[sizeof(m_assumedRoleId) - 1] = '\0';
         m_accessKeyId[sizeof(m_accessKeyId) - 1] = '\0';
         m_secretAccessKey[sizeof(m_secretAccessKey) - 1] = '\0';
-        m_sessionToken[sizeof(m_sessionToken) - 1] = '\0';
 
         m_expiration = other.m_expiration;
+
+        delete[] m_sessionToken;
+        m_sessionToken = nullptr;
+        if (other.m_sessionToken != nullptr) {
+            m_sessionToken = new char[strlen(other.m_sessionToken) + 1];
+            strcpy(m_sessionToken, other.m_sessionToken);
+        }
 
         return *this;
     }
@@ -320,8 +330,12 @@ public:
     inline const char *GetSessionToken() const { return m_sessionToken; }
 
     inline void SetSessionToken(const char *value) {
-        strncpy(m_sessionToken, value, sizeof(m_sessionToken));
-        m_sessionToken[sizeof(m_sessionToken) - 1] = '\0';
+        delete[] m_sessionToken;
+        m_sessionToken = nullptr;
+        if (value != nullptr) {
+            m_sessionToken = new char[strlen(value) + 1];
+            strcpy(m_sessionToken, value);
+        }
     }
 
     inline GetFleetRoleCredentialsResult &WithSessionToken(const char *value) {
@@ -343,7 +357,9 @@ private:
     char m_assumedRoleId[MAX_ASSUMED_ROLE_ID_LENGTH + 1];
     char m_accessKeyId[MAX_ACCESS_KEY_ID_LENGTH + 1];
     char m_secretAccessKey[MAX_SECRET_ACCESS_KEY_LENGTH + 1];
-    char m_sessionToken[MAX_SESSION_TOKEN_LENGTH + 1];
+    // Can't pre-allocate a buffer since AWS docs say:
+    // -> We strongly recommend that you make no assumptions about the maximum [session token] size
+    char *m_sessionToken;
     time_t m_expiration;
 #endif
 };

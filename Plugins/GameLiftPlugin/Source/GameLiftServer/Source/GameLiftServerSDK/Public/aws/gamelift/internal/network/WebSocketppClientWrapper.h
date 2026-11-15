@@ -12,18 +12,10 @@
 #pragma once
 
 #include <aws/gamelift/internal/network/IWebSocketClientWrapper.h>
-#include <aws/gamelift/internal/retry/RetryStrategy.h>
 #include <condition_variable>
 #include <thread>
 #include <websocketpp/client.hpp>
-#if defined(__GNUC__) || defined(__clang__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wshadow"
-#endif
 #include <websocketpp/config/asio_client.hpp>
-#if defined(__GNUC__) || defined(__clang__)
-#pragma GCC diagnostic pop
-#endif
 
 namespace Aws {
 namespace GameLift {
@@ -37,8 +29,6 @@ typedef websocketpp::client<websocketpp::config::asio_tls_client> WebSocketppCli
 class WebSocketppClientWrapper : public IWebSocketClientWrapper {
 public:
     WebSocketppClientWrapper(std::shared_ptr<WebSocketppClientType> webSocketClient);
-    // connectRetryStrategy decides how Connect retries failed connection attempts (tests use a single attempt)
-    WebSocketppClientWrapper(std::shared_ptr<WebSocketppClientType> webSocketClient, std::shared_ptr<RetryStrategy> connectRetryStrategy);
 
     Aws::GameLift::GenericOutcome Connect(const Uri &uri) override;
     Aws::GameLift::GenericOutcome SendSocketMessage(const std::string &requestId, const std::string &message) override;
@@ -50,12 +40,6 @@ public:
 
 private:
     const int WEBSOCKET_OPEN_HANDSHAKE_TIMEOUT_MILLIS = 20000; // 20 seconds
-    // Hard upper bound on how long PerformConnect will block waiting for a connection to
-    // open or fail. Backstop for cases where neither OnConnected nor OnError ever fires
-    // (e.g. a stalled TCP/TLS handshake that the websocketpp open-handshake timeout does
-    // not cover). Must be >= WEBSOCKET_OPEN_HANDSHAKE_TIMEOUT_MILLIS so a legitimately
-    // in-progress handshake can still complete before we give up on the attempt.
-    const int CONNECT_WAIT_TIMEOUT_MILLIS = WEBSOCKET_OPEN_HANDSHAKE_TIMEOUT_MILLIS + 5000; // 25 seconds
     const int SERVICE_CALL_TIMEOUT_MILLIS = 20000;             // 20 seconds
     const int OK_STATUS_CODE = 200;
     const int WAIT_FOR_RECONNECT_RETRY_DELAY_SECONDS = 5;
@@ -63,13 +47,7 @@ private:
 
     // The WebSocketpp objects this class wraps
     std::shared_ptr<WebSocketppClientType> m_webSocketClient;
-    std::shared_ptr<RetryStrategy> m_connectRetryStrategy;
     WebSocketppClientType::connection_ptr m_connection;
-    // The connection PerformConnect is currently awaiting. Used so OnConnected/OnError can
-    // ignore stale callbacks from a connection we have already abandoned after a wait
-    // timeout (otherwise a late callback could falsely satisfy a later attempt's wait).
-    // Guarded by m_lock.
-    WebSocketppClientType::connection_ptr m_pendingConnection;
     std::unique_ptr<std::thread> m_socket_thread_1;
     std::unique_ptr<std::thread> m_socket_thread_2;
 

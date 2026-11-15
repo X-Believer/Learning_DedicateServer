@@ -108,8 +108,8 @@ namespace FileSystem
 
         Aws::String path;
         Aws::String relativePath;
-        FileType fileType = FileType::None;
-        int64_t fileSize = 0;
+        FileType fileType;
+        int64_t fileSize;
     };
 
     /**

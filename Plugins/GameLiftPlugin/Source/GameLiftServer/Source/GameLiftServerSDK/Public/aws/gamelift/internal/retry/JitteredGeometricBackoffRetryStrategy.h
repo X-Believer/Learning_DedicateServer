@@ -10,7 +10,6 @@
  *
  */
 
-#pragma once
 #include <aws/gamelift/internal/retry/RetryStrategy.h>
 
 namespace Aws {

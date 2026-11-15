@@ -39,7 +39,6 @@ struct aws_signing_config_base {
 enum aws_signing_algorithm {
     AWS_SIGNING_ALGORITHM_V4,
     AWS_SIGNING_ALGORITHM_V4_ASYMMETRIC,
-    AWS_SIGNING_ALGORITHM_V4_S3EXPRESS,
 };
 
 /**

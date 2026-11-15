@@ -39,7 +39,6 @@ namespace Model
     AWS_S3_API void AddToNode(Aws::Utils::Xml::XmlNode& parentNode) const;
 
 
-    ///@{
     /**
      * <p>Specifies the start of the byte range. This parameter is optional. Valid
      * values: non-negative integers. The default value is 0. If only
@@ -49,12 +48,38 @@ namespace Model
      * means scan from byte 50 until the end of the file.</p>
      */
     inline long long GetStart() const{ return m_start; }
-    inline bool StartHasBeenSet() const { return m_startHasBeenSet; }
-    inline void SetStart(long long value) { m_startHasBeenSet = true; m_start = value; }
-    inline ScanRange& WithStart(long long value) { SetStart(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Specifies the start of the byte range. This parameter is optional. Valid
+     * values: non-negative integers. The default value is 0. If only
+     * <code>start</code> is supplied, it means scan from that point to the end of the
+     * file. For example,
+     * <code>&lt;scanrange&gt;&lt;start&gt;50&lt;/start&gt;&lt;/scanrange&gt;</code>
+     * means scan from byte 50 until the end of the file.</p>
+     */
+    inline bool StartHasBeenSet() const { return m_startHasBeenSet; }
+
+    /**
+     * <p>Specifies the start of the byte range. This parameter is optional. Valid
+     * values: non-negative integers. The default value is 0. If only
+     * <code>start</code> is supplied, it means scan from that point to the end of the
+     * file. For example,
+     * <code>&lt;scanrange&gt;&lt;start&gt;50&lt;/start&gt;&lt;/scanrange&gt;</code>
+     * means scan from byte 50 until the end of the file.</p>
+     */
+    inline void SetStart(long long value) { m_startHasBeenSet = true; m_start = value; }
+
+    /**
+     * <p>Specifies the start of the byte range. This parameter is optional. Valid
+     * values: non-negative integers. The default value is 0. If only
+     * <code>start</code> is supplied, it means scan from that point to the end of the
+     * file. For example,
+     * <code>&lt;scanrange&gt;&lt;start&gt;50&lt;/start&gt;&lt;/scanrange&gt;</code>
+     * means scan from byte 50 until the end of the file.</p>
+     */
+    inline ScanRange& WithStart(long long value) { SetStart(value); return *this;}
+
+
     /**
      * <p>Specifies the end of the byte range. This parameter is optional. Valid
      * values: non-negative integers. The default value is one less than the size of
@@ -64,10 +89,37 @@ namespace Model
      * scan the last 50 bytes.</p>
      */
     inline long long GetEnd() const{ return m_end; }
+
+    /**
+     * <p>Specifies the end of the byte range. This parameter is optional. Valid
+     * values: non-negative integers. The default value is one less than the size of
+     * the object being queried. If only the End parameter is supplied, it is
+     * interpreted to mean scan the last N bytes of the file. For example,
+     * <code>&lt;scanrange&gt;&lt;end&gt;50&lt;/end&gt;&lt;/scanrange&gt;</code> means
+     * scan the last 50 bytes.</p>
+     */
     inline bool EndHasBeenSet() const { return m_endHasBeenSet; }
+
+    /**
+     * <p>Specifies the end of the byte range. This parameter is optional. Valid
+     * values: non-negative integers. The default value is one less than the size of
+     * the object being queried. If only the End parameter is supplied, it is
+     * interpreted to mean scan the last N bytes of the file. For example,
+     * <code>&lt;scanrange&gt;&lt;end&gt;50&lt;/end&gt;&lt;/scanrange&gt;</code> means
+     * scan the last 50 bytes.</p>
+     */
     inline void SetEnd(long long value) { m_endHasBeenSet = true; m_end = value; }
+
+    /**
+     * <p>Specifies the end of the byte range. This parameter is optional. Valid
+     * values: non-negative integers. The default value is one less than the size of
+     * the object being queried. If only the End parameter is supplied, it is
+     * interpreted to mean scan the last N bytes of the file. For example,
+     * <code>&lt;scanrange&gt;&lt;end&gt;50&lt;/end&gt;&lt;/scanrange&gt;</code> means
+     * scan the last 50 bytes.</p>
+     */
     inline ScanRange& WithEnd(long long value) { SetEnd(value); return *this;}
-    ///@}
+
   private:
 
     long long m_start;

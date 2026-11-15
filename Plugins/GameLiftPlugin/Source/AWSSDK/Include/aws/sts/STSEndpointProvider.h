@@ -26,7 +26,7 @@ using Aws::Endpoint::DefaultEndpointProvider;
 
 using STSClientContextParameters = Aws::Endpoint::ClientContextParameters;
 
-using STSClientConfiguration = Aws::Client::GenericClientConfiguration;
+using STSClientConfiguration = Aws::Client::GenericClientConfiguration<false>;
 using STSBuiltInParameters = Aws::Endpoint::BuiltInParameters;
 
 /**

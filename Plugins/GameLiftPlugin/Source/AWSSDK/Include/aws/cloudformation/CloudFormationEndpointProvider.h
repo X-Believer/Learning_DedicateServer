@@ -26,7 +26,7 @@ using Aws::Endpoint::DefaultEndpointProvider;
 
 using CloudFormationClientContextParameters = Aws::Endpoint::ClientContextParameters;
 
-using CloudFormationClientConfiguration = Aws::Client::GenericClientConfiguration;
+using CloudFormationClientConfiguration = Aws::Client::GenericClientConfiguration<false>;
 using CloudFormationBuiltInParameters = Aws::Endpoint::BuiltInParameters;
 
 /**

@@ -20,7 +20,7 @@ namespace GameLift {
 namespace Internal {
 
 /**
- * Message from Amazon GameLift Servers/Customer reporting process health.
+ * Message from GameLift/Customer reporting process health.
  */
 class HeartbeatServerProcessRequest : public Message {
 public:

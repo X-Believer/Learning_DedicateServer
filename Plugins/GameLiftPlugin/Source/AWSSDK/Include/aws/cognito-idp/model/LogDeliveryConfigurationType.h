@@ -26,8 +26,7 @@ namespace Model
 {
 
   /**
-   * <p>The logging parameters of a user pool returned in response to
-   * <code>GetLogDeliveryConfiguration</code>.</p><p><h3>See Also:</h3>   <a
+   * <p>The logging parameters of a user pool.</p><p><h3>See Also:</h3>   <a
    * href="http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LogDeliveryConfigurationType">AWS
    * API Reference</a></p>
    */
@@ -40,34 +39,87 @@ namespace Model
     AWS_COGNITOIDENTITYPROVIDER_API Aws::Utils::Json::JsonValue Jsonize() const;
 
 
-    ///@{
     /**
-     * <p>The ID of the user pool where you configured logging.</p>
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
      */
     inline const Aws::String& GetUserPoolId() const{ return m_userPoolId; }
-    inline bool UserPoolIdHasBeenSet() const { return m_userPoolIdHasBeenSet; }
-    inline void SetUserPoolId(const Aws::String& value) { m_userPoolIdHasBeenSet = true; m_userPoolId = value; }
-    inline void SetUserPoolId(Aws::String&& value) { m_userPoolIdHasBeenSet = true; m_userPoolId = std::move(value); }
-    inline void SetUserPoolId(const char* value) { m_userPoolIdHasBeenSet = true; m_userPoolId.assign(value); }
-    inline LogDeliveryConfigurationType& WithUserPoolId(const Aws::String& value) { SetUserPoolId(value); return *this;}
-    inline LogDeliveryConfigurationType& WithUserPoolId(Aws::String&& value) { SetUserPoolId(std::move(value)); return *this;}
-    inline LogDeliveryConfigurationType& WithUserPoolId(const char* value) { SetUserPoolId(value); return *this;}
-    ///@}
 
-    ///@{
     /**
-     * <p>A logging destination of a user pool. User pools can have multiple logging
-     * destinations for message-delivery and user-activity logs.</p>
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
+     */
+    inline bool UserPoolIdHasBeenSet() const { return m_userPoolIdHasBeenSet; }
+
+    /**
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
+     */
+    inline void SetUserPoolId(const Aws::String& value) { m_userPoolIdHasBeenSet = true; m_userPoolId = value; }
+
+    /**
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
+     */
+    inline void SetUserPoolId(Aws::String&& value) { m_userPoolIdHasBeenSet = true; m_userPoolId = std::move(value); }
+
+    /**
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
+     */
+    inline void SetUserPoolId(const char* value) { m_userPoolIdHasBeenSet = true; m_userPoolId.assign(value); }
+
+    /**
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
+     */
+    inline LogDeliveryConfigurationType& WithUserPoolId(const Aws::String& value) { SetUserPoolId(value); return *this;}
+
+    /**
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
+     */
+    inline LogDeliveryConfigurationType& WithUserPoolId(Aws::String&& value) { SetUserPoolId(std::move(value)); return *this;}
+
+    /**
+     * <p>The ID of the user pool where you configured detailed activity logging.</p>
+     */
+    inline LogDeliveryConfigurationType& WithUserPoolId(const char* value) { SetUserPoolId(value); return *this;}
+
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
      */
     inline const Aws::Vector<LogConfigurationType>& GetLogConfigurations() const{ return m_logConfigurations; }
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
+     */
     inline bool LogConfigurationsHasBeenSet() const { return m_logConfigurationsHasBeenSet; }
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
+     */
     inline void SetLogConfigurations(const Aws::Vector<LogConfigurationType>& value) { m_logConfigurationsHasBeenSet = true; m_logConfigurations = value; }
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
+     */
     inline void SetLogConfigurations(Aws::Vector<LogConfigurationType>&& value) { m_logConfigurationsHasBeenSet = true; m_logConfigurations = std::move(value); }
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
+     */
     inline LogDeliveryConfigurationType& WithLogConfigurations(const Aws::Vector<LogConfigurationType>& value) { SetLogConfigurations(value); return *this;}
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
+     */
     inline LogDeliveryConfigurationType& WithLogConfigurations(Aws::Vector<LogConfigurationType>&& value) { SetLogConfigurations(std::move(value)); return *this;}
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
+     */
     inline LogDeliveryConfigurationType& AddLogConfigurations(const LogConfigurationType& value) { m_logConfigurationsHasBeenSet = true; m_logConfigurations.push_back(value); return *this; }
+
+    /**
+     * <p>The detailed activity logging destination of a user pool.</p>
+     */
     inline LogDeliveryConfigurationType& AddLogConfigurations(LogConfigurationType&& value) { m_logConfigurationsHasBeenSet = true; m_logConfigurations.push_back(std::move(value)); return *this; }
-    ///@}
+
   private:
 
     Aws::String m_userPoolId;

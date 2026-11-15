@@ -54,12 +54,11 @@ namespace Internal
 	TSharedPtr<SPathInput> MakeOutConfigFilePath()
 	{
 		return SNew(SPathInput)
-			.Title(Menu::DeployCommon::kOutConfigFilePathTitle)
-			.PathHint(Menu::DeployCommon::kOutConfigFilePathHint)
+			.Title(Menu::DeployManagedEC2::kOutConfigFilePathTitle)
+			.PathHint(Menu::DeployManagedEC2::kOutConfigFilePathHint)
 			.IsFileSelection(false)
-			.ToolTipText(Menu::DeployCommon::kOutConfigFilePathTooltip);
+			.ToolTipText(Menu::DeployManagedEC2::kOutConfigFilePathTooltip);
 	}
-
 } // namespace Internal
 
 #define LOCTEXT_NAMESPACE "SDeploymentFields"
@@ -103,8 +102,8 @@ void SDeploymentFields::Construct(const FArguments& InArgs)
 	ExtraServerResourcesPathInputRow->SetVisibility(EVisibility::Collapsed);
 
 	TSharedPtr<SWidget> OutConfigFilePathInputRow = SNew(SNamedRow)
-		.NameText(Menu::DeployCommon::kOutConfigFilePathTitle)
-		.NameTooltipText(Menu::DeployCommon::kOutConfigFilePathTooltip)
+		.NameText(Menu::DeployManagedEC2::kOutConfigFilePathTitle)
+		.NameTooltipText(Menu::DeployManagedEC2::kOutConfigFilePathTooltip)
 		.RowWidget(OutConfigFilePathInput);
 
 	TSharedPtr<SWidget> FullWidget =
@@ -133,7 +132,7 @@ void SDeploymentFields::Construct(const FArguments& InArgs)
 		[
 			ExtraServerResourcesPathInputRow.ToSharedRef()
 		]
-		+ SVerticalBox::Slot().AutoHeight().Padding(SPadding::Top_Bottom)
+		+ SVerticalBox::Slot().AutoHeight().Padding(SPadding::Top)
 		[
 			OutConfigFilePathInputRow.ToSharedRef()
 		];
@@ -145,16 +144,6 @@ void SDeploymentFields::Construct(const FArguments& InArgs)
 			FullWidget.ToSharedRef()
 		]
 	];
-}
-
-void SDeploymentFields::SetAllFieldsReadOnly(bool ReadOnly)
-{
-	BuildNameInput->SetReadonly(ReadOnly);
-	BuildOperatingSystemInput->SetEnabled(!ReadOnly);
-	BuildFolderPathInput->SetReadonly(ReadOnly);
-	BuildFilePathInput->SetReadonly(ReadOnly);
-	ExtraServerResourcesPathInput->SetReadonly(ReadOnly);
-	OutConfigFilePathInput->SetReadonly(ReadOnly);
 }
 
 TSharedPtr<SSelectionComboBox> SDeploymentFields::MakeBuildOperatingSystem()
@@ -177,7 +166,6 @@ void SDeploymentFields::OnBuildingSupportedOperatingSystemValues(TArray<FTextInt
 void SDeploymentFields::OnOperatingSystemSelected(int SelectionId, const FTextIntPair& Item)
 {
 	CurrentOperatingSystemSelected = SelectionId;
-	OnOperatingSystemChanged.Broadcast();
 }
 
 void SDeploymentFields::SetGameOnlyMode()
@@ -198,9 +186,6 @@ void SDeploymentFields::SetBuildName(const FText& Name)
 void SDeploymentFields::SetBuildOperatingSystem(const FText& OSValue)
 {
 	CurrentOperatingSystemSelected = (int)EFleetOperatingSystemFromValueText(OSValue);
-
-	// update selection combo box to show this item selection
-	BuildOperatingSystemInput->SetSelectedId(CurrentOperatingSystemSelected);
 }
 
 void SDeploymentFields::SetBuildFolderPath(const FText& Path)
@@ -221,11 +206,6 @@ void SDeploymentFields::SetExtraServerResourcesPath(const FText& Path)
 void SDeploymentFields::SetOutConfigFilePath(const FText& Path)
 {
 	OutConfigFilePathInput->SetSelectedPath(Path);
-}
-
-void SDeploymentFields::SetDeploymentScenario(const FText& Name)
-{
-	DeploymentScenario = Name;
 }
 
 const FText& SDeploymentFields::GetBuildName() const
@@ -256,11 +236,6 @@ const FText& SDeploymentFields::GetExtraServerResourcesPath() const
 const FText& SDeploymentFields::GetOutConfigFilePath() const
 {
 	return OutConfigFilePathInput->GetSelectedPathRef();
-}
-
-const FText& SDeploymentFields::GetDeploymentScenario() const
-{
-	return DeploymentScenario;
 }
 
 SDeploymentFields::Modes SDeploymentFields::GetCurrentState() const

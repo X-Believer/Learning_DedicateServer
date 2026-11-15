@@ -14,7 +14,6 @@
 
 #include "Modules/ModuleManager.h"
 #include "Delegates/DelegateCombinations.h"
-#include <atomic>
 
 #if PLATFORM_WINDOWS
 #include "Windows/AllowWindowsPlatformTypes.h"
@@ -28,8 +27,6 @@
 #if PLATFORM_WINDOWS
 #include "Windows/HideWindowsPlatformTypes.h"
 #endif
-
-DECLARE_LOG_CATEGORY_EXTERN(LogGameLiftServerSDK, Log, All);
 
 DECLARE_DELEGATE_OneParam(FOnStartGameSession, Aws::GameLift::Server::Model::GameSession);
 DECLARE_DELEGATE_OneParam(FOnUpdateGameSession, Aws::GameLift::Server::Model::UpdateGameSession);
@@ -130,9 +127,6 @@ public:
     virtual FGameLiftGenericOutcome InitSDK();
     virtual FGameLiftGenericOutcome InitSDK(const FServerParameters &serverParameters);
 
-    virtual FGameLiftGenericOutcome InitMetrics();
-    virtual FGameLiftGenericOutcome InitMetrics(const FMetricsParameters &metricsParameters);
-
     //virtual TGameLiftGenericOutcome ProcessReady(Aws::GameLift::Server::ProcessParameters &processParameters);
     virtual FGameLiftGenericOutcome ProcessReady(FProcessParameters &processParameters);
 
@@ -140,7 +134,6 @@ public:
     virtual FGameLiftGenericOutcome ActivateGameSession();
     virtual FGameLiftGenericOutcome AcceptPlayerSession(const FString& playerSessionId);
     virtual FGameLiftGenericOutcome RemovePlayerSession(const FString& playerSessionId);
-    virtual FGameLiftGenericOutcome Destroy();
     virtual FGameLiftDescribePlayerSessionsOutcome DescribePlayerSessions(const FGameLiftDescribePlayerSessionsRequest& describePlayerSessionsRequest);
 
     virtual FGameLiftGenericOutcome UpdatePlayerSessionCreationPolicy(EPlayerSessionCreationPolicy policy);
@@ -152,12 +145,8 @@ public:
 
     virtual FGameLiftGetComputeCertificateOutcome GetComputeCertificate();
     virtual FGameLiftGetFleetRoleCredentialsOutcome GetFleetRoleCredentials(const FGameLiftGetFleetRoleCredentialsRequest& request);
-    virtual FGameLiftListContainersNetworkInfoOutcome ListContainersNetworkInfo();
 
 private:
-    /** Whether InitSDK() has been successfully called and Destroy() has not yet been called. */
-    std::atomic<bool> bSdkInitialized{false};
-
     /** Handle to the dll we will load */
     static void* GameLiftServerSDKLibraryHandle;
     static bool LoadDependency(const FString& Dir, const FString& Name, void*& Handle);

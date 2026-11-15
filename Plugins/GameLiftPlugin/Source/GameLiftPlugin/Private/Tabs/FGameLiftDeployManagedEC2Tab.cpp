@@ -3,7 +3,7 @@
 
 #include "Tabs/FGameLiftDeployManagedEC2Tab.h"
 
-#include "SMenu/EC2/SGameLiftDeployManagedEC2Menu.h"
+#include "SMenu/SGameLiftDeployManagedEC2Menu.h"
 #include "GameLiftPluginConstants.h"
 
 #include <Widgets/Layout/SScrollBox.h>
@@ -18,7 +18,7 @@ void FGameLiftDeployManagedEC2Tab::Register()
 		FOnSpawnTab::CreateRaw(this, &FGameLiftDeployManagedEC2Tab::HandleSpawnTab))
 		.SetDisplayName(Tabs::kDeployManagedEC2TabTitle)
 		.SetTooltipText(Tabs::kDeployManagedEC2TabTooltip)
-		.SetIcon(FSlateIcon(FGameLiftPluginStyle::Get().GetStyleSetName(), Style::Brush::kGameLiftManagedEC2IconName))
+		.SetIcon(FSlateIcon(FGameLiftPluginStyle::Get().GetStyleSetName(), Style::Brush::kGameLiftTabIconName))
 		//.SetGroup(WorkspaceMenu::GetMenuStructure().GetDeveloperToolsMiscCategory());
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
 }

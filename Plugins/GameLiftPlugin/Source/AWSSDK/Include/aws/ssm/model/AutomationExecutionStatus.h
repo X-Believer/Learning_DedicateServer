@@ -33,8 +33,7 @@ namespace Model
     ChangeCalendarOverrideApproved,
     ChangeCalendarOverrideRejected,
     CompletedWithSuccess,
-    CompletedWithFailure,
-    Exited
+    CompletedWithFailure
   };
 
 namespace AutomationExecutionStatusMapper

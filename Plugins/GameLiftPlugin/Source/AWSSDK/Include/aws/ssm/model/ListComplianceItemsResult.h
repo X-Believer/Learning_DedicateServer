@@ -34,43 +34,106 @@ namespace Model
     AWS_SSM_API ListComplianceItemsResult& operator=(const Aws::AmazonWebServiceResult<Aws::Utils::Json::JsonValue>& result);
 
 
-    ///@{
     /**
      * <p>A list of compliance information for the specified resource ID. </p>
      */
     inline const Aws::Vector<ComplianceItem>& GetComplianceItems() const{ return m_complianceItems; }
-    inline void SetComplianceItems(const Aws::Vector<ComplianceItem>& value) { m_complianceItems = value; }
-    inline void SetComplianceItems(Aws::Vector<ComplianceItem>&& value) { m_complianceItems = std::move(value); }
-    inline ListComplianceItemsResult& WithComplianceItems(const Aws::Vector<ComplianceItem>& value) { SetComplianceItems(value); return *this;}
-    inline ListComplianceItemsResult& WithComplianceItems(Aws::Vector<ComplianceItem>&& value) { SetComplianceItems(std::move(value)); return *this;}
-    inline ListComplianceItemsResult& AddComplianceItems(const ComplianceItem& value) { m_complianceItems.push_back(value); return *this; }
-    inline ListComplianceItemsResult& AddComplianceItems(ComplianceItem&& value) { m_complianceItems.push_back(std::move(value)); return *this; }
-    ///@}
 
-    ///@{
+    /**
+     * <p>A list of compliance information for the specified resource ID. </p>
+     */
+    inline void SetComplianceItems(const Aws::Vector<ComplianceItem>& value) { m_complianceItems = value; }
+
+    /**
+     * <p>A list of compliance information for the specified resource ID. </p>
+     */
+    inline void SetComplianceItems(Aws::Vector<ComplianceItem>&& value) { m_complianceItems = std::move(value); }
+
+    /**
+     * <p>A list of compliance information for the specified resource ID. </p>
+     */
+    inline ListComplianceItemsResult& WithComplianceItems(const Aws::Vector<ComplianceItem>& value) { SetComplianceItems(value); return *this;}
+
+    /**
+     * <p>A list of compliance information for the specified resource ID. </p>
+     */
+    inline ListComplianceItemsResult& WithComplianceItems(Aws::Vector<ComplianceItem>&& value) { SetComplianceItems(std::move(value)); return *this;}
+
+    /**
+     * <p>A list of compliance information for the specified resource ID. </p>
+     */
+    inline ListComplianceItemsResult& AddComplianceItems(const ComplianceItem& value) { m_complianceItems.push_back(value); return *this; }
+
+    /**
+     * <p>A list of compliance information for the specified resource ID. </p>
+     */
+    inline ListComplianceItemsResult& AddComplianceItems(ComplianceItem&& value) { m_complianceItems.push_back(std::move(value)); return *this; }
+
+
     /**
      * <p>The token for the next set of items to return. Use this token to get the next
      * set of results.</p>
      */
     inline const Aws::String& GetNextToken() const{ return m_nextToken; }
-    inline void SetNextToken(const Aws::String& value) { m_nextToken = value; }
-    inline void SetNextToken(Aws::String&& value) { m_nextToken = std::move(value); }
-    inline void SetNextToken(const char* value) { m_nextToken.assign(value); }
-    inline ListComplianceItemsResult& WithNextToken(const Aws::String& value) { SetNextToken(value); return *this;}
-    inline ListComplianceItemsResult& WithNextToken(Aws::String&& value) { SetNextToken(std::move(value)); return *this;}
-    inline ListComplianceItemsResult& WithNextToken(const char* value) { SetNextToken(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The token for the next set of items to return. Use this token to get the next
+     * set of results.</p>
+     */
+    inline void SetNextToken(const Aws::String& value) { m_nextToken = value; }
+
+    /**
+     * <p>The token for the next set of items to return. Use this token to get the next
+     * set of results.</p>
+     */
+    inline void SetNextToken(Aws::String&& value) { m_nextToken = std::move(value); }
+
+    /**
+     * <p>The token for the next set of items to return. Use this token to get the next
+     * set of results.</p>
+     */
+    inline void SetNextToken(const char* value) { m_nextToken.assign(value); }
+
+    /**
+     * <p>The token for the next set of items to return. Use this token to get the next
+     * set of results.</p>
+     */
+    inline ListComplianceItemsResult& WithNextToken(const Aws::String& value) { SetNextToken(value); return *this;}
+
+    /**
+     * <p>The token for the next set of items to return. Use this token to get the next
+     * set of results.</p>
+     */
+    inline ListComplianceItemsResult& WithNextToken(Aws::String&& value) { SetNextToken(std::move(value)); return *this;}
+
+    /**
+     * <p>The token for the next set of items to return. Use this token to get the next
+     * set of results.</p>
+     */
+    inline ListComplianceItemsResult& WithNextToken(const char* value) { SetNextToken(value); return *this;}
+
+
     
     inline const Aws::String& GetRequestId() const{ return m_requestId; }
+
+    
     inline void SetRequestId(const Aws::String& value) { m_requestId = value; }
+
+    
     inline void SetRequestId(Aws::String&& value) { m_requestId = std::move(value); }
+
+    
     inline void SetRequestId(const char* value) { m_requestId.assign(value); }
+
+    
     inline ListComplianceItemsResult& WithRequestId(const Aws::String& value) { SetRequestId(value); return *this;}
+
+    
     inline ListComplianceItemsResult& WithRequestId(Aws::String&& value) { SetRequestId(std::move(value)); return *this;}
+
+    
     inline ListComplianceItemsResult& WithRequestId(const char* value) { SetRequestId(value); return *this;}
-    ///@}
+
   private:
 
     Aws::Vector<ComplianceItem> m_complianceItems;

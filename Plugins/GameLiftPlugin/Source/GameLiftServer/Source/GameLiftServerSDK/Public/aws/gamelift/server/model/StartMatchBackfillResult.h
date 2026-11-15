@@ -32,8 +32,8 @@ namespace Model {
  * <p>Represents the returned data from StartMatchBackfill (currently only the ticketId)
  * in response to a request action.
  * For more information, see the <a
- * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon GameLift Servers 
- * Developer Guide</a>.</p>
+ * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon
+ * GameLift Developer Guide</a>.</p>
  */
 class AWS_GAMELIFT_API StartMatchBackfillResult {
 #ifdef GAMELIFT_USE_STD

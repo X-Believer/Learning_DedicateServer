@@ -21,9 +21,6 @@ namespace Internal {
  * Interface for objects that are json serializable (i.e. the Message class).
  */
 class ISerializable {
-public:
-    virtual ~ISerializable() = default;
-
 protected:
     /**
      * Serialize the object into Json and return the value.

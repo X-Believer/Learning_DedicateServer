@@ -22,7 +22,7 @@ namespace GameLift {
 namespace Internal {
 
 /**
- * Message from Amazon GameLift Servers initializing GameSession Creation
+ * Message from GameLift initializing GameSession Creation
  */
 class CreateGameSessionMessage : public Message {
 public:

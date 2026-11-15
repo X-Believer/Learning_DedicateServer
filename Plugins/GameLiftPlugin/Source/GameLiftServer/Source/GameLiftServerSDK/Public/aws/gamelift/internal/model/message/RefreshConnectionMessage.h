@@ -19,7 +19,7 @@ namespace Aws {
 namespace GameLift {
 namespace Internal {
 /**
- * Message from Amazon GameLift Servers indicating the server SDK should refresh its websocket connection.
+ * Message from GameLift indicating the SDK should refresh its websocket connection.
  */
 class RefreshConnectionMessage : public Message {
 public:

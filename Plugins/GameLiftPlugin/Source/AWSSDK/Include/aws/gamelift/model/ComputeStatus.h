@@ -18,8 +18,7 @@ namespace Model
     NOT_SET,
     PENDING,
     ACTIVE,
-    TERMINATING,
-    IMPAIRED
+    TERMINATING
   };
 
 namespace ComputeStatusMapper

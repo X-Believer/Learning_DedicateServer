@@ -18,7 +18,6 @@
 #include <rapidjson/stringbuffer.h>
 #include <string>
 #include <vector>
-#include <inttypes.h>
 
 namespace Aws {
 namespace GameLift {
@@ -33,8 +32,8 @@ public:
     static int SafelyDeserializeInt(const rapidjson::Value &value, const char *key);
     static void WritePositiveInt(rapidjson::Writer<rapidjson::StringBuffer> *writer, const char *key, int value);
 
-    static int64_t SafelyDeserializeInt64(const rapidjson::Value &value, const char *key);
-    static void WritePositiveInt64(rapidjson::Writer<rapidjson::StringBuffer> *writer, const char *key, int64_t value);
+    static long SafelyDeserializeLong(const rapidjson::Value &value, const char *key);
+    static void WritePositiveLong(rapidjson::Writer<rapidjson::StringBuffer> *writer, const char *key, long value);
 
     static Aws::GameLift::Server::LogParameters SafelyDeserializeLogParameters(const rapidjson::Value &value, const char *key);
     static void WriteLogParameters(rapidjson::Writer<rapidjson::StringBuffer> *writer, const char *key, const Aws::GameLift::Server::LogParameters &value);

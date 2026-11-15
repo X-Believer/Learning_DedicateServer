@@ -5,8 +5,6 @@
 
 enum class ESetupMessageState
 {
-	HelpMessage,
-	InfoMessage,
 	WarningMessage,
 	FailureMessage,
 	ReadyToGoMessage,

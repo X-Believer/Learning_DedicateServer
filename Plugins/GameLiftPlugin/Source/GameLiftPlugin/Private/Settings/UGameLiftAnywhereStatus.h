@@ -57,7 +57,4 @@ public:
 
 	UPROPERTY(config, EditAnywhere, Category = "Anywhere Status")
 	FString PathToClientBuild;
-	
-	UPROPERTY(config, EditAnywhere, Category = "Anywhere Status")
-	FString ClientBuildLauncherArguments;
 };

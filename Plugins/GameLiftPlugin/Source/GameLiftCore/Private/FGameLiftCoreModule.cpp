@@ -10,7 +10,6 @@
 #include "AWSConfigFileProfile.h"
 #include "AWSBootstrapProfile.h"
 #include "Anywhere/GameLiftAnywhereHandler.h"
-#include "Containers/GameLiftContainersHandler.h"
 
 #if PLATFORM_WINDOWS
 #include "Windows/AllowWindowsPlatformTypes.h"
@@ -20,6 +19,10 @@
 #include <aws/core/client/ClientConfiguration.h>
 #include <aws/core/client/AWSClient.h>
 #include <aws/core/client/AWSErrorMarshaller.h>
+
+#ifdef DIFFERENCE
+#undef DIFFERENCE
+#endif
 
 #include <aws/gamelift/core/gamelift_account.h>
 #include <aws/gamelift/core/exports.h>
@@ -69,7 +72,7 @@ static void TestGameLiftCore()
 static class UUserWidget* CreatedWidget;
 
 FGameLiftCoreModule::FGameLiftCoreModule()
-	: Deployer(new AWSScenariosDeployer), ProfileBootstrap(new AWSBootstrapProfile), AnywhereHandler(new GameLiftAnywhereHandler), ContainersHandler(new GameLiftContainersHandler)
+	: Deployer(new AWSScenariosDeployer), ProfileBootstrap(new AWSBootstrapProfile), AnywhereHandler(new GameLiftAnywhereHandler)
 {
 }
 
@@ -122,11 +125,6 @@ IAWSBootstrapProfile& FGameLiftCoreModule::GetProfileBootstrap()
 IGameLiftAnywhereHandler& FGameLiftCoreModule::GetGameLiftAnywhereHandler()
 {
 	return *AnywhereHandler;
-}
-
-IGameLiftContainersHandler& FGameLiftCoreModule::GetGameLiftContainersHandler()
-{
-	return *ContainersHandler;
 }
 
 TSharedRef<IAWSConfigFileProfile> FGameLiftCoreModule::MakeAWSConfigFileProfile()

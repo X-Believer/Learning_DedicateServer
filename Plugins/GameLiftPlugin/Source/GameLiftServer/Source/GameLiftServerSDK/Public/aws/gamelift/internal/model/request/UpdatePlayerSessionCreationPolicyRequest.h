@@ -21,7 +21,7 @@ namespace Internal {
 enum class WebSocketPlayerSessionCreationPolicy { NOT_SET, DENY_ALL, ACCEPT_ALL };
 
 /**
- * UpdatePlayerSessionCreationPolicyRequest Request. This request is sent to the Amazon GameLift Servers WebSocket
+ * UpdatePlayerSessionCreationPolicyRequest Request. This request is sent to the GameLift WebSocket
  * during a DescribePlayerSessions call
  */
 class UpdatePlayerSessionCreationPolicyRequest : public Message {

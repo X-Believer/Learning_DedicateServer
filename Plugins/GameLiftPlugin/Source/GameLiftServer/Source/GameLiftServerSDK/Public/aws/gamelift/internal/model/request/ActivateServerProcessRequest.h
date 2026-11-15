@@ -20,13 +20,13 @@ namespace GameLift {
 namespace Internal {
 
 /**
- * ActivateServerProcess Request. This request is sent to the Amazon GameLift Servers WebSocket during the
+ * ActivateServerProcess Request. This request is sent to the GameLift WebSocket during the
  * ProcessReady call
  */
 class ActivateServerProcessRequest : public Message {
 public:
     ActivateServerProcessRequest();
-    ActivateServerProcessRequest(std::string sdkVersion, std::string sdkLanguage, std::string sdkToolName, std::string sdkToolVersion, int port, const Aws::GameLift::Server::LogParameters &logParameters);
+    ActivateServerProcessRequest(std::string sdkVersion, std::string sdkLanguage, int port, const Aws::GameLift::Server::LogParameters &logParameters);
 
     ActivateServerProcessRequest(const ActivateServerProcessRequest &) = default;
     ActivateServerProcessRequest(ActivateServerProcessRequest &&) = default;
@@ -38,10 +38,6 @@ public:
 
     inline const std::string &GetSdkLanguage() const { return m_sdkLanguage; }
 
-    inline const std::string &GetSdkToolName() const { return m_sdkToolName; }
-
-    inline const std::string &GetSdkToolVersion() const { return m_sdkToolVersion; }
-
     inline const int GetPort() const { return m_port; }
 
     inline const Aws::GameLift::Server::LogParameters GetLogParameters() const { return m_logParameters; }
@@ -49,10 +45,6 @@ public:
     inline void SetSdkVersion(const std::string &sdkVersion) { m_sdkVersion = sdkVersion; }
 
     inline void SetSdkLanguage(const std::string &sdkLanguage) { m_sdkLanguage = sdkLanguage; }
-
-    inline void SetSdkToolName(const std::string &sdkToolName) { m_sdkToolName = sdkToolName; }
-
-    inline void SetSdkToolVersion(const std::string &sdkToolVersion) { m_sdkToolVersion = sdkToolVersion; }
 
     inline void SetPort(const int port) { m_port = port; }
 
@@ -78,16 +70,6 @@ public:
         return *this;
     }
 
-    inline ActivateServerProcessRequest &WithSdkToolName(const std::string &sdkToolName) {
-        SetSdkToolName(sdkToolName);
-        return *this;
-    }
-
-    inline ActivateServerProcessRequest &WithSdkToolVersion(const std::string &sdkToolVersion) {
-        SetSdkToolVersion(sdkToolVersion);
-        return *this;
-    }
-
     friend std::ostream &operator<<(std::ostream &os, const ActivateServerProcessRequest &request);
 
 protected:
@@ -98,15 +80,11 @@ private:
     static constexpr const char *ACTIVATE_SERVER_PROCESS = "ActivateServerProcess";
     static constexpr const char *SDK_VERSION = "SdkVersion";
     static constexpr const char *SDK_LANGUAGE = "SdkLanguage";
-    static constexpr const char *SDK_TOOL_NAME = "SdkToolName";
-    static constexpr const char *SDK_TOOL_VERSION = "SdkToolVersion";
     static constexpr const char *PORT = "Port";
     static constexpr const char *LOG_PATHS = "LogPaths";
 
     std::string m_sdkVersion;
     std::string m_sdkLanguage;
-    std::string m_sdkToolName;
-    std::string m_sdkToolVersion;
     int m_port;
     Aws::GameLift::Server::LogParameters m_logParameters;
 };

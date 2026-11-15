@@ -110,7 +110,6 @@
 #include <aws/cognito-idp/model/UpdateUserPoolDomainResult.h>
 #include <aws/cognito-idp/model/VerifySoftwareTokenResult.h>
 #include <aws/cognito-idp/model/VerifyUserAttributeResult.h>
-#include <aws/cognito-idp/model/AssociateSoftwareTokenRequest.h>
 #include <aws/core/NoResult.h>
 /* End of service model headers required in CognitoIdentityProviderClient header */
 
@@ -145,7 +144,7 @@ namespace Aws
 
   namespace CognitoIdentityProvider
   {
-    using CognitoIdentityProviderClientConfiguration = Aws::Client::GenericClientConfiguration;
+    using CognitoIdentityProviderClientConfiguration = Aws::Client::GenericClientConfiguration<false>;
     using CognitoIdentityProviderEndpointProviderBase = Aws::CognitoIdentityProvider::Endpoint::CognitoIdentityProviderEndpointProviderBase;
     using CognitoIdentityProviderEndpointProvider = Aws::CognitoIdentityProvider::Endpoint::CognitoIdentityProviderEndpointProvider;
 

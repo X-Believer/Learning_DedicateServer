@@ -18,5 +18,4 @@ public:
 
 private:
 	TSharedRef<SWidget> MakeHelpWidget() const;
-	TSharedRef<SWidget> MakeHelpCardWidget(const TCHAR* UrlLink, int IconWidth, const FString& IconName, const FText TitleText, const FText DescriptionText) const;
 };

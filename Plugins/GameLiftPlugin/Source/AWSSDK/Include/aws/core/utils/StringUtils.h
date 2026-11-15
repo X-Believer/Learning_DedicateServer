@@ -49,11 +49,6 @@ namespace Aws
             */
             static Aws::String URLEncode(const char* unsafe);
 
-            static inline Aws::String URLEncode(const Aws::String& unsafe)
-            {
-              return URLEncode(unsafe.c_str());
-            }
-
             /**
             * Http Clients tend to escape some characters but not all. Escaping all of them causes problems, because the client
             * will also try to escape them.
@@ -79,13 +74,9 @@ namespace Aws
                  */
                 NOT_SET,
                 /**
-                 * Deprecated use INCLUDE_EMPTY_SEGMENTS instead.
+                 * Includes empty entries in the vector returned by Split()
                  */
-                INCLUDE_EMPTY_ENTRIES,
-                /**
-                 * Include delimiters as empty segments in the split string
-                 */
-                INCLUDE_EMPTY_SEGMENTS,
+                INCLUDE_EMPTY_ENTRIES
             };
 
             /**
@@ -119,13 +110,6 @@ namespace Aws
              * @param option, if INCLUDE_EMPTY_ENTRIES, includes empty entries in the result, otherwise removes empty entries.
              */
             static Aws::Vector<Aws::String> Split(const Aws::String& toSplit, char splitOn, size_t numOfTargetParts, SplitOptions option);
-
-            /**
-             * Splits a string on delimeter, keeping the delimiter in the string as a empty space.
-             * @param toSplit, the original string to split
-             * @param splitOn, the delimiter you want to use.
-             */
-            static Aws::Vector<Aws::String> SplitWithSpaces(const Aws::String& toSplit, char splitOn);
 
             /**
             * Splits a string on new line characters.

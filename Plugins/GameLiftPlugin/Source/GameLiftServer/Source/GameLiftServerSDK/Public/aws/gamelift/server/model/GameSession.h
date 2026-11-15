@@ -366,31 +366,31 @@ public:
     }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline const std::string &GetIpAddress() const { return m_ipAddress; }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetIpAddress(const std::string &value) { m_ipAddress = value; }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetIpAddress(std::string &&value) { m_ipAddress = value; }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetIpAddress(const char *value) { m_ipAddress.assign(value); }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline GameSession &WithIpAddress(const std::string &value) {
@@ -399,7 +399,7 @@ public:
     }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline GameSession &WithIpAddress(std::string &&value) {
@@ -408,7 +408,7 @@ public:
     }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline GameSession &WithIpAddress(const char *value) {
@@ -417,19 +417,19 @@ public:
     }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline int GetPort() const { return m_port; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetPort(int value) { m_port = value; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline GameSession &WithPort(int value) {
@@ -482,27 +482,27 @@ public:
     }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline const std::string &GetMatchmakerData() const { return m_matchmakerData; }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline void SetMatchmakerData(const std::string &value) { m_matchmakerData = value; }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline void SetMatchmakerData(std::string &&value) { m_matchmakerData = value; }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline void SetMatchmakerData(const char *value) { m_matchmakerData.assign(value); }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline GameSession &WithMatchmakerData(const std::string &value) {
         SetMatchmakerData(value);
@@ -510,7 +510,7 @@ public:
     }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline GameSession &WithMatchmakerData(std::string &&value) {
         SetMatchmakerData(value);
@@ -518,7 +518,7 @@ public:
     }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline GameSession &WithMatchmakerData(const char *value) {
         SetMatchmakerData(value);
@@ -526,31 +526,31 @@ public:
     }
 
     /**
-     * <p>The DNS name of the host running a game server process, used for establishing a TLS
+     * <p>The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.</p>
      */
     inline const std::string &GetDnsName() const { return m_dnsName; }
 
     /**
-     * <p>The DNS name of the host running a game server process, used for establishing a TLS
+     * <p>The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.</p>
      */
     inline void SetDnsName(const std::string &value) { m_dnsName = value; }
 
     /**
-     * <p>The DNS name of the host running a game server process, used for establishing a TLS
+     * <p>The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.</p>
      */
     inline void SetDnsName(std::string &&value) { m_dnsName = value; }
 
     /**
-     * <p>The DNS name of the host running a game server process, used for establishing a TLS
+     * <p>The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.</p>
      */
     inline void SetDnsName(const char *value) { m_dnsName.assign(value); }
 
     /**
-     * <p>The DNS name of the host running a game server process, used for establishing a TLS
+     * <p>The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.</p>
      */
     inline GameSession &WithDnsName(const std::string &value) {
@@ -559,7 +559,7 @@ public:
     }
 
     /**
-     * <p>The DNS name of the host running a game server process, used for establishing a TLS
+     * <p>The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.</p>
      */
     inline GameSession &WithDnsName(std::string &&value) {
@@ -568,7 +568,7 @@ public:
     }
 
     /**
-     * <p>The DNS name of the host running a game server process, used for establishing a TLS
+     * <p>The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.</p>
      */
     inline GameSession &WithDnsName(const char *value) {
@@ -831,13 +831,13 @@ public:
     }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline const char *GetIpAddress() const { return m_ipAddress; }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetIpAddress(const char *value) {
@@ -846,7 +846,7 @@ public:
     }
 
     /**
-     * <p>IP address of the game session. To connect to a game server process, an
+     * <p>IP address of the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline GameSession &WithIpAddress(const char *value) {
@@ -855,19 +855,19 @@ public:
     }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline int GetPort() const { return m_port; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline void SetPort(int value) { m_port = value; }
 
     /**
-     * <p>Port number for the game session. To connect to a game server process, an
+     * <p>Port number for the game session. To connect to a GameLift server process, an
      * app needs both the IP address and port number.</p>
      */
     inline GameSession &WithPort(int value) {
@@ -897,12 +897,12 @@ public:
     }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline const char *GetMatchmakerData() const { return m_matchmakerData; }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline void SetMatchmakerData(const char *value) {
         strncpy(m_matchmakerData, value, sizeof(m_matchmakerData));
@@ -910,7 +910,7 @@ public:
     }
 
     /**
-     * <p>Data generated from Amazon GameLift Servers Matchmaking.</p>
+     * <p>Data generated from GameLift Matchmaking.</p>
      */
     inline GameSession &WithMatchmakerData(const char *value) {
         SetMatchmakerData(value);
@@ -918,13 +918,13 @@ public:
     }
 
     /**
-     * The DNS name of the host running a game server process, used for establishing a TLS
+     * The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.
      */
     inline const char *GetDnsName() const { return m_dnsName; }
 
     /**
-     * The DNS name of the host running a game server process, used for establishing a TLS
+     * The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.
      */
     inline void SetDnsName(const char *value) {
@@ -933,7 +933,7 @@ public:
     }
 
     /**
-     * The DNS name of the host running a game server process, used for establishing a TLS
+     * The DNS name of the host running a GameLift server process, used for establishing a TLS
      * connection for a game session.
      */
     inline GameSession &WithDnsName(const char *value) {

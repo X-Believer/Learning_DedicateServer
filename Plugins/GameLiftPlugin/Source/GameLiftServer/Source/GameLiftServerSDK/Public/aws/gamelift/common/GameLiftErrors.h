@@ -24,50 +24,44 @@
 namespace Aws {
 namespace GameLift {
 enum class AWS_GAMELIFT_API GAMELIFT_ERROR_TYPE {
-    ALREADY_INITIALIZED,             // The server or client has already been initialized with
+    ALREADY_INITIALIZED,             // The GameLift Server or Client has already been initialized with
                                      // Initialize().
     FLEET_MISMATCH,                  // The target fleet does not match the fleet of a gameSession or playerSession.
-    GAMELIFT_CLIENT_NOT_INITIALIZED, // The client has not been initialized.
-    GAMELIFT_SERVER_NOT_INITIALIZED, // The server SDK has not been initialized.
-    GAME_SESSION_ENDED_FAILED,       // The server SDK could not contact the service to report
+    GAMELIFT_CLIENT_NOT_INITIALIZED, // The GameLift client has not been initialized.
+    GAMELIFT_SERVER_NOT_INITIALIZED, // The GameLift server has not been initialized.
+    GAME_SESSION_ENDED_FAILED,       // The GameLift Server SDK could not contact the service to report
                                      // the game session ended.
-    GAME_SESSION_NOT_READY,          // The game session was not activated.
-    GAME_SESSION_READY_FAILED,       // The server SDK could not contact the service to report
+    GAME_SESSION_NOT_READY,          // The GameLift Server Game Session was not activated.
+    GAME_SESSION_READY_FAILED,       // The GameLift Server SDK could not contact the service to report
                                      // the game session is ready.
     GAME_SESSION_ID_NOT_SET,         // No game sessions are bound to this process.
     INITIALIZATION_MISMATCH,         // A client method was called after Server::Initialize(), or vice
                                      // versa.
-    NOT_INITIALIZED,                 // The server or client has not been initialized with Initialize().
+    NOT_INITIALIZED,                 // The GameLift Server or Client has not been initialized with Initialize().
     NO_TARGET_ALIASID_SET,           // A target aliasId has not been set.
     NO_TARGET_FLEET_SET,             // A target fleet has not been set.
-    PROCESS_ENDING_FAILED,           // The server SDK could not contact the service to report the
+    PROCESS_ENDING_FAILED,           // The GameLift Server SDK could not contact the service to report the
                                      // process is ending.
     PROCESS_NOT_ACTIVE,              // The server process is not yet active, not bound to a GameSession, and
                                      // cannot accept or process PlayerSessions.
     PROCESS_NOT_READY,               // The server process is not yet ready to be activated.
-    PROCESS_READY_FAILED,            // The server SDK could not contact the service to report the
+    PROCESS_READY_FAILED,            // The GameLift Server SDK could not contact the service to report the
                                      // process is ready.
     SDK_VERSION_DETECTION_FAILED,    // SDK version detection failed.
     SERVICE_CALL_FAILED,             // A call to an AWS service has failed.
     STX_CALL_FAILED,                 // A call to the XStx server backend component has failed.
     STX_INITIALIZATION_FAILED,       // The XStx server backend component has failed to initialize.
     UNEXPECTED_PLAYER_SESSION,       // An unregistered player session was encountered by the server.
-    BAD_REQUEST_EXCEPTION,           // Generic error when client creates a bad request. 
-    UNAUTHORIZED_EXCEPTION,          // Client not authorized to access a required resource due to missing or invalid auth.
-    FORBIDDEN_EXCEPTION,             // Client requesting to use resources/operations they aren't allow to access.
-    NOT_FOUND_EXCEPTION,             // Request needs a backend resource that the client failed to install.
-    CONFLICT_EXCEPTION,              // Client request error caused by stale data.
-    TOO_MANY_REQUESTS_EXCEPTION,     // Client called request too often and is being throttled. 
-    INTERNAL_SERVICE_EXCEPTION,      // Generic error when Amazon GameLift Servers WebSocket fails to process a request.
-    WEBSOCKET_CONNECT_FAILURE,                // Failure to connect to the Amazon GameLift Servers WebSocket
+    BAD_REQUEST_EXCEPTION,
+    INTERNAL_SERVICE_EXCEPTION,
+    WEBSOCKET_CONNECT_FAILURE,                // Failure to connect to the GameLift Service WebSocket
     WEBSOCKET_CONNECT_FAILURE_FORBIDDEN,      // Access denied, e.g. auth token has expired
     WEBSOCKET_CONNECT_FAILURE_INVALID_URL,    // End point URL is invalid
     WEBSOCKET_CONNECT_FAILURE_TIMEOUT,        // Timeout
-    WEBSOCKET_RETRIABLE_SEND_MESSAGE_FAILURE, // Retriable failure to send message to the Amazon GameLift Servers
+    WEBSOCKET_RETRIABLE_SEND_MESSAGE_FAILURE, // Retriable failure to send message to the GameLift
                                               // Service WebSocket
-    WEBSOCKET_SEND_MESSAGE_FAILURE,           // Failure to send message to the Amazon GameLift Servers WebSocket
-    VALIDATION_EXCEPTION,                     // Client-side error when invalid parameters are passed.
-    UNSUPPORTED_COMPUTE_TYPE_EXCEPTION        // API called on an unsupported compute type.
+    WEBSOCKET_SEND_MESSAGE_FAILURE            // Failure to send message to the GameLift Service WebSocket
+
 };
 
 class AWS_GAMELIFT_API GameLiftError {
@@ -166,23 +160,8 @@ private:
 #endif
     static GAMELIFT_ERROR_TYPE GetErrorTypeForStatusCode(const int statusCode) {
         if (statusCode >= 400 && statusCode < 500) {
-            // Catch valid 4xx (client errors) status codes returned by websocket lambda
-            // All other 4xx codes fallback to "bad request exception"
-            switch(statusCode) {
-                case 400:
-                    return GAMELIFT_ERROR_TYPE::BAD_REQUEST_EXCEPTION;
-                case 401:
-                    return GAMELIFT_ERROR_TYPE::UNAUTHORIZED_EXCEPTION;
-                case 403:
-                    return GAMELIFT_ERROR_TYPE::FORBIDDEN_EXCEPTION;
-                case 404:
-                    return GAMELIFT_ERROR_TYPE::NOT_FOUND_EXCEPTION;
-                case 409:
-                    return GAMELIFT_ERROR_TYPE::CONFLICT_EXCEPTION;
-                case 429:
-                    return GAMELIFT_ERROR_TYPE::TOO_MANY_REQUESTS_EXCEPTION;
-            }
-
+            // Map all 4xx requests to bad request exception. We don't have an error type for all
+            // 100 client errors
             return GAMELIFT_ERROR_TYPE::BAD_REQUEST_EXCEPTION;
         } else {
             // The websocket can return other error types, in this case classify it as an internal
@@ -198,9 +177,9 @@ private:
             case GAMELIFT_ERROR_TYPE::FLEET_MISMATCH:
                 return "Fleet mismatch.";
             case GAMELIFT_ERROR_TYPE::GAMELIFT_CLIENT_NOT_INITIALIZED:
-                return "Amazon GameLift Servers client not initialized.";
+                return "GameLift client not initialized.";
             case GAMELIFT_ERROR_TYPE::GAMELIFT_SERVER_NOT_INITIALIZED:
-                return "Server SDK not initialized.";
+                return "GameLift server not initialized.";
             case GAMELIFT_ERROR_TYPE::GAME_SESSION_ENDED_FAILED:
                 return "Game session failed.";
             case GAMELIFT_ERROR_TYPE::GAME_SESSION_NOT_READY:
@@ -237,16 +216,6 @@ private:
                 return "Unexpected player session.";
             case GAMELIFT_ERROR_TYPE::BAD_REQUEST_EXCEPTION:
                 return "Bad request exception.";
-            case GAMELIFT_ERROR_TYPE::UNAUTHORIZED_EXCEPTION:
-                return "Unauthorized exception.";
-            case GAMELIFT_ERROR_TYPE::FORBIDDEN_EXCEPTION:
-                return "Forbidden exception.";
-            case GAMELIFT_ERROR_TYPE::NOT_FOUND_EXCEPTION:
-                return "Not found exception.";
-            case GAMELIFT_ERROR_TYPE::CONFLICT_EXCEPTION:
-                return "Conflict exception.";
-            case GAMELIFT_ERROR_TYPE::TOO_MANY_REQUESTS_EXCEPTION:
-                return "Throttling exception.";
             case GAMELIFT_ERROR_TYPE::INTERNAL_SERVICE_EXCEPTION:
                 return "Internal service exception.";
             case GAMELIFT_ERROR_TYPE::WEBSOCKET_CONNECT_FAILURE:
@@ -259,10 +228,6 @@ private:
                 return "WebSocket Connection has timed out.";
             case GAMELIFT_ERROR_TYPE::WEBSOCKET_SEND_MESSAGE_FAILURE:
                 return "WebSocket Send Message Failed.";
-            case GAMELIFT_ERROR_TYPE::VALIDATION_EXCEPTION:
-                return "Validation exception.";
-            case GAMELIFT_ERROR_TYPE::UNSUPPORTED_COMPUTE_TYPE_EXCEPTION:
-                return "Unsupported compute type.";
             default:
                 return "Unknown Error";
         }
@@ -271,16 +236,16 @@ private:
     static std::string GetDefaultMessageForErrorType(GAMELIFT_ERROR_TYPE errorType) {
         switch (errorType) {
             case GAMELIFT_ERROR_TYPE::ALREADY_INITIALIZED:
-                return "Server SDK has already been initialized. You must call Destroy() before "
+                return "GameLift has already been initialized. You must call Destroy() before "
                        "reinitializing the client or server.";
             case GAMELIFT_ERROR_TYPE::FLEET_MISMATCH:
                 return "The Target fleet does not match the request fleet. Make sure GameSessions and "
                        "PlayerSessions belong to your target fleet.";
             case GAMELIFT_ERROR_TYPE::GAMELIFT_CLIENT_NOT_INITIALIZED:
-                return "The Amazon GameLift Servers client has not been initialized. Please call SetTargetFleet or "
+                return "The GameLift client has not been initialized. Please call SetTargetFleet or "
                        "SetTArgetAliasId.";
             case GAMELIFT_ERROR_TYPE::GAMELIFT_SERVER_NOT_INITIALIZED:
-                return "The server SDK has not been initialized. Please call InitSDK.";
+                return "The GameLift server has not been initialized. Please call InitSDK.";
             case GAMELIFT_ERROR_TYPE::GAME_SESSION_ENDED_FAILED:
                 return "The GameSessionEnded invocation failed.";
             case GAMELIFT_ERROR_TYPE::GAME_SESSION_NOT_READY:
@@ -294,8 +259,8 @@ private:
                        "a call to Client::Initialize(), and Server calls require Server::Initialize(). "
                        "Only one may be active at a time.";
             case GAMELIFT_ERROR_TYPE::NOT_INITIALIZED:
-                return "Server SDK has not been initialized! You must call Client::Initialize() or "
-                       "Server::InitSDK() before making Amazon GameLift Servers calls.";
+                return "GameLift has not been initialized! You must call Client::Initialize() or "
+                       "Server::InitSDK() before making GameLift calls.";
             case GAMELIFT_ERROR_TYPE::NO_TARGET_ALIASID_SET:
                 return "The aliasId has not been set. Clients should call SetTargetAliasId() before "
                        "making calls that require an alias.";
@@ -303,14 +268,14 @@ private:
                 return "The target fleet has not been set. Clients should call SetTargetFleet() before "
                        "making calls that require a fleet.";
             case GAMELIFT_ERROR_TYPE::PROCESS_ENDING_FAILED:
-                return "ProcessEnding call to Amazon GameLift Servers failed.";
+                return "ProcessEnding call to GameLift failed.";
             case GAMELIFT_ERROR_TYPE::PROCESS_NOT_ACTIVE:
                 return "The process has not yet been activated.";
             case GAMELIFT_ERROR_TYPE::PROCESS_NOT_READY:
                 return "The process has not yet been activated by calling ProcessReady(). Processes in "
                        "standby cannot receive StartGameSession callbacks.";
             case GAMELIFT_ERROR_TYPE::PROCESS_READY_FAILED:
-                return "ProcessReady call to Amazon GameLift Servers failed.";
+                return "ProcessReady call to GameLift failed.";
             case GAMELIFT_ERROR_TYPE::SDK_VERSION_DETECTION_FAILED:
                 return "Could not detect SDK version.";
             case GAMELIFT_ERROR_TYPE::SERVICE_CALL_FAILED:
@@ -321,40 +286,26 @@ private:
                 return "The STX server backend component has failed to initialize.";
             case GAMELIFT_ERROR_TYPE::UNEXPECTED_PLAYER_SESSION:
                 return "The player session was not expected by the server. Clients wishing to connect "
-                       "to a server must obtain a PlayerSessionID from Amazon GameLift Servers by creating a player "
+                       "to a server must obtain a PlayerSessionID from GameLift by creating a player "
                        "session on the desired server's game instance.";
             case GAMELIFT_ERROR_TYPE::BAD_REQUEST_EXCEPTION:
                 return "Bad request exception.";
-            case GAMELIFT_ERROR_TYPE::UNAUTHORIZED_EXCEPTION:
-                return "User provided invalid or missing authorization to access a resource/operation.";
-            case GAMELIFT_ERROR_TYPE::FORBIDDEN_EXCEPTION:
-                return "User is attempting to access resources/operations that they are not allowed to access.";
-            case GAMELIFT_ERROR_TYPE::NOT_FOUND_EXCEPTION:
-                return "A necessary resource was missing when attempting to process the request.";
-            case GAMELIFT_ERROR_TYPE::CONFLICT_EXCEPTION:
-                return "Request conflicts with the current state of the target resource.";
-            case GAMELIFT_ERROR_TYPE::TOO_MANY_REQUESTS_EXCEPTION:
-                return "Too many requests; please increase throttle limit if needed.";
             case GAMELIFT_ERROR_TYPE::INTERNAL_SERVICE_EXCEPTION:
                 return "Internal service exception.";
             case GAMELIFT_ERROR_TYPE::WEBSOCKET_CONNECT_FAILURE:
-                return "Connection to the Amazon GameLift Servers WebSocket has failed";
+                return "Connection to the GameLift Service WebSocket has failed";
             case GAMELIFT_ERROR_TYPE::WEBSOCKET_CONNECT_FAILURE_FORBIDDEN:
-                return "Handshake with Amazon GameLift Servers WebSocket failed. Please verify that values of ServerParameters "
+                return "Handshake with GameLift websocket server failed. Please verify that values of ServerParameters "
                        "in InitSDK() are correct. For example, process ID needs to be unique between executions, and "
                        "the authentication token needs to be correct and unexpired.";
             case GAMELIFT_ERROR_TYPE::WEBSOCKET_CONNECT_FAILURE_INVALID_URL:
-                return "Connection to Amazon GameLift Servers WebSocket failed due to invalid websocket URL. Please verify that "
+                return "Connection to GameLift websocket server failed due to invalid websocket URL. Please verify that "
                        "websocketUrl in InitSDK() is correct and matches the GameLiftServiceSdkEndpoint output from "
                        "AWS::GameLift::RegisterCompute().";
             case GAMELIFT_ERROR_TYPE::WEBSOCKET_CONNECT_FAILURE_TIMEOUT:
-                return "Connection to the Amazon GameLift Servers WebSocket Connection has timed out.";
+                return "Connection to the GameLift Service WebSocket Connection has timed out.";
             case GAMELIFT_ERROR_TYPE::WEBSOCKET_SEND_MESSAGE_FAILURE:
-                return "Sending Message to the Amazon GameLift Servers WebSocket has failed.";
-            case GAMELIFT_ERROR_TYPE::VALIDATION_EXCEPTION:
-                return "The input is invalid.";
-            case GAMELIFT_ERROR_TYPE::UNSUPPORTED_COMPUTE_TYPE_EXCEPTION:
-                return "This API is not supported on the current compute type.";
+                return "Sending Message to the GameLift Service WebSocket has failed.";
             default:
                 return "An unexpected error has occurred.";
         }

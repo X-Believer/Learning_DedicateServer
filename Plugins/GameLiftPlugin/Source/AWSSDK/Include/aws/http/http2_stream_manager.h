@@ -68,7 +68,7 @@ struct aws_http2_stream_manager_options {
     bool http2_prior_knowledge;
 
     struct aws_byte_cursor host;
-    uint32_t port;
+    uint16_t port;
 
     /**
      * Optional.

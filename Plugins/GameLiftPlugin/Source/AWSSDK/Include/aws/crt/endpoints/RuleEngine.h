@@ -53,13 +53,6 @@ namespace Aws
                  */
                 bool AddBoolean(const ByteCursor &name, bool value);
 
-                /*
-                 * Add string array parameter.
-                 * True if added successfully and false if failed.
-                 * Aws::Crt::LastError() can be used to retrieve failure error code.
-                 */
-                bool AddStringArray(const ByteCursor &name, const Vector<ByteCursor> &value);
-
                 /// @private
                 aws_endpoints_request_context *GetNativeHandle() const noexcept { return m_requestContext; }
 
@@ -158,5 +151,5 @@ namespace Aws
                 aws_endpoints_rule_engine *m_ruleEngine;
             };
         } // namespace Endpoints
-    } // namespace Crt
+    }     // namespace Crt
 } // namespace Aws

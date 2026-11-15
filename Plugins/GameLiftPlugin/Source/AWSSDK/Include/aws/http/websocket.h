@@ -185,7 +185,7 @@ struct aws_websocket_client_connection_options {
      * Optional.
      * Defaults to 443 if tls_options is present, 80 if it is not.
      */
-    uint32_t port;
+    uint16_t port;
 
     /**
      * Required.

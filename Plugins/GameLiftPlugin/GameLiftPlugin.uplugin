@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 9,
-	"VersionName": "3.4.1",
+	"Version": 4,
+	"VersionName": "1.1.2",
 	"FriendlyName": "Amazon GameLift Plugin",
 	"Description": "Integrate your session-based multiplayer game with Amazon GameLift and create a dedicated cloud hosting solution for your game servers.",
 	"Category": "Networking",
@@ -23,10 +23,6 @@
 			"LoadingPhase": "Default",
 			"PlatformAllowList": [
 				"Win64"
-			],
-			"TargetAllowList": [
-				"Editor",
-				"Client"
 			]
 		},
 		{
@@ -35,9 +31,6 @@
 			"LoadingPhase": "Default",
 			"PlatformAllowList": [
 				"Win64"
-			],
-			"TargetAllowList": [
-				"Editor"
 			]
 		},
 		{
@@ -46,26 +39,12 @@
 			"LoadingPhase": "Default",
 			"PlatformAllowList": [
 				"Win64"
-			],
-			"TargetAllowList": [
-				"Editor"
 			]
 		},
 		{
 			"Name": "GameLiftServerSDK",
 			"Type": "Runtime",
-			"LoadingPhase": "PreDefault",
-			"TargetAllowList": [
-				"Server"
-			]
-		},
-		{
-			"Name": "GameLiftMetrics",
-			"Type": "Runtime",
-			"LoadingPhase": "PreDefault",
-			"TargetAllowList": [
-				"Server"
-			]
+			"LoadingPhase": "PreDefault"
 		}
 	],
 	"LocalizationTargets": [

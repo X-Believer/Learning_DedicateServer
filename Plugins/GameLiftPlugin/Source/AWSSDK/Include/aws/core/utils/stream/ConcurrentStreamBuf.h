@@ -30,23 +30,15 @@ namespace Aws
             {
             public:
 
-                explicit ConcurrentStreamBuf(size_t bufferLength = 8 * 1024);
+                explicit ConcurrentStreamBuf(size_t bufferLength = 4 * 1024);
 
-                void SetEofInput(Aws::IOStream* pStreamToClose = nullptr);
-                void CloseStream();
-
-                /**
-                 * Blocks the current thread until all submitted data is consumed.
-                 * Returns false on timeout, and true if GetArea and back buffer are empty.
-                 */
-                bool WaitForDrain(int64_t timeoutMs);
+                void SetEof();
 
             protected:
                 std::streampos seekoff(std::streamoff off, std::ios_base::seekdir dir, std::ios_base::openmode which = std::ios_base::in | std::ios_base::out) override;
                 std::streampos seekpos(std::streampos pos, std::ios_base::openmode which = std::ios_base::in | std::ios_base::out) override;
 
                 int underflow() override;
-                int uflow() override;
                 int overflow(int ch) override;
                 int sync() override;
                 std::streamsize showmanyc() override;
@@ -59,9 +51,7 @@ namespace Aws
                 Aws::Vector<unsigned char> m_backbuf; // used to shuttle data from the put area to the get area
                 std::mutex m_lock; // synchronize access to the common backbuffer
                 std::condition_variable m_signal;
-                bool m_eofInput = false;
-                bool m_eofOutput = false;
-                Aws::IOStream* m_pStreamToClose = nullptr;
+                bool m_eof;
             };
         }
     }

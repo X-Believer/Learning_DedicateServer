@@ -14,7 +14,6 @@
 #include <aws/secretsmanager/SecretsManagerClient.h>
 #include <aws/ssm/SSMClient.h>
 #include <aws/sts/STSClient.h>
-#include <aws/ecr/ECRClient.h>
 #include <aws/sts/model/AssumeRoleRequest.h>
 
 // GameLift
@@ -52,7 +51,7 @@ namespace GameLift
 
             return new Aws::S3::S3Client(
                 creds,
-                Aws::MakeShared<Aws::S3::S3EndpointProvider>(Aws::S3::S3Client::GetAllocationTag()),
+                Aws::MakeShared<Aws::S3::S3EndpointProvider>(Aws::S3::S3Client::ALLOCATION_TAG),
                 clientConfig);
         }
 
@@ -95,10 +94,6 @@ namespace GameLift
         static inline Aws::GameLift::GameLiftClient* GetDefaultGameLiftClient(const AccountCredentialsCopy& credentials)
         {
             return getDefaultClient<Aws::GameLift::GameLiftClient>(credentials);
-        }
-        static inline Aws::ECR::ECRClient* GetDefaultECRClient(const AccountCredentialsCopy& credentials)
-        {
-            return getDefaultClient<Aws::ECR::ECRClient>(credentials);
         }
     };
 }

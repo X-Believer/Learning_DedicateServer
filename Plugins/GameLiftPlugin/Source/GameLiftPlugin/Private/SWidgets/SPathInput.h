@@ -56,6 +56,5 @@ private:
 	FOnPathUpdated OnPathUpdated;
 	EVisibility ButtonVisibility;
 	TSharedPtr<SEditableTextBox> EditableTextBox;
-	TSharedPtr<SButton> FolderOpenButton;
 	bool IsFileSelection;
 };

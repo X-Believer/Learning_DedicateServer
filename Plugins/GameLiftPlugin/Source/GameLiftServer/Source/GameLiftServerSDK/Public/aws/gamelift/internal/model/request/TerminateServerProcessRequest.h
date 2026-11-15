@@ -19,7 +19,7 @@ namespace GameLift {
 namespace Internal {
 
 /**
- * TerminateServerProcess Request. This request is sent to the Amazon GameLift Servers WebSocket during the
+ * TerminateServerProcess Request. This request is sent to the GameLift WebSocket during the
  * ProcessEnding call
  */
 class TerminateServerProcessRequest : public Message {

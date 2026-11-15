@@ -17,9 +17,10 @@ public:
 	void Construct(const FArguments& InArgs);
 
 private:
+	TSharedRef<SWidget> MakeGameLiftIntroWidget() const;
 	TSharedRef<SWidget> MakeGetStartedWidget() const;
-	TSharedRef<SWidget> CreateFleetCard(const FString& IconName, const FText TitleText, const FText DescriptionText, TSharedRef<SWidget> ButtonWidget) const;
-	TSharedRef<SWidget> MakeSetUpAnywhereButtonSwitcher() const;
+
+	TSharedRef<SWidget> MakeSetUpAnywhereButtonSwicher() const;
 
 private:
 	TSharedPtr<SButton> SetUpAnywhereButton;

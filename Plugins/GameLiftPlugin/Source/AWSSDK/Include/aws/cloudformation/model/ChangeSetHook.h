@@ -43,19 +43,37 @@ namespace Model
     AWS_CLOUDFORMATION_API void OutputToStream(Aws::OStream& oStream, const char* location) const;
 
 
-    ///@{
     /**
      * <p>Specifies the points in provisioning logic where a hook is invoked.</p>
      */
     inline const HookInvocationPoint& GetInvocationPoint() const{ return m_invocationPoint; }
-    inline bool InvocationPointHasBeenSet() const { return m_invocationPointHasBeenSet; }
-    inline void SetInvocationPoint(const HookInvocationPoint& value) { m_invocationPointHasBeenSet = true; m_invocationPoint = value; }
-    inline void SetInvocationPoint(HookInvocationPoint&& value) { m_invocationPointHasBeenSet = true; m_invocationPoint = std::move(value); }
-    inline ChangeSetHook& WithInvocationPoint(const HookInvocationPoint& value) { SetInvocationPoint(value); return *this;}
-    inline ChangeSetHook& WithInvocationPoint(HookInvocationPoint&& value) { SetInvocationPoint(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Specifies the points in provisioning logic where a hook is invoked.</p>
+     */
+    inline bool InvocationPointHasBeenSet() const { return m_invocationPointHasBeenSet; }
+
+    /**
+     * <p>Specifies the points in provisioning logic where a hook is invoked.</p>
+     */
+    inline void SetInvocationPoint(const HookInvocationPoint& value) { m_invocationPointHasBeenSet = true; m_invocationPoint = value; }
+
+    /**
+     * <p>Specifies the points in provisioning logic where a hook is invoked.</p>
+     */
+    inline void SetInvocationPoint(HookInvocationPoint&& value) { m_invocationPointHasBeenSet = true; m_invocationPoint = std::move(value); }
+
+    /**
+     * <p>Specifies the points in provisioning logic where a hook is invoked.</p>
+     */
+    inline ChangeSetHook& WithInvocationPoint(const HookInvocationPoint& value) { SetInvocationPoint(value); return *this;}
+
+    /**
+     * <p>Specifies the points in provisioning logic where a hook is invoked.</p>
+     */
+    inline ChangeSetHook& WithInvocationPoint(HookInvocationPoint&& value) { SetInvocationPoint(std::move(value)); return *this;}
+
+
     /**
      * <p>Specify the hook failure mode for non-compliant resources in the followings
      * ways.</p> <ul> <li> <p> <code>FAIL</code> Stops provisioning resources.</p>
@@ -63,14 +81,48 @@ namespace Model
      * message.</p> </li> </ul>
      */
     inline const HookFailureMode& GetFailureMode() const{ return m_failureMode; }
-    inline bool FailureModeHasBeenSet() const { return m_failureModeHasBeenSet; }
-    inline void SetFailureMode(const HookFailureMode& value) { m_failureModeHasBeenSet = true; m_failureMode = value; }
-    inline void SetFailureMode(HookFailureMode&& value) { m_failureModeHasBeenSet = true; m_failureMode = std::move(value); }
-    inline ChangeSetHook& WithFailureMode(const HookFailureMode& value) { SetFailureMode(value); return *this;}
-    inline ChangeSetHook& WithFailureMode(HookFailureMode&& value) { SetFailureMode(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Specify the hook failure mode for non-compliant resources in the followings
+     * ways.</p> <ul> <li> <p> <code>FAIL</code> Stops provisioning resources.</p>
+     * </li> <li> <p> <code>WARN</code> Allows provisioning to continue with a warning
+     * message.</p> </li> </ul>
+     */
+    inline bool FailureModeHasBeenSet() const { return m_failureModeHasBeenSet; }
+
+    /**
+     * <p>Specify the hook failure mode for non-compliant resources in the followings
+     * ways.</p> <ul> <li> <p> <code>FAIL</code> Stops provisioning resources.</p>
+     * </li> <li> <p> <code>WARN</code> Allows provisioning to continue with a warning
+     * message.</p> </li> </ul>
+     */
+    inline void SetFailureMode(const HookFailureMode& value) { m_failureModeHasBeenSet = true; m_failureMode = value; }
+
+    /**
+     * <p>Specify the hook failure mode for non-compliant resources in the followings
+     * ways.</p> <ul> <li> <p> <code>FAIL</code> Stops provisioning resources.</p>
+     * </li> <li> <p> <code>WARN</code> Allows provisioning to continue with a warning
+     * message.</p> </li> </ul>
+     */
+    inline void SetFailureMode(HookFailureMode&& value) { m_failureModeHasBeenSet = true; m_failureMode = std::move(value); }
+
+    /**
+     * <p>Specify the hook failure mode for non-compliant resources in the followings
+     * ways.</p> <ul> <li> <p> <code>FAIL</code> Stops provisioning resources.</p>
+     * </li> <li> <p> <code>WARN</code> Allows provisioning to continue with a warning
+     * message.</p> </li> </ul>
+     */
+    inline ChangeSetHook& WithFailureMode(const HookFailureMode& value) { SetFailureMode(value); return *this;}
+
+    /**
+     * <p>Specify the hook failure mode for non-compliant resources in the followings
+     * ways.</p> <ul> <li> <p> <code>FAIL</code> Stops provisioning resources.</p>
+     * </li> <li> <p> <code>WARN</code> Allows provisioning to continue with a warning
+     * message.</p> </li> </ul>
+     */
+    inline ChangeSetHook& WithFailureMode(HookFailureMode&& value) { SetFailureMode(std::move(value)); return *this;}
+
+
     /**
      * <p>The unique name for your hook. Specifies a three-part namespace for your
      * hook, with a recommended pattern of
@@ -83,54 +135,211 @@ namespace Model
      * 
      */
     inline const Aws::String& GetTypeName() const{ return m_typeName; }
-    inline bool TypeNameHasBeenSet() const { return m_typeNameHasBeenSet; }
-    inline void SetTypeName(const Aws::String& value) { m_typeNameHasBeenSet = true; m_typeName = value; }
-    inline void SetTypeName(Aws::String&& value) { m_typeNameHasBeenSet = true; m_typeName = std::move(value); }
-    inline void SetTypeName(const char* value) { m_typeNameHasBeenSet = true; m_typeName.assign(value); }
-    inline ChangeSetHook& WithTypeName(const Aws::String& value) { SetTypeName(value); return *this;}
-    inline ChangeSetHook& WithTypeName(Aws::String&& value) { SetTypeName(std::move(value)); return *this;}
-    inline ChangeSetHook& WithTypeName(const char* value) { SetTypeName(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The unique name for your hook. Specifies a three-part namespace for your
+     * hook, with a recommended pattern of
+     * <code>Organization::Service::Hook</code>.</p>  <p>The following
+     * organization namespaces are reserved and can't be used in your hook type
+     * names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p>
+     * <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p>
+     * <code>ASK</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p>
+     * <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul>
+     * 
+     */
+    inline bool TypeNameHasBeenSet() const { return m_typeNameHasBeenSet; }
+
+    /**
+     * <p>The unique name for your hook. Specifies a three-part namespace for your
+     * hook, with a recommended pattern of
+     * <code>Organization::Service::Hook</code>.</p>  <p>The following
+     * organization namespaces are reserved and can't be used in your hook type
+     * names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p>
+     * <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p>
+     * <code>ASK</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p>
+     * <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul>
+     * 
+     */
+    inline void SetTypeName(const Aws::String& value) { m_typeNameHasBeenSet = true; m_typeName = value; }
+
+    /**
+     * <p>The unique name for your hook. Specifies a three-part namespace for your
+     * hook, with a recommended pattern of
+     * <code>Organization::Service::Hook</code>.</p>  <p>The following
+     * organization namespaces are reserved and can't be used in your hook type
+     * names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p>
+     * <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p>
+     * <code>ASK</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p>
+     * <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul>
+     * 
+     */
+    inline void SetTypeName(Aws::String&& value) { m_typeNameHasBeenSet = true; m_typeName = std::move(value); }
+
+    /**
+     * <p>The unique name for your hook. Specifies a three-part namespace for your
+     * hook, with a recommended pattern of
+     * <code>Organization::Service::Hook</code>.</p>  <p>The following
+     * organization namespaces are reserved and can't be used in your hook type
+     * names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p>
+     * <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p>
+     * <code>ASK</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p>
+     * <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul>
+     * 
+     */
+    inline void SetTypeName(const char* value) { m_typeNameHasBeenSet = true; m_typeName.assign(value); }
+
+    /**
+     * <p>The unique name for your hook. Specifies a three-part namespace for your
+     * hook, with a recommended pattern of
+     * <code>Organization::Service::Hook</code>.</p>  <p>The following
+     * organization namespaces are reserved and can't be used in your hook type
+     * names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p>
+     * <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p>
+     * <code>ASK</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p>
+     * <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul>
+     * 
+     */
+    inline ChangeSetHook& WithTypeName(const Aws::String& value) { SetTypeName(value); return *this;}
+
+    /**
+     * <p>The unique name for your hook. Specifies a three-part namespace for your
+     * hook, with a recommended pattern of
+     * <code>Organization::Service::Hook</code>.</p>  <p>The following
+     * organization namespaces are reserved and can't be used in your hook type
+     * names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p>
+     * <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p>
+     * <code>ASK</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p>
+     * <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul>
+     * 
+     */
+    inline ChangeSetHook& WithTypeName(Aws::String&& value) { SetTypeName(std::move(value)); return *this;}
+
+    /**
+     * <p>The unique name for your hook. Specifies a three-part namespace for your
+     * hook, with a recommended pattern of
+     * <code>Organization::Service::Hook</code>.</p>  <p>The following
+     * organization namespaces are reserved and can't be used in your hook type
+     * names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p>
+     * <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p>
+     * <code>ASK</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p>
+     * <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul>
+     * 
+     */
+    inline ChangeSetHook& WithTypeName(const char* value) { SetTypeName(value); return *this;}
+
+
     /**
      * <p>The version ID of the type specified.</p>
      */
     inline const Aws::String& GetTypeVersionId() const{ return m_typeVersionId; }
-    inline bool TypeVersionIdHasBeenSet() const { return m_typeVersionIdHasBeenSet; }
-    inline void SetTypeVersionId(const Aws::String& value) { m_typeVersionIdHasBeenSet = true; m_typeVersionId = value; }
-    inline void SetTypeVersionId(Aws::String&& value) { m_typeVersionIdHasBeenSet = true; m_typeVersionId = std::move(value); }
-    inline void SetTypeVersionId(const char* value) { m_typeVersionIdHasBeenSet = true; m_typeVersionId.assign(value); }
-    inline ChangeSetHook& WithTypeVersionId(const Aws::String& value) { SetTypeVersionId(value); return *this;}
-    inline ChangeSetHook& WithTypeVersionId(Aws::String&& value) { SetTypeVersionId(std::move(value)); return *this;}
-    inline ChangeSetHook& WithTypeVersionId(const char* value) { SetTypeVersionId(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The version ID of the type specified.</p>
+     */
+    inline bool TypeVersionIdHasBeenSet() const { return m_typeVersionIdHasBeenSet; }
+
+    /**
+     * <p>The version ID of the type specified.</p>
+     */
+    inline void SetTypeVersionId(const Aws::String& value) { m_typeVersionIdHasBeenSet = true; m_typeVersionId = value; }
+
+    /**
+     * <p>The version ID of the type specified.</p>
+     */
+    inline void SetTypeVersionId(Aws::String&& value) { m_typeVersionIdHasBeenSet = true; m_typeVersionId = std::move(value); }
+
+    /**
+     * <p>The version ID of the type specified.</p>
+     */
+    inline void SetTypeVersionId(const char* value) { m_typeVersionIdHasBeenSet = true; m_typeVersionId.assign(value); }
+
+    /**
+     * <p>The version ID of the type specified.</p>
+     */
+    inline ChangeSetHook& WithTypeVersionId(const Aws::String& value) { SetTypeVersionId(value); return *this;}
+
+    /**
+     * <p>The version ID of the type specified.</p>
+     */
+    inline ChangeSetHook& WithTypeVersionId(Aws::String&& value) { SetTypeVersionId(std::move(value)); return *this;}
+
+    /**
+     * <p>The version ID of the type specified.</p>
+     */
+    inline ChangeSetHook& WithTypeVersionId(const char* value) { SetTypeVersionId(value); return *this;}
+
+
     /**
      * <p>The version ID of the type configuration.</p>
      */
     inline const Aws::String& GetTypeConfigurationVersionId() const{ return m_typeConfigurationVersionId; }
-    inline bool TypeConfigurationVersionIdHasBeenSet() const { return m_typeConfigurationVersionIdHasBeenSet; }
-    inline void SetTypeConfigurationVersionId(const Aws::String& value) { m_typeConfigurationVersionIdHasBeenSet = true; m_typeConfigurationVersionId = value; }
-    inline void SetTypeConfigurationVersionId(Aws::String&& value) { m_typeConfigurationVersionIdHasBeenSet = true; m_typeConfigurationVersionId = std::move(value); }
-    inline void SetTypeConfigurationVersionId(const char* value) { m_typeConfigurationVersionIdHasBeenSet = true; m_typeConfigurationVersionId.assign(value); }
-    inline ChangeSetHook& WithTypeConfigurationVersionId(const Aws::String& value) { SetTypeConfigurationVersionId(value); return *this;}
-    inline ChangeSetHook& WithTypeConfigurationVersionId(Aws::String&& value) { SetTypeConfigurationVersionId(std::move(value)); return *this;}
-    inline ChangeSetHook& WithTypeConfigurationVersionId(const char* value) { SetTypeConfigurationVersionId(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The version ID of the type configuration.</p>
+     */
+    inline bool TypeConfigurationVersionIdHasBeenSet() const { return m_typeConfigurationVersionIdHasBeenSet; }
+
+    /**
+     * <p>The version ID of the type configuration.</p>
+     */
+    inline void SetTypeConfigurationVersionId(const Aws::String& value) { m_typeConfigurationVersionIdHasBeenSet = true; m_typeConfigurationVersionId = value; }
+
+    /**
+     * <p>The version ID of the type configuration.</p>
+     */
+    inline void SetTypeConfigurationVersionId(Aws::String&& value) { m_typeConfigurationVersionIdHasBeenSet = true; m_typeConfigurationVersionId = std::move(value); }
+
+    /**
+     * <p>The version ID of the type configuration.</p>
+     */
+    inline void SetTypeConfigurationVersionId(const char* value) { m_typeConfigurationVersionIdHasBeenSet = true; m_typeConfigurationVersionId.assign(value); }
+
+    /**
+     * <p>The version ID of the type configuration.</p>
+     */
+    inline ChangeSetHook& WithTypeConfigurationVersionId(const Aws::String& value) { SetTypeConfigurationVersionId(value); return *this;}
+
+    /**
+     * <p>The version ID of the type configuration.</p>
+     */
+    inline ChangeSetHook& WithTypeConfigurationVersionId(Aws::String&& value) { SetTypeConfigurationVersionId(std::move(value)); return *this;}
+
+    /**
+     * <p>The version ID of the type configuration.</p>
+     */
+    inline ChangeSetHook& WithTypeConfigurationVersionId(const char* value) { SetTypeConfigurationVersionId(value); return *this;}
+
+
     /**
      * <p>Specifies details about the target that the hook will run against.</p>
      */
     inline const ChangeSetHookTargetDetails& GetTargetDetails() const{ return m_targetDetails; }
+
+    /**
+     * <p>Specifies details about the target that the hook will run against.</p>
+     */
     inline bool TargetDetailsHasBeenSet() const { return m_targetDetailsHasBeenSet; }
+
+    /**
+     * <p>Specifies details about the target that the hook will run against.</p>
+     */
     inline void SetTargetDetails(const ChangeSetHookTargetDetails& value) { m_targetDetailsHasBeenSet = true; m_targetDetails = value; }
+
+    /**
+     * <p>Specifies details about the target that the hook will run against.</p>
+     */
     inline void SetTargetDetails(ChangeSetHookTargetDetails&& value) { m_targetDetailsHasBeenSet = true; m_targetDetails = std::move(value); }
+
+    /**
+     * <p>Specifies details about the target that the hook will run against.</p>
+     */
     inline ChangeSetHook& WithTargetDetails(const ChangeSetHookTargetDetails& value) { SetTargetDetails(value); return *this;}
+
+    /**
+     * <p>Specifies details about the target that the hook will run against.</p>
+     */
     inline ChangeSetHook& WithTargetDetails(ChangeSetHookTargetDetails&& value) { SetTargetDetails(std::move(value)); return *this;}
-    ///@}
+
   private:
 
     HookInvocationPoint m_invocationPoint;

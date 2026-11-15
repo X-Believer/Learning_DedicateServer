@@ -75,7 +75,7 @@ Parameters:
     Type: String
     Default: MyGame
     Description: Game name to prepend before resource names
-    MaxLength: 30
+    MaxLength: 12
 
   LambdaZipS3BucketParameter:
     Type: String
@@ -103,32 +103,6 @@ Parameters:
     Default: 100
     MaxValue: 20000000
     MinValue: 100
-   
-  UnrealEngineVersionParameter:
-    Type: String
-    Description: "Unreal Engine Version being used by the plugin"
-
-  EnableMetricsParameter:
-    Type: String
-    Default: "false"
-    AllowedValues: ["true", "false"]
-    Description: "Enable telemetry metrics collection using OTEL collector"
-
-  EnablePlayerGatewayParameter:
-    Type: String
-    Default: "DISABLED"
-    AllowedValues: ["ENABLED", "DISABLED"]
-    Description: "Enable player gateway on the created fleet"
-
-  GameServerIpProtocolSupportedParameter:
-    Type: String
-    Default: "IPv4"
-    AllowedValues: ["IPv4", "DUAL_STACK"]
-    Description: "IP protocol supported by the game server when player gateway is enabled"
-
-Conditions:
-  ShouldCreateMetricsResources: !Equals [!Ref EnableMetricsParameter, "true"]
-  IsPlayerGatewayEnabled: !Equals [!Ref EnablePlayerGatewayParameter, "ENABLED"]
 
 Resources:
   ApiGatewayCloudWatchRole:
@@ -207,43 +181,9 @@ Resources:
                   - "gamelift:SearchGameSessions"
                 Resource: "*"
 
-  MetricsInstanceRole:
-    Type: "AWS::IAM::Role"
-    Condition: ShouldCreateMetricsResources
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: gamelift.amazonaws.com
-            Action: sts:AssumeRole
-      Policies:
-        - PolicyName: AMPRemoteWriteAccess
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - aps:RemoteWrite
-                Resource: !Sub 'arn:aws:aps:*:${AWS::AccountId}:workspace/*'
-        - PolicyName: OTelCollectorEMFExporter
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - logs:PutLogEvents
-                  - logs:CreateLogStream
-                  - logs:CreateLogGroup
-                  - logs:PutRetentionPolicy
-                Resource: !Sub 'arn:aws:logs:*:${AWS::AccountId}:log-group:*:log-stream:*'
-
   UserPool:
     Type: "AWS::Cognito::UserPool"
     Properties:
-      AdminCreateUserConfig:
-        AllowAdminCreateUserOnly: false
       AutoVerifiedAttributes:
         - email
       EmailConfiguration:
@@ -438,9 +378,7 @@ Resources:
       BuildId: !Ref ServerBuild
       CertificateConfiguration:
         CertificateType: GENERATED
-      Description: !Sub 
-        - "${FleetDescriptionParameter} Using Unreal Engine Version ${UnrealEngineVersionParameter}${MetricsText}"
-        - MetricsText: !If [ShouldCreateMetricsResources, " with telemetry metrics enabled", ""]
+      Description: !Ref FleetDescriptionParameter
       DesiredEC2Instances: 1
       EC2InboundPermissions:
         - FromPort: !Ref FleetTcpFromPortParameter
@@ -453,8 +391,6 @@ Resources:
           ToPort: !Ref FleetUdpToPortParameter
       EC2InstanceType: c5.large
       FleetType: ON_DEMAND
-      InstanceRoleARN: !If [ShouldCreateMetricsResources, !GetAtt MetricsInstanceRole.Arn, !Ref "AWS::NoValue"]
-      InstanceRoleCredentialsProvider: !If [ShouldCreateMetricsResources, "SHARED_CREDENTIAL_FILE", !Ref "AWS::NoValue"]
       Name: !Ref FleetNameParameter
       NewGameSessionProtectionPolicy: FullProtection
       ResourceCreationLimitPolicy:
@@ -467,11 +403,6 @@ Resources:
           - ConcurrentExecutions: 1
             LaunchPath: !Ref LaunchPathParameter
             Parameters: !Ref LaunchParametersParameter
-      PlayerGatewayMode: !Ref EnablePlayerGatewayParameter
-      PlayerGatewayConfiguration: !If
-        - IsPlayerGatewayEnabled
-        - GameServerIpProtocolSupported: !Ref GameServerIpProtocolSupportedParameter
-        - !Ref "AWS::NoValue"
 
   AliasResource:
     Type: "AWS::GameLift::Alias"
@@ -496,7 +427,7 @@ Resources:
       Handler: results_request.handler
       MemorySize: 128
       Role: !GetAtt ResultsRequestLambdaFunctionExecutionRole.Arn
-      Runtime: python3.14
+      Runtime: python3.8
 
   GameRequestLambdaFunction:
     Type: "AWS::Lambda::Function"
@@ -513,7 +444,7 @@ Resources:
       Handler: game_request.handler
       MemorySize: 128
       Role: !GetAtt GameRequestLambdaFunctionExecutionRole.Arn
-      Runtime: python3.14
+      Runtime: python3.8
 
   ResultsRequestLambdaFunctionApiGatewayPermission:
     Type: "AWS::Lambda::Permission"

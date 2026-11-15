@@ -3,7 +3,6 @@
  * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
  * SPDX-License-Identifier: Apache-2.0.
  */
-#include <aws/crt/Utility.h>
 #include <utility>
 
 namespace Aws
@@ -76,12 +75,6 @@ namespace Aws
                 {
                     m_value = nullptr;
                 }
-            }
-
-            template <typename... Args> explicit Optional(Aws::Crt::InPlaceT, Args &&...args)
-            {
-                new (m_storage) T(std::forward<Args>(args)...);
-                m_value = reinterpret_cast<T *>(m_storage);
             }
 
             Optional &operator=(const Optional &other)
@@ -175,16 +168,6 @@ namespace Aws
                 }
 
                 return *this;
-            }
-
-            template <typename... Args> T &emplace(Args &&...args)
-            {
-                reset();
-
-                new (m_storage) T(std::forward<Args>(args)...);
-                m_value = reinterpret_cast<T *>(m_storage);
-
-                return *m_value;
             }
 
             const T *operator->() const { return m_value; }

@@ -22,8 +22,7 @@ namespace Model
     COMPROMISED,
     UNKNOWN,
     RESET_REQUIRED,
-    FORCE_CHANGE_PASSWORD,
-    EXTERNAL_PROVIDER
+    FORCE_CHANGE_PASSWORD
   };
 
 namespace UserStatusTypeMapper

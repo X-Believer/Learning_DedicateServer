@@ -9,7 +9,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *
  */
-#pragma once
 
 #include <aws/gamelift/internal/retry/RetryStrategy.h>
 

@@ -11,9 +11,6 @@
 */
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Misc/DateTime.h"
-
 enum class GAMELIFTSERVERSDK_API EPlayerSessionCreationPolicy
 {
     NOT_SET,
@@ -93,20 +90,6 @@ struct GAMELIFTSERVERSDK_API FServerParameters
     FString m_processId;
     FString m_hostId;
     FString m_authToken;
-    FString m_awsRegion;
-    FString m_accessKey;
-    FString m_secretKey;
-    FString m_sessionToken;
-};
-
-struct GAMELIFTSERVERSDK_API FMetricsParameters
-{
-    FString m_statsDHost;
-    int32 m_statsDPort = 0;
-    FString m_crashReporterHost;
-    int32 m_crashReporterPort = 0;
-    int32 m_flushIntervalMs = 0;
-    int32 m_maxPacketSize = 0;
 };
 
 struct GAMELIFTSERVERSDK_API FGameLiftPlayerSession
@@ -160,25 +143,6 @@ struct GAMELIFTSERVERSDK_API FGameLiftGetFleetRoleCredentialsRequest
 {
     FString m_roleArn;
     FString m_roleSessionName;
-};
-
-enum class GAMELIFTSERVERSDK_API EContainerGroupType
-{
-    GAME_SERVER,
-    PER_INSTANCE
-};
-
-struct GAMELIFTSERVERSDK_API FContainerNetworkInfo
-{
-    FString m_containerName;
-    FString m_containerId;
-    FString m_ipAddress;
-    EContainerGroupType m_containerGroupType = EContainerGroupType::GAME_SERVER;
-};
-
-struct GAMELIFTSERVERSDK_API FGameLiftListContainersNetworkInfoResult
-{
-    TArray<FContainerNetworkInfo> m_containersNetworkInfo;
 };
 
 struct GAMELIFTSERVERSDK_API FGameLiftError {
@@ -300,4 +264,3 @@ typedef TGameLiftOutcome<long, FGameLiftError> FGameLiftLongOutcome;
 typedef TGameLiftOutcome<FGameLiftDescribePlayerSessionsResult, FGameLiftError> FGameLiftDescribePlayerSessionsOutcome;
 typedef TGameLiftOutcome<FGameLiftGetComputeCertificateResult, FGameLiftError> FGameLiftGetComputeCertificateOutcome;
 typedef TGameLiftOutcome<FGameLiftGetFleetRoleCredentialsResult, FGameLiftError> FGameLiftGetFleetRoleCredentialsOutcome;
-typedef TGameLiftOutcome<FGameLiftListContainersNetworkInfoResult, FGameLiftError> FGameLiftListContainersNetworkInfoOutcome;

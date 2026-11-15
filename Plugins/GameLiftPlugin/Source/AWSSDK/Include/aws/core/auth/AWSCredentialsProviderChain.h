@@ -46,22 +46,20 @@ namespace Aws
             void AddProvider(const std::shared_ptr<AWSCredentialsProvider>& provider) { m_providerChain.push_back(provider); }
 
 
-        private:
+        private:            
             Aws::Vector<std::shared_ptr<AWSCredentialsProvider> > m_providerChain;
-            std::shared_ptr<AWSCredentialsProvider> m_cachedProvider;
-            mutable Aws::Utils::Threading::ReaderWriterLock m_cachedProviderLock;
         };
 
         /**
          * Creates an AWSCredentialsProviderChain which uses in order EnvironmentAWSCredentialsProvider, ProfileConfigFileAWSCredentialsProvider,
-         * ProcessCredentialsProvider, STSAssumeRoleWebIdentityCredentialsProvider and SSOCredentialsProvider.
+         * and InstanceProfileCredentialsProvider.
          */
         class AWS_CORE_API DefaultAWSCredentialsProviderChain : public AWSCredentialsProviderChain
         {
         public:
             /**
              * Initializes the provider chain with EnvironmentAWSCredentialsProvider, ProfileConfigFileAWSCredentialsProvider,
-             * ProcessCredentialsProvider, STSAssumeRoleWebIdentityCredentialsProvider and SSOCredentialsProvider in that order.
+             * and InstanceProfileCredentialsProvider in that order.
              */
             DefaultAWSCredentialsProviderChain();
 

@@ -39,44 +39,109 @@ namespace Model
     AWS_APIGATEWAY_API ImportApiKeysResult& operator=(const Aws::AmazonWebServiceResult<Aws::Utils::Json::JsonValue>& result);
 
 
-    ///@{
     /**
      * <p>A list of all the ApiKey identifiers.</p>
      */
     inline const Aws::Vector<Aws::String>& GetIds() const{ return m_ids; }
-    inline void SetIds(const Aws::Vector<Aws::String>& value) { m_ids = value; }
-    inline void SetIds(Aws::Vector<Aws::String>&& value) { m_ids = std::move(value); }
-    inline ImportApiKeysResult& WithIds(const Aws::Vector<Aws::String>& value) { SetIds(value); return *this;}
-    inline ImportApiKeysResult& WithIds(Aws::Vector<Aws::String>&& value) { SetIds(std::move(value)); return *this;}
-    inline ImportApiKeysResult& AddIds(const Aws::String& value) { m_ids.push_back(value); return *this; }
-    inline ImportApiKeysResult& AddIds(Aws::String&& value) { m_ids.push_back(std::move(value)); return *this; }
-    inline ImportApiKeysResult& AddIds(const char* value) { m_ids.push_back(value); return *this; }
-    ///@}
 
-    ///@{
+    /**
+     * <p>A list of all the ApiKey identifiers.</p>
+     */
+    inline void SetIds(const Aws::Vector<Aws::String>& value) { m_ids = value; }
+
+    /**
+     * <p>A list of all the ApiKey identifiers.</p>
+     */
+    inline void SetIds(Aws::Vector<Aws::String>&& value) { m_ids = std::move(value); }
+
+    /**
+     * <p>A list of all the ApiKey identifiers.</p>
+     */
+    inline ImportApiKeysResult& WithIds(const Aws::Vector<Aws::String>& value) { SetIds(value); return *this;}
+
+    /**
+     * <p>A list of all the ApiKey identifiers.</p>
+     */
+    inline ImportApiKeysResult& WithIds(Aws::Vector<Aws::String>&& value) { SetIds(std::move(value)); return *this;}
+
+    /**
+     * <p>A list of all the ApiKey identifiers.</p>
+     */
+    inline ImportApiKeysResult& AddIds(const Aws::String& value) { m_ids.push_back(value); return *this; }
+
+    /**
+     * <p>A list of all the ApiKey identifiers.</p>
+     */
+    inline ImportApiKeysResult& AddIds(Aws::String&& value) { m_ids.push_back(std::move(value)); return *this; }
+
+    /**
+     * <p>A list of all the ApiKey identifiers.</p>
+     */
+    inline ImportApiKeysResult& AddIds(const char* value) { m_ids.push_back(value); return *this; }
+
+
     /**
      * <p>A list of warning messages.</p>
      */
     inline const Aws::Vector<Aws::String>& GetWarnings() const{ return m_warnings; }
-    inline void SetWarnings(const Aws::Vector<Aws::String>& value) { m_warnings = value; }
-    inline void SetWarnings(Aws::Vector<Aws::String>&& value) { m_warnings = std::move(value); }
-    inline ImportApiKeysResult& WithWarnings(const Aws::Vector<Aws::String>& value) { SetWarnings(value); return *this;}
-    inline ImportApiKeysResult& WithWarnings(Aws::Vector<Aws::String>&& value) { SetWarnings(std::move(value)); return *this;}
-    inline ImportApiKeysResult& AddWarnings(const Aws::String& value) { m_warnings.push_back(value); return *this; }
-    inline ImportApiKeysResult& AddWarnings(Aws::String&& value) { m_warnings.push_back(std::move(value)); return *this; }
-    inline ImportApiKeysResult& AddWarnings(const char* value) { m_warnings.push_back(value); return *this; }
-    ///@}
 
-    ///@{
+    /**
+     * <p>A list of warning messages.</p>
+     */
+    inline void SetWarnings(const Aws::Vector<Aws::String>& value) { m_warnings = value; }
+
+    /**
+     * <p>A list of warning messages.</p>
+     */
+    inline void SetWarnings(Aws::Vector<Aws::String>&& value) { m_warnings = std::move(value); }
+
+    /**
+     * <p>A list of warning messages.</p>
+     */
+    inline ImportApiKeysResult& WithWarnings(const Aws::Vector<Aws::String>& value) { SetWarnings(value); return *this;}
+
+    /**
+     * <p>A list of warning messages.</p>
+     */
+    inline ImportApiKeysResult& WithWarnings(Aws::Vector<Aws::String>&& value) { SetWarnings(std::move(value)); return *this;}
+
+    /**
+     * <p>A list of warning messages.</p>
+     */
+    inline ImportApiKeysResult& AddWarnings(const Aws::String& value) { m_warnings.push_back(value); return *this; }
+
+    /**
+     * <p>A list of warning messages.</p>
+     */
+    inline ImportApiKeysResult& AddWarnings(Aws::String&& value) { m_warnings.push_back(std::move(value)); return *this; }
+
+    /**
+     * <p>A list of warning messages.</p>
+     */
+    inline ImportApiKeysResult& AddWarnings(const char* value) { m_warnings.push_back(value); return *this; }
+
+
     
     inline const Aws::String& GetRequestId() const{ return m_requestId; }
+
+    
     inline void SetRequestId(const Aws::String& value) { m_requestId = value; }
+
+    
     inline void SetRequestId(Aws::String&& value) { m_requestId = std::move(value); }
+
+    
     inline void SetRequestId(const char* value) { m_requestId.assign(value); }
+
+    
     inline ImportApiKeysResult& WithRequestId(const Aws::String& value) { SetRequestId(value); return *this;}
+
+    
     inline ImportApiKeysResult& WithRequestId(Aws::String&& value) { SetRequestId(std::move(value)); return *this;}
+
+    
     inline ImportApiKeysResult& WithRequestId(const char* value) { SetRequestId(value); return *this;}
-    ///@}
+
   private:
 
     Aws::Vector<Aws::String> m_ids;

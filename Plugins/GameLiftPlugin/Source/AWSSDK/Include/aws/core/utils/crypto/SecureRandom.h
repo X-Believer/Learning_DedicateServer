@@ -4,8 +4,6 @@
  */
 #pragma once
 #include <type_traits>
-#include <memory>
-#include <cassert>
 
 namespace Aws
 {

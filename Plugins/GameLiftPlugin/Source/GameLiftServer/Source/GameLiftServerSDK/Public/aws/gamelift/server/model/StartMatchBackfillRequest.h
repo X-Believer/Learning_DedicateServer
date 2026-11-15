@@ -39,8 +39,8 @@ namespace Model {
 /**
  * <p>A request to be used for making a StartMatchBackfill call.
  * For more information, see the <a
- * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon GameLift Servers 
- * Developer Guide</a>.</p>
+ * href="http://docs.aws.amazon.com/gamelift/latest/developerguide/">Amazon
+ * GameLift Developer Guide</a>.</p>
  *
  * Note: Each StartMatchBackfillRequest takes a little less than 1mb of memory. The default windows
  * stack size is 1mb, so creating one StartMatchBackfillRequest variable on the stack frame gets you

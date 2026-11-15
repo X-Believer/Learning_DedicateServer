@@ -21,7 +21,7 @@ namespace Aws {
 namespace GameLift {
 namespace Internal {
 /**
- * WebSocketStartMatchBackfillRequest request. This request is sent to the Amazon GameLift Servers WebSocket during
+ * WebSocketStartMatchBackfillRequest request. This request is sent to the GameLift WebSocket during
  * a DescribePlayerSessions call
  */
 class WebSocketStartMatchBackfillRequest : public Message {

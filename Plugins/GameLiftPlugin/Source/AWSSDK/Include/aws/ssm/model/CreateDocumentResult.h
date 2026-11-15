@@ -33,27 +33,53 @@ namespace Model
     AWS_SSM_API CreateDocumentResult& operator=(const Aws::AmazonWebServiceResult<Aws::Utils::Json::JsonValue>& result);
 
 
-    ///@{
     /**
      * <p>Information about the SSM document.</p>
      */
     inline const DocumentDescription& GetDocumentDescription() const{ return m_documentDescription; }
-    inline void SetDocumentDescription(const DocumentDescription& value) { m_documentDescription = value; }
-    inline void SetDocumentDescription(DocumentDescription&& value) { m_documentDescription = std::move(value); }
-    inline CreateDocumentResult& WithDocumentDescription(const DocumentDescription& value) { SetDocumentDescription(value); return *this;}
-    inline CreateDocumentResult& WithDocumentDescription(DocumentDescription&& value) { SetDocumentDescription(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Information about the SSM document.</p>
+     */
+    inline void SetDocumentDescription(const DocumentDescription& value) { m_documentDescription = value; }
+
+    /**
+     * <p>Information about the SSM document.</p>
+     */
+    inline void SetDocumentDescription(DocumentDescription&& value) { m_documentDescription = std::move(value); }
+
+    /**
+     * <p>Information about the SSM document.</p>
+     */
+    inline CreateDocumentResult& WithDocumentDescription(const DocumentDescription& value) { SetDocumentDescription(value); return *this;}
+
+    /**
+     * <p>Information about the SSM document.</p>
+     */
+    inline CreateDocumentResult& WithDocumentDescription(DocumentDescription&& value) { SetDocumentDescription(std::move(value)); return *this;}
+
+
     
     inline const Aws::String& GetRequestId() const{ return m_requestId; }
+
+    
     inline void SetRequestId(const Aws::String& value) { m_requestId = value; }
+
+    
     inline void SetRequestId(Aws::String&& value) { m_requestId = std::move(value); }
+
+    
     inline void SetRequestId(const char* value) { m_requestId.assign(value); }
+
+    
     inline CreateDocumentResult& WithRequestId(const Aws::String& value) { SetRequestId(value); return *this;}
+
+    
     inline CreateDocumentResult& WithRequestId(Aws::String&& value) { SetRequestId(std::move(value)); return *this;}
+
+    
     inline CreateDocumentResult& WithRequestId(const char* value) { SetRequestId(value); return *this;}
-    ///@}
+
   private:
 
     DocumentDescription m_documentDescription;

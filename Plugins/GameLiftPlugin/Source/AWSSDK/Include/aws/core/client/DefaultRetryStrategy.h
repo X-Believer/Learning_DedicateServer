@@ -27,8 +27,6 @@ public:
 
     virtual long GetMaxAttempts() const override { return m_maxRetries + 1; }
 
-    const char* GetStrategyName() const override { return "default";}
-
 protected:
     long m_scaleFactor;
     long m_maxRetries;

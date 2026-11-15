@@ -51,12 +51,11 @@ FString AwsAccountInstanceManager::GetBucketName() const
 	return BucketName;
 }
 
-int AwsAccountInstanceManager::BuildInstance(const FString& InProfile, TSharedRef<IAWSConfigFileProfile> InProfileReader, const FString& InExistingBucketName, const FString& InRootPath, const FString& InPluginRootPath)
+int AwsAccountInstanceManager::BuildInstance(const FString& InProfile, TSharedRef<IAWSConfigFileProfile> InProfileReader, const FString& InRootPath, const FString& InPluginRootPath)
 {
 	ReleaseInstance();
 
-	std::string StdBucketName = Convertors::FSToStdS(InExistingBucketName);
-	auto result = AccountInfo.BuildAccountInfo(StdBucketName);
+	auto result = AccountInfo.BuildAccountInfo();
 
 	if (result != GameLift::GAMELIFT_SUCCESS)
 	{

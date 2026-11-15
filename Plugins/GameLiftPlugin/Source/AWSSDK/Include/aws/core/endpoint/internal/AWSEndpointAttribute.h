@@ -76,13 +76,11 @@ namespace Aws
 
             /**
              * A grab bag property map of endpoint attributes. The values here are considered unstable.
-             * C++ SDK supports only endpoint attributes "AuthScheme" and "Bucket Type".
+             * C++ SDK supports only (and single so far) endpoint attribute "AuthScheme"
              */
             struct AWS_CORE_API EndpointAttributes
             {
                 Aws::Internal::Endpoint::EndpointAuthScheme authScheme;
-                Aws::String backend;
-                bool useS3ExpressAuth;
 
                 static EndpointAttributes BuildEndpointAttributesFromJson(const Aws::String& iJsonStr);
             };

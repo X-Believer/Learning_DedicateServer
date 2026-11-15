@@ -33,27 +33,53 @@ namespace Model
     AWS_S3_API GetBucketPolicyStatusResult& operator=(const Aws::AmazonWebServiceResult<Aws::Utils::Xml::XmlDocument>& result);
 
 
-    ///@{
     /**
      * <p>The policy status for the specified bucket.</p>
      */
     inline const PolicyStatus& GetPolicyStatus() const{ return m_policyStatus; }
-    inline void SetPolicyStatus(const PolicyStatus& value) { m_policyStatus = value; }
-    inline void SetPolicyStatus(PolicyStatus&& value) { m_policyStatus = std::move(value); }
-    inline GetBucketPolicyStatusResult& WithPolicyStatus(const PolicyStatus& value) { SetPolicyStatus(value); return *this;}
-    inline GetBucketPolicyStatusResult& WithPolicyStatus(PolicyStatus&& value) { SetPolicyStatus(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The policy status for the specified bucket.</p>
+     */
+    inline void SetPolicyStatus(const PolicyStatus& value) { m_policyStatus = value; }
+
+    /**
+     * <p>The policy status for the specified bucket.</p>
+     */
+    inline void SetPolicyStatus(PolicyStatus&& value) { m_policyStatus = std::move(value); }
+
+    /**
+     * <p>The policy status for the specified bucket.</p>
+     */
+    inline GetBucketPolicyStatusResult& WithPolicyStatus(const PolicyStatus& value) { SetPolicyStatus(value); return *this;}
+
+    /**
+     * <p>The policy status for the specified bucket.</p>
+     */
+    inline GetBucketPolicyStatusResult& WithPolicyStatus(PolicyStatus&& value) { SetPolicyStatus(std::move(value)); return *this;}
+
+
     
     inline const Aws::String& GetRequestId() const{ return m_requestId; }
+
+    
     inline void SetRequestId(const Aws::String& value) { m_requestId = value; }
+
+    
     inline void SetRequestId(Aws::String&& value) { m_requestId = std::move(value); }
+
+    
     inline void SetRequestId(const char* value) { m_requestId.assign(value); }
+
+    
     inline GetBucketPolicyStatusResult& WithRequestId(const Aws::String& value) { SetRequestId(value); return *this;}
+
+    
     inline GetBucketPolicyStatusResult& WithRequestId(Aws::String&& value) { SetRequestId(std::move(value)); return *this;}
+
+    
     inline GetBucketPolicyStatusResult& WithRequestId(const char* value) { SetRequestId(value); return *this;}
-    ///@}
+
   private:
 
     PolicyStatus m_policyStatus;

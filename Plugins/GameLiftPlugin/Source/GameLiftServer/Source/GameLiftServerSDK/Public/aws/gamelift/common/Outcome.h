@@ -13,7 +13,6 @@
 #include <aws/gamelift/common/GameLiftErrors.h>
 #include <aws/gamelift/server/model/DescribePlayerSessionsResult.h>
 #include <aws/gamelift/server/model/GetComputeCertificateResult.h>
-#include <aws/gamelift/server/model/ListContainersNetworkInfoResult.h>
 #include <aws/gamelift/server/model/GetFleetRoleCredentialsResult.h>
 #include <aws/gamelift/server/model/StartMatchBackfillResult.h>
 #include <future>
@@ -125,7 +124,6 @@ typedef Outcome<long, GameLiftError> AwsLongOutcome;
 typedef Outcome<Aws::GameLift::Server::Model::DescribePlayerSessionsResult, GameLiftError> DescribePlayerSessionsOutcome;
 typedef Outcome<Aws::GameLift::Server::Model::StartMatchBackfillResult, GameLiftError> StartMatchBackfillOutcome;
 typedef Outcome<Aws::GameLift::Server::Model::GetComputeCertificateResult, GameLiftError> GetComputeCertificateOutcome;
-typedef Outcome<Aws::GameLift::Server::Model::ListContainersNetworkInfoResult, GameLiftError> ListContainersNetworkInfoOutcome;
 typedef Outcome<Aws::GameLift::Server::Model::GetFleetRoleCredentialsResult, GameLiftError> GetFleetRoleCredentialsOutcome;
 } // namespace GameLift
 } // namespace Aws

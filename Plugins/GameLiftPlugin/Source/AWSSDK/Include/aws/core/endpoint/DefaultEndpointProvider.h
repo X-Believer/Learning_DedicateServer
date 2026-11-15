@@ -43,7 +43,7 @@ namespace Aws
         /**
          * Default endpoint provider template used in this SDK.
          */
-        template<typename ClientConfigurationT = Aws::Client::GenericClientConfiguration,
+        template<typename ClientConfigurationT = Aws::Client::GenericClientConfiguration<false>,
                  typename BuiltInParametersT = Aws::Endpoint::BuiltInParameters,
                  typename ClientContextParametersT = Aws::Endpoint::ClientContextParameters>
         class AWS_CORE_API DefaultEndpointProvider : public EndpointProviderBase<ClientConfigurationT, BuiltInParametersT, ClientContextParametersT>
@@ -113,8 +113,10 @@ namespace Aws
         /**
          * Export endpoint provider symbols for Windows DLL, otherwise declare as extern
          */
-        AWS_CORE_EXTERN template class AWS_CORE_API DefaultEndpointProvider<Aws::Client::GenericClientConfiguration,
+        AWS_CORE_EXTERN template class AWS_CORE_API DefaultEndpointProvider<Aws::Client::GenericClientConfiguration<false>,
             Aws::Endpoint::BuiltInParameters,
             Aws::Endpoint::ClientContextParameters>;
+        
+        AWS_CORE_EXTERN template class AWS_CORE_API DefaultEndpointProvider<Aws::Client::GenericClientConfiguration<true>>;
     } // namespace Endpoint
 } // namespace Aws

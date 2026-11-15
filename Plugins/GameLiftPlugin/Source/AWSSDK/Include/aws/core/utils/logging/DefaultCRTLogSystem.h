@@ -24,7 +24,7 @@ namespace Aws
             {
             public:
                 DefaultCRTLogSystem(LogLevel logLevel);
-                virtual ~DefaultCRTLogSystem() = default;
+                virtual ~DefaultCRTLogSystem();
 
                 DefaultCRTLogSystem(DefaultCRTLogSystem&&) = delete;
                 DefaultCRTLogSystem(const DefaultCRTLogSystem&) = delete;
@@ -32,17 +32,26 @@ namespace Aws
                 /**
                  * Gets the currently configured log level.
                  */
-                LogLevel GetLogLevel() const override;
+                LogLevel GetLogLevel() const override { return m_logLevel; }
                 /**
                  * Set a new log level. This has the immediate effect of changing the log output to the new level.
                  */
-                void SetLogLevel(LogLevel logLevel) override;
+                void SetLogLevel(LogLevel logLevel) override { m_logLevel.store(logLevel); }
 
                 /**
                  * Handle the logging information from common runtime libraries.
                  * Redirect them to C++ SDK logging system by default.
                  */
                 virtual void Log(LogLevel logLevel, const char* subjectName, const char* formatStr, va_list args) override;
+
+            protected:
+                std::atomic<LogLevel> m_logLevel;
+
+                // destruction synchronization
+                mutable std::atomic<bool> m_stopLogging;
+                mutable std::atomic<size_t> m_logsProcessed;
+                mutable std::condition_variable m_stopSignal;
+                mutable std::mutex m_stopMutex;
             };
 
         } // namespace Logging

@@ -35,7 +35,6 @@ namespace Model
     AWS_SECRETSMANAGER_API Aws::Http::HeaderValueCollection GetRequestSpecificHeaders() const override;
 
 
-    ///@{
     /**
      * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
      * specify a complete ARN rather than a partial ARN. See <a
@@ -43,16 +42,64 @@ namespace Model
      * a secret from a partial ARN</a>.</p>
      */
     inline const Aws::String& GetSecretId() const{ return m_secretId; }
-    inline bool SecretIdHasBeenSet() const { return m_secretIdHasBeenSet; }
-    inline void SetSecretId(const Aws::String& value) { m_secretIdHasBeenSet = true; m_secretId = value; }
-    inline void SetSecretId(Aws::String&& value) { m_secretIdHasBeenSet = true; m_secretId = std::move(value); }
-    inline void SetSecretId(const char* value) { m_secretIdHasBeenSet = true; m_secretId.assign(value); }
-    inline UntagResourceRequest& WithSecretId(const Aws::String& value) { SetSecretId(value); return *this;}
-    inline UntagResourceRequest& WithSecretId(Aws::String&& value) { SetSecretId(std::move(value)); return *this;}
-    inline UntagResourceRequest& WithSecretId(const char* value) { SetSecretId(value); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
+     * specify a complete ARN rather than a partial ARN. See <a
+     * href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding
+     * a secret from a partial ARN</a>.</p>
+     */
+    inline bool SecretIdHasBeenSet() const { return m_secretIdHasBeenSet; }
+
+    /**
+     * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
+     * specify a complete ARN rather than a partial ARN. See <a
+     * href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding
+     * a secret from a partial ARN</a>.</p>
+     */
+    inline void SetSecretId(const Aws::String& value) { m_secretIdHasBeenSet = true; m_secretId = value; }
+
+    /**
+     * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
+     * specify a complete ARN rather than a partial ARN. See <a
+     * href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding
+     * a secret from a partial ARN</a>.</p>
+     */
+    inline void SetSecretId(Aws::String&& value) { m_secretIdHasBeenSet = true; m_secretId = std::move(value); }
+
+    /**
+     * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
+     * specify a complete ARN rather than a partial ARN. See <a
+     * href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding
+     * a secret from a partial ARN</a>.</p>
+     */
+    inline void SetSecretId(const char* value) { m_secretIdHasBeenSet = true; m_secretId.assign(value); }
+
+    /**
+     * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
+     * specify a complete ARN rather than a partial ARN. See <a
+     * href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding
+     * a secret from a partial ARN</a>.</p>
+     */
+    inline UntagResourceRequest& WithSecretId(const Aws::String& value) { SetSecretId(value); return *this;}
+
+    /**
+     * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
+     * specify a complete ARN rather than a partial ARN. See <a
+     * href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding
+     * a secret from a partial ARN</a>.</p>
+     */
+    inline UntagResourceRequest& WithSecretId(Aws::String&& value) { SetSecretId(std::move(value)); return *this;}
+
+    /**
+     * <p>The ARN or name of the secret.</p> <p>For an ARN, we recommend that you
+     * specify a complete ARN rather than a partial ARN. See <a
+     * href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen">Finding
+     * a secret from a partial ARN</a>.</p>
+     */
+    inline UntagResourceRequest& WithSecretId(const char* value) { SetSecretId(value); return *this;}
+
+
     /**
      * <p>A list of tag key names to remove from the secret. You don't specify the
      * value. Both the key and its associated value are removed.</p> <p>This parameter
@@ -64,15 +111,103 @@ namespace Model
      * CLI User Guide.</p>
      */
     inline const Aws::Vector<Aws::String>& GetTagKeys() const{ return m_tagKeys; }
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline bool TagKeysHasBeenSet() const { return m_tagKeysHasBeenSet; }
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline void SetTagKeys(const Aws::Vector<Aws::String>& value) { m_tagKeysHasBeenSet = true; m_tagKeys = value; }
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline void SetTagKeys(Aws::Vector<Aws::String>&& value) { m_tagKeysHasBeenSet = true; m_tagKeys = std::move(value); }
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline UntagResourceRequest& WithTagKeys(const Aws::Vector<Aws::String>& value) { SetTagKeys(value); return *this;}
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline UntagResourceRequest& WithTagKeys(Aws::Vector<Aws::String>&& value) { SetTagKeys(std::move(value)); return *this;}
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline UntagResourceRequest& AddTagKeys(const Aws::String& value) { m_tagKeysHasBeenSet = true; m_tagKeys.push_back(value); return *this; }
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline UntagResourceRequest& AddTagKeys(Aws::String&& value) { m_tagKeysHasBeenSet = true; m_tagKeys.push_back(std::move(value)); return *this; }
+
+    /**
+     * <p>A list of tag key names to remove from the secret. You don't specify the
+     * value. Both the key and its associated value are removed.</p> <p>This parameter
+     * requires a JSON text string argument.</p> <p>For storing multiple values, we
+     * recommend that you use a JSON text string argument and specify key/value pairs.
+     * For more information, see <a
+     * href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html">Specifying
+     * parameter values for the Amazon Web Services CLI</a> in the Amazon Web Services
+     * CLI User Guide.</p>
+     */
     inline UntagResourceRequest& AddTagKeys(const char* value) { m_tagKeysHasBeenSet = true; m_tagKeys.push_back(value); return *this; }
-    ///@}
+
   private:
 
     Aws::String m_secretId;

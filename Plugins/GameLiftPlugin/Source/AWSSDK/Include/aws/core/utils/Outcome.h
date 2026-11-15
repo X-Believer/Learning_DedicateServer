@@ -101,7 +101,6 @@ namespace Aws
                     result = o.result;
                     error = o.error;
                     success = o.success;
-                    retryCount = o.retryCount;
                 }
 
                 return *this;
@@ -110,8 +109,7 @@ namespace Aws
             Outcome(Outcome&& o) : // Required to force Move Constructor
                 result(std::move(o.result)),
                 error(std::move(o.error)),
-                success(o.success),
-                retryCount(std::move(o.retryCount))
+                success(o.success)
             {
             }
 
@@ -122,7 +120,6 @@ namespace Aws
                     result = std::move(o.result);
                     error = std::move(o.error);
                     success = o.success;
-                    retryCount = std::move(o.retryCount);
                 }
 
                 return *this;
@@ -163,20 +160,10 @@ namespace Aws
                 return this->success;
             }
 
-            /**
-             * Returns how many times the retry happened before getting this outcome.
-             */
-            inline unsigned int GetRetryCount() const { return retryCount; }
-            /**
-             * Sets the retry count.
-             */
-            inline void SetRetryCount(const unsigned int iRetryCount) { retryCount = iRetryCount; }
-
         private:
             R result;
             E error;
-            bool success = false;
-            unsigned int retryCount = 0;
+            bool success;
         };
 
     } // namespace Utils

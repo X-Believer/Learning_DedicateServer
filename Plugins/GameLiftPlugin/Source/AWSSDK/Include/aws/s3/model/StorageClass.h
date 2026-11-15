@@ -25,8 +25,7 @@ namespace Model
     DEEP_ARCHIVE,
     OUTPOSTS,
     GLACIER_IR,
-    SNOW,
-    EXPRESS_ONEZONE
+    SNOW
   };
 
 namespace StorageClassMapper

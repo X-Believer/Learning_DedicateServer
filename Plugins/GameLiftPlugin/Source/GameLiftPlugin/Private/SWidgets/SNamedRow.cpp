@@ -54,7 +54,7 @@ void SNamedRow::Construct(const FArguments& InArgs)
 		SNew(SHorizontalBox)
 		// Primary column
 		+ SHorizontalBox::Slot()
-		.VAlign(InArgs._FirstColumnVAlignTop ? VAlign_Top : VAlign_Center)
+		.VAlign(VAlign_Center)
 		.AutoWidth()
 		[
 			SNew(SBox)

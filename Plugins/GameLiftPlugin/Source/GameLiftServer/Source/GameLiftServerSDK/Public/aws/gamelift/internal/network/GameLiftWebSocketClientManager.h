@@ -24,7 +24,7 @@ namespace Internal {
 
 /**
  * Class Managing a single WebSocketClientWrapper, enabling connection and communication with
- * Amazon GameLift Servers
+ * GameLift
  */
 class GameLiftWebSocketClientManager {
 public:
@@ -35,7 +35,7 @@ public:
     inline bool IsConnected() { return m_webSocketClientWrapper->IsConnected(); }
 
     Aws::GameLift::GenericOutcome Connect(std::string websocketUrl, const std::string &authToken, const std::string &processId, const std::string &hostId,
-                                          const std::string &fleetId, const std::map<std::string, std::string> &sigV4QueryParameters = {});
+                                          const std::string &fleetId);
     // Messages are synchronously sent and a response is waited for.
     GenericOutcome SendSocketMessage(Message &message);
     void Disconnect();
@@ -49,7 +49,6 @@ private:
     static constexpr const char *AUTH_TOKEN_KEY = "Authorization";
     static constexpr const char *COMPUTE_ID_KEY = "ComputeId";
     static constexpr const char *FLEET_ID_KEY = "FleetId";
-    static constexpr const char *IDEMPOTENCY_TOKEN_KEY = "IdempotencyToken";
 
     static constexpr const char *REQUIRED_URL_ENDING = "/";
 

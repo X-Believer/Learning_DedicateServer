@@ -17,21 +17,18 @@ public:
 
 	GameLift::AccountInfo GetAccountInfo() const;
 
-	int BuildAccountInfo(std::string BootstrapBucketName = "");
+	int BuildAccountInfo();
 
 	void SetGameName(std::string NewGameName);
-	void SetBucketName(std::string NewBucketName);
 
 	const std::string& GetAccountId() const;
-	const std::string& GetBucketName() const;
 	const std::string& GetBuildConfiguration() const;
 	const std::string& GetCompanyName() const;
 	const std::string& GetGameName() const;
 
 private:
 	std::string StdAccountId;
-	std::string StdBucketName;
-	std::string StdBuildConfiguration;  
+	std::string StdBuildConfiguration;    
 	std::string StdCompanyName;
 	std::string StdGameName;
 };

@@ -1,211 +1,337 @@
-# Amazon GameLift Servers SDK for Unreal Engine
+# GameLiftServerSDK Unreal Plugin
+## Documention
+You can find the official Amazon GameLift documentation [here](https://aws.amazon.com/documentation/gamelift/).
 
-The Amazon GameLift Servers SDK for Unreal Engine is compatible with UE5 versions (5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8), and supports development and packaging of game servers for Windows or Linux, as well as game clients for any Unreal-supported platform.
-The SDK supports both x64 and ARM architectures, with ARM architecture being supported starting from Unreal Engine version 5.0 and above.
+## Building Unreal from Source
+The standard version of Unreal Engine download through the Epic launcher only allows for Unreal client application builds. In order to build an Unreal server application, you need to download and build the Unreal Engine from the Epic Games Git repo.
+1. Follow the instructions [here](https://www.unrealengine.com/en-US/ue-on-github) to link your GitHub account to your Epic Games account 
+1. Run the following command to clone your desired branch
+    ```
+    git clone -b <branch> --single-branch https://github.com/EpicGames/UnrealEngine.git
+    ```
+    For example, to clone the 5.1.0-release branch  
+    ```
+    git clone -b 5.1.0-release --single-branch https://github.com/EpicGames/UnrealEngine.git
+    ```
+1. Run `setup.bat` from the repo root folder
+1. Run `generateFiles.bat` from the repo root folder
+1. Open up the UE5.sln file in Visual Studio and build the UE5 project with Development Editor Win64 target.  
+    * Be aware that building this solution can take over an hour
 
-## Install the SDK for Unreal Engine
-
-Follow these steps to set up the SDK for Unreal Engine and add it to your Unreal Engine editor.
-
-### Step 1: Install prerequisites
-
-You’ll need the following tools to install and run the plugin with your Unreal projects.
-
-* An AWS account to use with Amazon GameLift Servers. To use the plugin guided workflows, you need a user profile with your AWS account and access credentials. See [Set up an AWS account](https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-aws-login.html) for help with these steps:
-    * Sign up for an AWS account.
-    * Create a user with permissions to use Amazon GameLift Servers.
-    * Set up programmatic access with long-term IAM credentials.
-* A source-built version of the Unreal Engine editor. You need a source-built editor to package a multiplayer game server build. See these Unreal Engine documentation topics:
-    * [Accessing Unreal Engine source code on GitHub](https://www.unrealengine.com/ue-on-github) (requires GitHub and Epic Games accounts).
-    * [Building Unreal Engine from Source](https://docs.unrealengine.com/5.3/en-US/building-unreal-engine-from-source/)
-* A multiplayer game project with C++ game code. (Blueprint-only projects aren’t compatible with the plugin.) If you don’t have a project in progress, use one of the Unreal Engine sample games such as the [Third Person Template](https://dev.epicgames.com/documentation/en-us/unreal-engine/third-person-template-in-unreal-engine).
-If you're starting a new Unreal project, create a game using the Third Person template and use the following settings:
+## Creating a new Amazon GameLift example project for Unreal
+1. Run the Development Editor for UE5 project from the UE5.sln with VisualStudio.
+1. Once loaded, select a New Third Person Project with the following:
     * C++
     * With starter content
-    * Desktop
-    * Custom project name (examples in this README use the name `GameLiftUnrealApp`)
-* [Microsoft Visual Studio](https://visualstudio.microsoft.com/vs/) 2019 or newer.
-* [Unreal Engine cross-compiling toolchain](https://dev.epicgames.com/documentation/en-us/unreal-engine/linux-development-requirements-for-unreal-engine#cross-compiletoolchain). This tool is required only if you’re building a Linux game server.
+    * Desktop  
+    * For our examples we will name our project `GameLiftUnrealApp`
+1. If using Visual Studio, this will open another instance of Visual Studio. You can close this and the Visual Studio instance you were using with the Unreal Engine Source.
+1. Navigate to the location of your new third person example. Find the Source folder and file named `<Your application name>.Target.cs`
+    * For our example this will be `GameLiftUnrealApp.Target.cs`
+1. Copy this file and name it `<Your application name>Server.Target.cs`
+    * In our case `GameLiftUnrealAppServer.Target.cs`
+1. Open this newly copied file and the following changes
+    * Change the `class` and `constructor` to match the filename
+    * Change the `Type` from `TargetType.Game` to `TargetType.Server`
+    * The final file will look like the following for our example app. There might be some differences, however that's fine as long as the above changes were made. 
+    ```csharp
+    public class GameLiftUnrealAppServerTarget : TargetRules
+    {  
+        public GameLiftUnrealAppServerTarget(TargetInfo Target) : base(Target)
+        {
+            Type = TargetType.Server;
+            DefaultBuildSettings = BuildSettingsVersion.V2;
+            IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_1;
+            ExtraModuleNames.Add("GameLiftUnrealApp");
+        }
+    }
+    ```
+1. Keep the location of your new third person example app in mind, you will need it later in this document.
 
-### Step 2: Get the plugin
+## Using the plugin
+### Building the C++ SDK
+Before we can use the plugin inside an Unreal game, we need to compile the Amazon GameLift server C++ SDK.  
 
-1. Download the plugin `GameLift-Cpp-ServerSDK-UnrealPlugin-<version>.zip` from the repository’s [**Releases**](https://github.com/amazon-gamelift/amazon-gamelift-plugin-unreal/releases) page or clone the repository if you plan to customize it.
-2. If you downloaded the plugin from the [**Releases**](https://github.com/amazon-gamelift/amazon-gamelift-plugin-unreal/releases) page, unzip the downloaded file `GameLift-Cpp-ServerSDK-UnrealPlugin-<version>.zip`. 
-3. If you cloned the repository, run the following command in the root directory of the repository:
-   
-    For Linux or Mac:
+To build the Amazon GameLift server SDK:
+1. Open a terminal/command prompt.
+2. Navigate to the `GameLift-Cpp-ServerSDK-<version>` folder that was included with the Amazon GameLift SDK Release download.
+1. Follow the below instructions for your platform.  
+
+#### Linux
+
+1. Run the following commands
     ```sh
-    chmod +x setup.sh
-    sh setup.sh
+    mkdir out
+    cd out
+    cmake -DBUILD_FOR_UNREAL=1 ..
+    make
+    ```
+1. Once complete, the following file should have been built
+    ```
+    prefix/lib/aws-cpp-sdk-gamelift-server.so
+    ```
+1. Copy the file over to this location in the Unreal plugin folder 
+    ```
+    ../../GameLift-Unreal-plugin-<version>/GameLiftServerSDK/ThirdParty/GameLiftServerSDK/Linux/x86_64-unknown-linux-gnu/
+    ```  
+    Once complete you should have a filepath similar to this example
+    ```
+    ../../GameLift-Unreal-plugin-5.0.2/GameLiftServerSDK/ThirdParty/GameLiftServerSDK/Linux/x86_64-unknown-linux-gnu/aws-cpp-sdk-gamelift-server.so 
     ```
 
-   For Windows:
+#### Windows
+
+1. Run the following commands
+    ```sh
+    mkdir out
+    cd out
+    cmake -G "Visual Studio 17 2022" -DBUILD_FOR_UNREAL=1 ..
+    msbuild ALL_BUILD.vcxproj /p:Configuration=Release
     ```
-    powershell -file setup.ps1
+1. The above step produces the following binary files required by the plugin.  
+    ```
+    prefix\bin\aws-cpp-sdk-gamelift-server.dll  
+    prefix\lib\aws-cpp-sdk-gamelift-server.lib
+    ```
+1. Copy the files over to this location in the Unreal plugin folder 
+    ```
+    ..\..\GameLift-Unreal-plugin-<version>\GameLiftServerSDK\ThirdParty\GameLiftServerSDK\Win64\
+    ```  
+    Once complete you should have two filepaths similar to this example  
+    ```
+    ..\..\GameLift-Unreal-plugin-5.0.2\GameLiftServerSDK\ThirdParty\GameLiftServerSDK\Win64\aws-cpp-sdk-gamelift-server.dll  
+    ..\..\GameLift-Unreal-plugin-5.0.2\GameLiftServerSDK\ThirdParty\GameLiftServerSDK\Win64\aws-cpp-sdk-gamelift-server.lib 
     ```
 
-    Once completed, the plugin is ready to be added to an Unreal game project.
+At this point, we are ready to add the plugin to an Unreal game project and start using it.
 
-### Step 3: Add the plugin to your Unreal game project
-1. Locate the root folder of your Unreal game project. Look for a subfolder named `Plugins`. If it doesn’t exist, create it.
-2. Copy the entire `GameLiftServerSDK/` folder, either from this repository (after running the setup script) or from the unzipped release bundle, into the `Plugins` folder in your game project.
-3. Open the `.uproject` file for your game project. Add the `GameLiftServerSDK` to the `Plugins` section:
-    ```
+For more detailed instructions on how to build the C++ SDK, please refer to the README.md file located in the C++ SDK directory.
+
+### Import the plugin into the example project
+There are multiple ways to import an Unreal plugin. The method shown below doesn't require use of the Unreal Editor.
+
+1. First, we'll want to add the GameLiftServerSDK plugin to the game's `.uproject` file.  
+    * *From the example above, remember our app is called `GameLiftUnrealApp`, so the file will be `GameLiftUnrealApp.uproject`*  
+1. Add the following entry to the list of plugins
+    ```sh
     "Plugins": [
-        ......
         {
             "Name": "GameLiftServerSDK",
             "Enabled": true
         }
     ]
     ```
-4. In a file browser, select the game project `.uproject` file and choose the option **Switch Unreal Engine Version**. Set the game project to use the source-built Unreal Editor (as mentioned in Step 1).
-5. (Windows) In the game project root folder, right-click the `.uproject` file and choose the option to generate project files. Open the solution ( `*.sln`) file and build or rebuild the project.
-
-
-## Next steps: Integrate your game server and deploy for hosting
-
-After you add the server SDK to your game project, see these Amazon GameLift Servers documentation topics for help with integrating your game code and preparing your game server to work with Amazon GameLift Servers.
-
-* [Configure your game project for the server SDK](https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-engines-setup-unreal.html#integration-engines-setup-unreal-setup)
-* [Integrate Amazon GameLift Servers functionality into your game server code](https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-engines-setup-unreal.html#integration-engines-setup-unreal-code)
-* [Package your game build files](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-packaging.html)
-* [Set up local testing with an Anywhere fleet](https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html)
-* Deploy your game server to the cloud with managed EC2
-  * [Deploy a custom server build for Amazon GameLift Servers hosting](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html)
-  * [Create an Amazon GameLift Servers managed EC2 fleet](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating.html)
-* Deploy your game server to the cloud with managed containers
-  * [Build a container image for Amazon GameLift Servers](https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-prepare-images.html)
-  * [Create an Amazon GameLift Servers managed container fleet](https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-build-fleet.html)
-
-## Metrics
-
-This telemetry metrics solution enables the feature to collect and ship telemetry metrics from your game servers hosted on Amazon GameLift Servers to AWS services for monitoring and observability. For detailed setup and usage instructions, see [METRICS.md](../TelemetryMetrics/METRICS.md).
-
-![Telemetry Metrics on Amazon Grafana Dashboard](../TelemetryMetrics/telemetry_metrics.png)
-
-## Troubleshoot plugin installation
-
-#### Issue: When rebuilding the game project’s solution file after adding the plugin, I get some compile errors.
-
-**Resolution:** Add the following line to your `<ProjectName>Editor.Target.cs` file to disable adaptive unity build, which may cause conflicts:
-```
-    bUseAdaptiveUnityBuild = false;
-```
-
-## SDK Logging Configuration
-
-By default, Amazon GameLift Server SDK log messages are forwarded to Unreal Engine's logging system via `UE_LOG` under the `LogGameLiftServerSDK` category. These logs persist in UE's standard log output (e.g., `Saved/Logs/`) alongside your game's other log messages — no separate SDK log file is produced.
-
-### Controlling visible log detail (UE verbosity)
-
-The amount of SDK log output you see is controlled by Unreal's standard category verbosity for `LogGameLiftServerSDK`. The category's default runtime verbosity is **Log** (Info-level and above). This is the same mechanism used for all UE log categories and can be changed at any time — even while the server is running.
-
-**Raise verbosity on the command line:**
-```
--LogCmds="LogGameLiftServerSDK VeryVerbose"
-```
-
-**Raise verbosity at runtime (editor console or in-game console):**
-```
-Log LogGameLiftServerSDK VeryVerbose
-```
-
-**Set verbosity via ini (`DefaultEngine.ini` or per-platform Engine ini):**
-```ini
-[Core.Log]
-LogGameLiftServerSDK=VeryVerbose
-```
-
-### Configuration (DefaultGame.ini)
-
-Additional SDK-side logging settings are configured under the following section:
-
-```ini
-[/Script/GameLiftServerSDK.GameLiftLoggingConfig]
-LogDestination=UELog
-MinLogLevel=Trace
-```
-
-#### LogDestination
-
-Controls where SDK logs are written.
-
-| Value | Behavior |
-|-------|----------|
-| `UELog` (default) | SDK logs are forwarded to `UE_LOG(LogGameLiftServerSDK, ...)` and appear in Unreal's log output. |
-| `SDKFile` | SDK uses its own internal file + stdout logging, fixed at `Info` level. Useful if you need the SDK's rotating log files separate from UE logs. **Note:** `MinLogLevel` has no effect in this mode (see below). |
-
-#### MinLogLevel (optional hard cap)
-
-Sets the minimum severity at which the SDK will emit log messages to the callback. Messages below this level are never formatted or forwarded. Only applies when `LogDestination=UELog` — when `LogDestination=SDKFile`, this setting is **ignored** and the SDK's built-in file logger always logs at a fixed `Info` level.
-
-The default is **Trace** — all SDK messages reach the UE callback, and actual visibility is controlled by UE's category verbosity (see above). This default is deliberate: it preserves runtime verbosity toggling via `-LogCmds` and the console.
-
-Setting `MinLogLevel` above Trace is an **opt-in production hard cap** that prevents the SDK from formatting messages below the cap, reducing overhead in performance-critical builds. The tradeoff: runtime verbosity toggling cannot reveal levels below the cap because the SDK filter is fixed at `InitSDK` time.
-
-| Value | UE_LOG Verbosity | Description |
-|-------|-------------------|-------------|
-| `Trace` (default) | VeryVerbose | All SDK messages reach the callback |
-| `Debug` | Verbose | Debug-level and above |
-| `Info` | Log | Informational and above |
-| `Warn` | Warning | Warnings and above |
-| `Error` | Error | Errors and fatal conditions only |
-| `Fatal` | Error | Fatal SDK messages only (logged as Error to avoid crashing the server) |
-| `Off` | — | Suppresses all SDK log forwarding to UE_LOG |
-
-### Examples
-
-**Default behavior (no configuration needed):** All SDK messages reach UE_LOG. Visibility is controlled by the `LogGameLiftServerSDK` category verbosity (default: Log = Info and above).
-
-**Enable verbose SDK logging for debugging:** Raise UE's category verbosity to see Trace/Debug messages that are already being forwarded:
-```
--LogCmds="LogGameLiftServerSDK VeryVerbose"
-```
-Or at runtime in the console:
-```
-Log LogGameLiftServerSDK VeryVerbose
-```
-No ini change to `MinLogLevel` is needed — the default Trace already forwards everything.
-
-**Production hard cap (reduce SDK overhead):**
-```ini
-[/Script/GameLiftServerSDK.GameLiftLoggingConfig]
-MinLogLevel=Info
-```
-This prevents the SDK from formatting Trace/Debug messages entirely. Note: you cannot toggle verbosity below Info at runtime with this setting.
-
-**Restore legacy SDK file logging:**
-```ini
-[/Script/GameLiftServerSDK.GameLiftLoggingConfig]
-LogDestination=SDKFile
-```
-In this mode the SDK writes to its own rotating log files at a fixed `Info` level; `MinLogLevel` is not applied.
-
-## Metrics
-
-The Amazon GameLift Servers SDK for Unreal Engine provides a comprehensive metrics system for collecting and sending custom metrics from your game servers to Amazon GameLift. These metrics can be integrated with various visualization and aggregation tools including Amazon Managed Grafana, Prometheus, Amazon CloudWatch, and other monitoring platforms.
-
-See below for a simple usage guide and see [CUSTOM_METRICS.md](../TelemetryMetrics/CUSTOM_METRICS.md) for a detailed API description.
-
-## Quick Start
-
-### Initialize the GameLift Metrics SDK
-
-1. Include GameLiftMetrics.h at the top of your game mode source. `#include "GameLiftMetrics.h"`
-2. Initialize the GameLift Metrics SDK
-
-```c
-    FGameLiftGenericOutcome InitSdkOutcome = GameLiftSdkModule->InitSDK(ServerParametersForAnywhere);
-    // Initialize the GameLift metrics SDK
-    FGameLiftMetricsModule::Load().Initialize();
-
-    if (InitSdkOutcome.IsSuccess())
+1. Next, we'll want to make sure the game's ModuleRules take a dependency on the plugin. By opening the `.Build.cs` file and adding the GameLiftServerSDK dependency.
+    * This file is found in the in under `<Your application name>/Source/<Your application name>/`
+    * For our example, the filepath is `../GameLiftUnrealApp/Source/GameLiftUnrealApp/GameLiftUnrealApp.Build.cs`  
+1. Add `"GameLiftServerSDK"` to the end of the list of `PublicDependencyModuleNames`
+    ```csharp
+    public class GameLiftUnrealApp : ModuleRules  
     {
-        UE_LOG(GameServerLog, SetColor, TEXT("%s"), COLOR_GREEN);
-        UE_LOG(GameServerLog, Log, TEXT("GameLift InitSDK succeeded!"));
-        UE_LOG(GameServerLog, SetColor, TEXT("%s"), COLOR_NONE);
+      public GameLiftUnrealApp(TargetInfo Target)
+      {
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GameLiftServerSDK" });
+        bEnableExceptions = true;
+      }
     }
-    else
-    ...
+    ```
+1. The plugin should now be working for your application. Next you will need to initialize Amazon GameLift. See the next section for example code to do this.
+
+### Example code
+The code sample below showcases how to initialize a game server with Amazon GameLift. See the Amazon GameLift server integration guide for more details.
+As we can see, the Amazon GameLift-specific code is dependent on the WITH_GAMELIFT preprocessor flag. This flag is true only when both of these conditions are met:
+1. The plugins found the Amazon GameLift server SDK binaries.
+1. Target.Type == TargetRules.TargetType.Server  
+
+This means only Unreal Server builds will invoke Amazon GameLift's backend API. It also enables developers to write code that will execute properly for all the different Unreal Targets the game may produce.
+
+1. Open the `.sln` file for your application, for our example this will be `GameLiftUnrealApp.sln` found in the root folder.
+1. Once opened, find the file called `<Your application name>GameMode.h`, in our case `GameLiftUnrealAppGameMode.h`
+1. Change the file to match our example below  
+*Note the class name starts with an `A`*
+    ```cpp
+    #pragma once
+    
+    #include "CoreMinimal.h"
+    #include "GameFramework/GameModeBase.h"
+    #include "GameLiftServerSDK.h"
+    #include "GameLiftUnrealAppGameMode.generated.h"
+    
+    DECLARE_LOG_CATEGORY_EXTERN(GameServerLog, Log, All);
+    
+    UCLASS(minimalapi)
+    class AGameLiftUnrealAppGameMode : public AGameModeBase
+    {
+        GENERATED_BODY()
+    
+    public:
+        AGameLiftUnrealAppGameMode();
+    
+    protected:
+        virtual void BeginPlay() override;
+    
+    private:
+        // Process Parameters needs to remain in scope for the lifetime of the app
+        FProcessParameters m_params;
+    
+        void InitGameLift();
+    };
+    ```
+1. Next open the related source file, `<Your application name>GameMode.cpp` file, in our case `GameLiftUnrealAppGameMode.cpp`, and change to match the following example
+    ```cpp
+    #include "GameLiftUnrealAppGameMode.h"
+    #include "GameLiftUnrealAppCharacter.h"
+    
+    #include "UObject/ConstructorHelpers.h"
+    
+    DEFINE_LOG_CATEGORY(GameServerLog);
+    
+    AGameLiftUnrealAppGameMode::AGameLiftUnrealAppGameMode()
+    {
+        // set default pawn class to our Blueprinted character
+        static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPerson/Blueprints/BP_ThirdPersonCharacter"));
+        if (PlayerPawnBPClass.Class != NULL)
+        {
+            DefaultPawnClass = PlayerPawnBPClass.Class;
+        }
+    }
+    
+    void AGameLiftUnrealAppGameMode::BeginPlay()
+    {
+    #if WITH_GAMELIFT
+        InitGameLift();
+    #endif
+    }
+    
+    void AGameLiftUnrealAppGameMode::InitGameLift()
+    {
+        UE_LOG(GameServerLog, Log, TEXT("Initializing the GameLift Server"));
+    
+        //Getting the module first.
+        FGameLiftServerSDKModule* gameLiftSdkModule = &FModuleManager::LoadModuleChecked<FGameLiftServerSDKModule>(FName("GameLiftServerSDK"));
+    
+        //Define the server parameters
+        FServerParameters serverParameters;
+    
+        //AuthToken returned from the "aws gamelift get-compute-auth-token" API. Note this will expire and require a new call to the API after 15 minutes.
+        if (FParse::Value(FCommandLine::Get(), TEXT("-authtoken="), serverParameters.m_authToken))
+        {
+            UE_LOG(GameServerLog, Log, TEXT("AUTH_TOKEN: %s"), *serverParameters.m_authToken)
+        }
+    
+        //The Host/compute-name of the GameLift Anywhere instance.
+        if (FParse::Value(FCommandLine::Get(), TEXT("-hostid="), serverParameters.m_hostId))
+        {
+            UE_LOG(GameServerLog, Log, TEXT("HOST_ID: %s"), *serverParameters.m_hostId)
+        }
+    
+        //The EC2 or Anywhere Fleet ID.
+        if (FParse::Value(FCommandLine::Get(), TEXT("-fleetid="), serverParameters.m_fleetId))
+        {
+            UE_LOG(GameServerLog, Log, TEXT("FLEET_ID: %s"), *serverParameters.m_fleetId)
+        }
+    
+        //The WebSocket URL (GameLiftServiceSdkEndpoint).
+        if (FParse::Value(FCommandLine::Get(), TEXT("-websocketurl="), serverParameters.m_webSocketUrl))
+        {
+            UE_LOG(GameServerLog, Log, TEXT("WEBSOCKET_URL: %s"), *serverParameters.m_webSocketUrl)
+        }
+    
+        //The PID of the running process
+        serverParameters.m_processId = FString::Printf(TEXT("%d"), GetCurrentProcessId());
+        UE_LOG(GameServerLog, Log, TEXT("PID: %s"), *serverParameters.m_processId);
+    
+        //InitSDK will establish a local connection with GameLift's agent to enable further communication.
+        gameLiftSdkModule->InitSDK(serverParameters);
+    
+        //When a game session is created, GameLift sends an activation request to the game server and passes along the game session object containing game properties and other settings.
+        //Here is where a game server should take action based on the game session object.
+        //Once the game server is ready to receive incoming player connections, it should invoke GameLiftServerAPI.ActivateGameSession()
+        auto onGameSession = [=](Aws::GameLift::Server::Model::GameSession gameSession)
+        {
+            FString gameSessionId = FString(gameSession.GetGameSessionId());
+            UE_LOG(GameServerLog, Log, TEXT("GameSession Initializing: %s"), *gameSessionId);
+            gameLiftSdkModule->ActivateGameSession();
+        };
+    
+        m_params.OnStartGameSession.BindLambda(onGameSession);
+    
+        //OnProcessTerminate callback. GameLift will invoke this callback before shutting down an instance hosting this game server.
+        //It gives this game server a chance to save its state, communicate with services, etc., before being shut down.
+        //In this case, we simply tell GameLift we are indeed going to shutdown.
+        auto onProcessTerminate = [=]() 
+        {
+            UE_LOG(GameServerLog, Log, TEXT("Game Server Process is terminating"));
+            gameLiftSdkModule->ProcessEnding();
+        };
+    
+        m_params.OnTerminate.BindLambda(onProcessTerminate);
+    
+        //This is the HealthCheck callback.
+        //GameLift will invoke this callback every 60 seconds or so.
+        //Here, a game server might want to check the health of dependencies and such.
+        //Simply return true if healthy, false otherwise.
+        //The game server has 60 seconds to respond with its health status. GameLift will default to 'false' if the game server doesn't respond in time.
+        //In this case, we're always healthy!
+        auto onHealthCheck = []() 
+        {
+            UE_LOG(GameServerLog, Log, TEXT("Performing Health Check"));
+            return true;
+        };
+    
+        m_params.OnHealthCheck.BindLambda(onHealthCheck);
+    
+        //This game server tells GameLift that it will listen on port 7777 for incoming player connections.
+        m_params.port = 7777;
+    
+        //Here, the game server tells GameLift what set of files to upload when the game session ends.
+        //GameLift will upload everything specified here for the developers to fetch later.
+        TArray<FString> logfiles;
+        logfiles.Add(TEXT("GameLift426Test/Saved/Logs/GameLift426Test.log"));
+        m_params.logParameters = logfiles;
+    
+        //Calling ProcessReady tells GameLift this game server is ready to receive incoming game sessions!
+        UE_LOG(GameServerLog, Log, TEXT("Calling Process Ready"));
+        gameLiftSdkModule->ProcessReady(m_params);
+    }
+    ```
+1. Now you need to build your app for both of the following target types: `Development Editor` and `Development Server`  
+  *Avoid doing a rebuild of the solution, instead build just the project under the "Games" folder that matches the name of your app. Otherwise Visual Studio will rebuild the UE5 project which might take up to an hour.*
+1. Once both builds are complete, you can close Visual Studio, then open your app by double clicking the `.uproject` file
+1. After the app loads, to package the server build of the app. Click on `Platforms > Windows > <Your application name>Server` to select the correct target (for our example: `Platforms > Windows > GameLiftUnrealAppServer`)
+1. Now click on `Platforms > Windows > Package Project`, this will start the process of building the server application. Once complete you should have an executable, for the case of our example it will be named `GameLiftUnrealAppServer.exe`
+  
+### Running a cooked Unreal server on Amazon GameLift
+When cooking an Unreal server build, the engine will produce two executables. One will be located in the root of the folder and will act as a wrapper for the actual server executable. Is it recommended that the actual server executable be passed in as the launch path when creating a fleet.
+For example, I might have a GameLiftFPS.exe file at the root and another at \GameLiftFPS\Binaries\Win64\GameLiftFPSServer.exe. So, when creating a fleet, it is recommended to use C:\GameLiftFPS\Binaries\Win64\GameLiftFPSServer.exe as the launch path of the runtime configuration.
+
+Make sure to open the necessary UDP ports on the Amazon GameLift Fleet so that the Server can communicate to the client. By default Unreal Engine uses port 7777. Follow this link for more information: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetPortSettings.html
+
+Include an install.bat file to setup preqrequiests on the fleet. Example install.bat file:
+
+````
+VC_redist.x64.exe /q
+UE5PrereqSetup_x64.exe /q
+````
+
+### Do not forget your dependencies
+When uploading your application to Amazon GameLift, **make sure you also include any dependencies** such as the OpenSSL DLLs that you built the Amazon GameLift SDK with.
+
+**Note:** The version of OpenSSL you download and use to build the Amazon GameLift SDK should match the version of OpenSSL used by Unreal to package your game server. The version can be identified under the Unreal installation directory `Engine\Source\ThirdParty\OpenSSL`.
 ```
+libssl-1_1-x64.dll
+libcrypto-1_1-x64.dll
+```
+
+### Compatability Notes
+Supported UE4 and UE5 Versions
+
+------
+4.22  
+4.23  
+4.24  
+4.25  
+4.26  
+4.27   
+5.1.0  
+5.1.1   

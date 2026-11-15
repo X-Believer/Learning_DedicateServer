@@ -19,7 +19,7 @@ namespace Aws {
 namespace GameLift {
 namespace Internal {
 /**
- * WebSocketDescribePlayerSessionsRequest Response. This response is sent to the Amazon GameLift Servers WebSocket
+ * WebSocketDescribePlayerSessionsRequest Response. This response is sent to the GameLift WebSocket
  * during a DescribePlayerSessions call
  */
 class WebSocketGetComputeCertificateResponse : public Message {

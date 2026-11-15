@@ -18,7 +18,7 @@ namespace Aws {
 namespace GameLift {
 namespace Internal {
 /**
- * WebSocketGetComputeCertificateRequest Request. This request is sent to the Amazon GameLift Servers WebSocket
+ * WebSocketGetComputeCertificateRequest Request. This request is sent to the GameLift WebSocket
  * during a DescribePlayerSessions call
  */
 class WebSocketGetComputeCertificateRequest : public Message {

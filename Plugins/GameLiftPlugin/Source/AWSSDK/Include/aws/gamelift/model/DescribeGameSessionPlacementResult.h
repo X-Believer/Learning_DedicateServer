@@ -33,27 +33,53 @@ namespace Model
     AWS_GAMELIFT_API DescribeGameSessionPlacementResult& operator=(const Aws::AmazonWebServiceResult<Aws::Utils::Json::JsonValue>& result);
 
 
-    ///@{
     /**
      * <p>Object that describes the requested game session placement.</p>
      */
     inline const GameSessionPlacement& GetGameSessionPlacement() const{ return m_gameSessionPlacement; }
-    inline void SetGameSessionPlacement(const GameSessionPlacement& value) { m_gameSessionPlacement = value; }
-    inline void SetGameSessionPlacement(GameSessionPlacement&& value) { m_gameSessionPlacement = std::move(value); }
-    inline DescribeGameSessionPlacementResult& WithGameSessionPlacement(const GameSessionPlacement& value) { SetGameSessionPlacement(value); return *this;}
-    inline DescribeGameSessionPlacementResult& WithGameSessionPlacement(GameSessionPlacement&& value) { SetGameSessionPlacement(std::move(value)); return *this;}
-    ///@}
 
-    ///@{
+    /**
+     * <p>Object that describes the requested game session placement.</p>
+     */
+    inline void SetGameSessionPlacement(const GameSessionPlacement& value) { m_gameSessionPlacement = value; }
+
+    /**
+     * <p>Object that describes the requested game session placement.</p>
+     */
+    inline void SetGameSessionPlacement(GameSessionPlacement&& value) { m_gameSessionPlacement = std::move(value); }
+
+    /**
+     * <p>Object that describes the requested game session placement.</p>
+     */
+    inline DescribeGameSessionPlacementResult& WithGameSessionPlacement(const GameSessionPlacement& value) { SetGameSessionPlacement(value); return *this;}
+
+    /**
+     * <p>Object that describes the requested game session placement.</p>
+     */
+    inline DescribeGameSessionPlacementResult& WithGameSessionPlacement(GameSessionPlacement&& value) { SetGameSessionPlacement(std::move(value)); return *this;}
+
+
     
     inline const Aws::String& GetRequestId() const{ return m_requestId; }
+
+    
     inline void SetRequestId(const Aws::String& value) { m_requestId = value; }
+
+    
     inline void SetRequestId(Aws::String&& value) { m_requestId = std::move(value); }
+
+    
     inline void SetRequestId(const char* value) { m_requestId.assign(value); }
+
+    
     inline DescribeGameSessionPlacementResult& WithRequestId(const Aws::String& value) { SetRequestId(value); return *this;}
+
+    
     inline DescribeGameSessionPlacementResult& WithRequestId(Aws::String&& value) { SetRequestId(std::move(value)); return *this;}
+
+    
     inline DescribeGameSessionPlacementResult& WithRequestId(const char* value) { SetRequestId(value); return *this;}
-    ///@}
+
   private:
 
     GameSessionPlacement m_gameSessionPlacement;

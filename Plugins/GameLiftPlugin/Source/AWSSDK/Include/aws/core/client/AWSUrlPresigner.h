@@ -33,8 +33,7 @@ namespace Aws
              */
             Aws::String GeneratePresignedUrl(const Aws::Http::URI &uri,
                                              Aws::Http::HttpMethod method,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer, for the supplied uri, http method, and customized headers. expirationInSeconds defaults
@@ -43,8 +42,7 @@ namespace Aws
             Aws::String GeneratePresignedUrl(const Aws::Http::URI &uri,
                                              Aws::Http::HttpMethod method,
                                              const Aws::Http::HeaderValueCollection &customizedHeaders,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer, for the supplied uri, http method, and region. expirationInSeconds defaults
@@ -53,8 +51,7 @@ namespace Aws
             Aws::String GeneratePresignedUrl(const Aws::Http::URI &uri,
                                              Aws::Http::HttpMethod method,
                                              const char *regionOverride,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer, for the supplied uri, http method, and customized headers. expirationInSeconds defaults
@@ -64,8 +61,7 @@ namespace Aws
                                              Aws::Http::HttpMethod method,
                                              const char *regionOverride,
                                              const Aws::Http::HeaderValueCollection &customizedHeaders,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer, for the supplied uri, http method, region, and service name. expirationInSeconds defaults
@@ -75,8 +71,7 @@ namespace Aws
                                              Aws::Http::HttpMethod method,
                                              const char *regionOverride,
                                              const char *serviceNameOverride,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer, for the supplied uri, http method, and customized headers. expirationInSeconds defaults
@@ -87,8 +82,7 @@ namespace Aws
                                              const char *regionOverride,
                                              const char *serviceNameOverride,
                                              const Aws::Http::HeaderValueCollection &customizedHeaders,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer, for the supplied uri, http method, region, service name, and signer name. expirationInSeconds defaults
@@ -99,8 +93,7 @@ namespace Aws
                                              const char *regionOverride,
                                              const char *serviceNameOverride,
                                              const char *signerName,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer, for the supplied uri, http method, region, service name, signer name, and customized headers. expirationInSeconds defaults
@@ -114,8 +107,7 @@ namespace Aws
                                              const char *serviceNameOverride,
                                              const char *signerName,
                                              const Aws::Http::HeaderValueCollection &customizedHeaders,
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri for a supplied AWSEndpoint.
@@ -126,8 +118,7 @@ namespace Aws
                                              uint64_t expirationInSeconds = 0,
                                              const char *signerName = Aws::Auth::SIGV4_SIGNER,
                                              const char *signerRegionOverride = nullptr,
-                                             const char *signerServiceNameOverride = nullptr,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             const char *signerServiceNameOverride = nullptr) const;
 
             /**
              * Generates a signed Uri for a supplied request and uri.
@@ -136,8 +127,7 @@ namespace Aws
                                              const Aws::Http::URI &uri,
                                              Aws::Http::HttpMethod method,
                                              const Aws::Http::QueryStringParameterCollection &extraParams = Aws::Http::QueryStringParameterCollection(),
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri using the injected signer. for the supplied request object, uri, http method, region, service name, signer name, and customized headers.
@@ -152,8 +142,7 @@ namespace Aws
                                              const char *serviceNameOverride,
                                              const char *signerName,
                                              const Aws::Http::QueryStringParameterCollection &extraParams = Aws::Http::QueryStringParameterCollection(),
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri for a supplied request and uri.
@@ -164,8 +153,7 @@ namespace Aws
                                              const char *regionOverride,
                                              const char *serviceNameOverride,
                                              const Aws::Http::QueryStringParameterCollection &extraParams = Aws::Http::QueryStringParameterCollection(),
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
             /**
              * Generates a signed Uri for a supplied request and uri.
@@ -175,8 +163,7 @@ namespace Aws
                                              Aws::Http::HttpMethod method,
                                              const char *regionOverride,
                                              const Aws::Http::QueryStringParameterCollection &extraParams = Aws::Http::QueryStringParameterCollection(),
-                                             long long expirationInSeconds = 0,
-                                             const std::shared_ptr<Aws::Http::ServiceSpecificParameters> serviceSpecificParameter = {}) const;
+                                             long long expirationInSeconds = 0) const;
 
         protected:
             const AWSClient& m_awsClient;

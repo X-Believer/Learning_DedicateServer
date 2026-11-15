@@ -24,7 +24,6 @@ namespace Aws
         public:
             SSOBearerTokenProvider();
             explicit SSOBearerTokenProvider(const Aws::String& awsProfile);
-            explicit SSOBearerTokenProvider(const Aws::String& awsProfile, std::shared_ptr<const Aws::Client::ClientConfiguration> config);
             /**
             * Retrieves the bearerToken if found, otherwise returns empty credential set.
             */
@@ -49,7 +48,6 @@ namespace Aws
             // Profile description variables
             Aws::UniquePtr<Aws::Internal::SSOCredentialsClient> m_client;
             Aws::String m_profileToUse;
-            std::shared_ptr<const Aws::Client::ClientConfiguration> m_config;
 
             mutable Aws::Auth::AWSBearerToken m_token;
             mutable Aws::Utils::DateTime m_lastUpdateAttempt;

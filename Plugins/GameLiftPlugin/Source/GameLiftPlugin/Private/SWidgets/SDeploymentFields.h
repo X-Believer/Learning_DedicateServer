@@ -18,8 +18,6 @@
 class SPathInput;
 class SSelectionComboBox;
 
-DECLARE_MULTICAST_DELEGATE(FOnOperatingSystemChanged);
-
 class SDeploymentFields : public SCompoundWidget
 {
 	SLATE_BEGIN_ARGS(SDeploymentFields) {}
@@ -37,7 +35,6 @@ public:
 
 	void SetGameOnlyMode();
 	void SetFullMode();
-	void SetAllFieldsReadOnly(bool ReadOnly);
 
 	void SetBuildName(const FText& Name);
 	void SetBuildOperatingSystem(const FText& OSValue);
@@ -45,7 +42,6 @@ public:
 	void SetBuildFilePath(const FText& Path);
 	void SetExtraServerResourcesPath(const FText& Path);
 	void SetOutConfigFilePath(const FText& Path);
-	void SetDeploymentScenario(const FText& Name);
 
 	const FText& GetBuildName() const;
 	FText GetBuildOperatingSystem() const;
@@ -53,10 +49,7 @@ public:
 	const FText& GetBuildFilePath() const;
 	const FText& GetExtraServerResourcesPath() const;
 	const FText& GetOutConfigFilePath() const;
-	const FText& GetDeploymentScenario() const;
 	Modes GetCurrentState() const;
-
-	FOnOperatingSystemChanged OnOperatingSystemChanged;
 
 private:
 	int32 GetSetupStateAsInt() const;
@@ -78,8 +71,6 @@ private:
 	TSharedPtr<SPathInput> BuildFilePathInput;
 	TSharedPtr<SPathInput> ExtraServerResourcesPathInput;
 	TSharedPtr<SPathInput> OutConfigFilePathInput;
-	TSharedPtr<SPathInput> GameClientFilePathInput;
-	FText DeploymentScenario;
 };
 
 inline TSharedRef<SDeploymentFields> AsSDeploymentFieldsRef(TSharedPtr<SWidget> WidgetToCast)

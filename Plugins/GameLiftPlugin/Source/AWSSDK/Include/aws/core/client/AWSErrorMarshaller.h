@@ -6,8 +6,6 @@
 #pragma once
 
 #include <aws/core/Core_EXPORTS.h>
-#include <aws/core/client/AWSError.h>
-#include <aws/core/client/CoreErrors.h>
 #include <aws/core/utils/memory/stl/AWSString.h>
 
 namespace Aws
@@ -55,15 +53,6 @@ namespace Aws
              */
             virtual AWSError<CoreErrors> FindErrorByName(const char* exceptionName) const;
             virtual AWSError<CoreErrors> FindErrorByHttpResponseCode(Aws::Http::HttpResponseCode code) const;
-
-            /**
-             * Deserialize http error payload to an error object.
-             */
-            virtual AWSError<CoreErrors> BuildAWSError(const std::shared_ptr<Http::HttpResponse>&) const
-            {
-                return AWSError<CoreErrors>(CoreErrors::UNKNOWN, false);
-            }
-
             /**
              * Attempts to extract region from error.
              */
@@ -86,8 +75,6 @@ namespace Aws
              */
             AWSError<CoreErrors> Marshall(const Aws::Http::HttpResponse& response) const override;
 
-            AWSError<CoreErrors> BuildAWSError(const std::shared_ptr<Http::HttpResponse>& httpResponse) const override;
-
         protected:
             const Aws::Utils::Json::JsonValue& GetJsonPayloadFromError(const AWSError<CoreErrors>&) const;
         };
@@ -101,8 +88,6 @@ namespace Aws
              * and AWSError with CoreErrors::UNKNOWN as the error type.
              */
             AWSError<CoreErrors> Marshall(const Aws::Http::HttpResponse& response) const override;
-
-            AWSError<CoreErrors> BuildAWSError(const std::shared_ptr<Http::HttpResponse>& httpResponse) const override;
 
         protected:
             const Aws::Utils::Xml::XmlDocument& GetXmlPayloadFromError(const AWSError<CoreErrors>&) const;

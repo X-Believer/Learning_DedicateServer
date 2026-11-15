@@ -16,8 +16,6 @@
 #include <aws/gamelift/common/Outcome.h>
 
 #include <aws/gamelift/server/ProcessParameters.h>
-#include <aws/gamelift/server/MetricsParameters.h>
-#include <aws/gamelift/server/CustomLoggerConfiguration.h>
 #include <aws/gamelift/server/model/DescribePlayerSessionsRequest.h>
 #include <aws/gamelift/server/model/GetFleetRoleCredentialsRequest.h>
 #include <aws/gamelift/server/model/ServerParameters.h>
@@ -26,7 +24,7 @@
 #include <future>
 
 /* The GameLiftServerAPI contains methods that should be used by the server executable you upload to
- * Amazon GameLift Servers. */
+ * GameLift. */
 
 namespace Aws {
 namespace GameLift {
@@ -45,64 +43,22 @@ typedef Aws::GameLift::Outcome<std::vector<std::string>, GameLiftError> GetConne
 AWS_GAMELIFT_API AwsStringOutcome GetSdkVersion();
 
 /**
-Initializes the game server.
-Should be called when the server starts, before any Amazon GameLift Servers dependent initialization happens.
+Initializes the GameLift server.
+Should be called when the server starts, before any GameLift-dependent initialization happens.
 Should be only used with Managed EC2 fleets, where the serer parameters are read from the environment.
 @return Pointer to the internal server state indicating that the server process is ready to call ProcessReady().
 */
 AWS_GAMELIFT_API InitSDKOutcome InitSDK();
 
 /**
-Initializes the game server.
-Should be called when the server starts with the given server parameters, before any Amazon GameLift Servers dependent initialization happens.
+Initializes the GameLift server.
+Should be called when the server starts with the given server parameters, before any GameLift-dependent initialization happens.
 @return Pointer to the internal server state indicating that the server process is ready to call ProcessReady().
 */
 AWS_GAMELIFT_API InitSDKOutcome InitSDK(const Aws::GameLift::Server::Model::ServerParameters &serverParameters);
 
 /**
-Initializes the metrics system with default configuration parameters.
-For best results, it's recommended to call this method before InitSDK() to enable metrics collection.
-Uses default values, overridden by environment variables if available.
-Defaults: localhost:8125 for StatsD, localhost:8126 for crash reporter
-FlushInterval: 10000ms, MaxPacketSize: 512 bytes
-Override with environment variables: GAMELIFT_STATSD_HOST, GAMELIFT_STATSD_PORT, etc.
-@return GenericOutcome indicating success or failure.
-*/
-AWS_GAMELIFT_API GenericOutcome InitMetrics();
-
-/**
-Initializes the metrics system with the specified configuration parameters.
-For best results, it's recommended to call this method before InitSDK() to enable metrics collection.
-Uses the provided parameters exactly as specified. To use environment variables or defaults, call InitMetrics() instead.
-@param metricsParameters A MetricsParameters object containing configuration for metrics collection:
-- StatsD server host and port for metrics reporting
-- Crash reporter host and port for crash tracking  
-- Metrics maximum packet size and flush interval settings
-@return GenericOutcome indicating success or failure.
-*/
-AWS_GAMELIFT_API GenericOutcome InitMetrics(const Aws::GameLift::Server::MetricsParameters &metricsParameters);
-
-/**
-Initializes custom logging with the specified callback parameters.
-For best results, call InitCustomLogger() BEFORE InitSDK() so that SDK initialization
-diagnostics (connection setup, logger init, InitSDK errors) are routed to your
-custom log callback from the very start.
-
-Calling InitCustomLogger() after InitSDK() is also safe — the switch is thread-safe with
-respect to SDK background threads, and log output switches to the callback from that
-point onward; messages logged before the call go to the default file/console logger.
-
-This method can be called at most once; subsequent calls return ALREADY_INITIALIZED
-and do NOT change the existing logger. A null callback is rejected with
-BAD_REQUEST_EXCEPTION.
-
-@param logParameters Parameters for configuring custom logging (callback, userData, minimumLogLevel).
-@return GenericOutcome indicating success or failure.
-*/
-AWS_GAMELIFT_API GenericOutcome InitCustomLogger(const Aws::GameLift::Server::CustomLoggerConfiguration &logParameters);
-
-/**
-Signals Amazon GameLift Servers that the process is ready to receive GameSessions.
+Signals GameLift that the process is ready to receive GameSessions.
 The onStartGameSession callback will be invoked when the server is bound to a GameSession.
 Game-property-dependent initialization (such as loading a user-requested map) should take place at
 that time. The onHealthCheck callback is invoked asynchronously. There is no mechanism to to destroy
@@ -113,20 +69,20 @@ reported as unhealthy.
 AWS_GAMELIFT_API GenericOutcome ProcessReady(const Aws::GameLift::Server::ProcessParameters &processParameters);
 
 /**
-Signals Amazon GameLift Servers that the process is ending.
-Amazon GameLift Servers will eventually terminate the process and recycle the host. Once the process is marked as
+Signals GameLift that the process is ending.
+GameLift will eventually terminate the process and recycle the host. Once the process is marked as
 Ending,
 */
 AWS_GAMELIFT_API GenericOutcome ProcessEnding();
 
 /**
-Reports to Amazon GameLift Servers that the server process is now ready to receive player sessions.
+Reports to GameLift that the server process is now ready to receive player sessions.
 Should be called once all GameSession initialization has finished.
 */
 AWS_GAMELIFT_API GenericOutcome ActivateGameSession();
 
 /**
-Reports to Amazon GameLift Servers that we need to backfill a match using FlexMatch.
+Reports to GameLift that we need to backfill a match using FlexMatch.
 When the match has been succeessfully backfilled updated matchmaker data will be sent to
 the OnUpdateGameSession callback.
 */
@@ -148,9 +104,9 @@ AWS_GAMELIFT_API GenericOutcome UpdatePlayerSessionCreationPolicy(Aws::GameLift:
 AWS_GAMELIFT_API AwsStringOutcome GetGameSessionId();
 
 /**
-Gets the time remaining before Amazon GameLift Servers will shut down the server process. Use this method in your
+Gets the time remaining before Gamelift will shut down the server process. Use this method in your
 onProcessTerminate() callback implementation to learn when the process will be terminated.
-@return The server's terminationTime in epoch seconds. Value will be -1 if Amazon GameLift Servers is not scheduled
+@return The server's terminationTime in epoch seconds. Value will be -1 if GameLift is not scheduled
 to terminate the server process.
 */
 AWS_GAMELIFT_API AwsLongOutcome GetTerminationTime();
@@ -192,64 +148,22 @@ DescribePlayerSessions(const Aws::GameLift::Server::Model::DescribePlayerSession
 AWS_GAMELIFT_API AwsStringOutcome GetSdkVersion();
 
 /**
-Initializes the game server.
-Should be called when the server starts, before any Amazon GameLift Servers dependent initialization happens.
+Initializes the GameLift server.
+Should be called when the server starts, before any GameLift-dependent initialization happens.
 Should be only used with Managed EC2 fleets, where the serer parameters are read from the environment.
 @return Pointer to the internal server state indicating that the server process is ready to call ProcessReady().
 */
 AWS_GAMELIFT_API GenericOutcome InitSDK();
 
 /**
-Initializes the game server.
-Should be called when the server starts with the given server parameters, before any Amazon GameLift Servers dependent initialization happens.
+Initializes the GameLift server.
+Should be called when the server starts with the given server parameters, before any GameLift-dependent initialization happens.
 @return Pointer to the internal server state indicating that the server process is ready to call ProcessReady().
 */
 AWS_GAMELIFT_API GenericOutcome InitSDK(const Aws::GameLift::Server::Model::ServerParameters &serverParameters);
 
 /**
-Initializes the metrics system with default configuration parameters.
-For best results, it's recommended to call this method before InitSDK() to enable metrics collection.
-Uses default values, overridden by environment variables if available.
-Defaults: localhost:8125 for StatsD, localhost:8126 for crash reporter
-FlushInterval: 10000ms, MaxPacketSize: 512 bytes
-Override with environment variables: GAMELIFT_STATSD_HOST, GAMELIFT_STATSD_PORT, etc.
-@return GenericOutcome indicating success or failure.
-*/
-AWS_GAMELIFT_API GenericOutcome InitMetrics();
-
-/**
-Initializes the metrics system with the specified configuration parameters.
-For best results, it's recommended to call this method before InitSDK() to enable metrics collection.
-Uses the provided parameters exactly as specified. To use environment variables or defaults, call InitMetrics() instead.
-@param metricsParameters A MetricsParameters object containing configuration for metrics collection:
-- StatsD server host and port for metrics reporting
-- Crash reporter host and port for crash tracking  
-- Metrics maximum packet size and flush interval settings
-@return GenericOutcome indicating success or failure.
-*/
-AWS_GAMELIFT_API GenericOutcome InitMetrics(const Aws::GameLift::Server::MetricsParameters &metricsParameters);
-
-/**
-Initializes custom logging with the specified callback parameters.
-For best results, call InitCustomLogger() BEFORE InitSDK() so that SDK initialization
-diagnostics (connection setup, logger init, InitSDK errors) are routed to your
-custom log callback from the very start.
-
-Calling InitCustomLogger() after InitSDK() is also safe — the switch is thread-safe with
-respect to SDK background threads, and log output switches to the callback from that
-point onward; messages logged before the call go to the default file/console logger.
-
-This method can be called at most once; subsequent calls return ALREADY_INITIALIZED
-and do NOT change the existing logger. A null callback is rejected with
-BAD_REQUEST_EXCEPTION.
-
-@param logParameters Parameters for configuring custom logging (callback, userData, minimumLogLevel).
-@return GenericOutcome indicating success or failure.
-*/
-AWS_GAMELIFT_API GenericOutcome InitCustomLogger(const Aws::GameLift::Server::CustomLoggerConfiguration &logParameters);
-
-/**
-Signals Amazon GameLift Servers that the process is ready to receive GameSessions.
+Signals GameLift that the process is ready to receive GameSessions.
 The onStartGameSession callback will be invoked when the server is bound to a GameSession.
 Game-property-dependent initialization (such as loading a user-requested map) should take place at
 that time. The onHealthCheck callback is invoked asynchronously. There is no mechanism to to destroy
@@ -260,39 +174,39 @@ reported as unhealthy.
 AWS_GAMELIFT_API GenericOutcome ProcessReady(const Aws::GameLift::Server::ProcessParameters &processParameters);
 
 /**
-Signals Amazon GameLift Servers that the process is ending.
-Amazon GameLift Servers will eventually terminate the process and recycle the host. Once the process is marked as
+Signals GameLift that the process is ending.
+GameLift will eventually terminate the process and recycle the host. Once the process is marked as
 Ending,
 */
 AWS_GAMELIFT_API GenericOutcome ProcessEnding();
 
 /**
-Reports to Amazon GameLift Servers that the server process is now ready to receive player sessions.
+Reports to GameLift that the server process is now ready to receive player sessions.
 Should be called once all GameSession initialization has finished.
 */
 AWS_GAMELIFT_API GenericOutcome ActivateGameSession();
 
 /**
-Reports to Amazon GameLift Servers that we need to backfill a match using FlexMatch.
+Reports to GameLift that we need to backfill a match using FlexMatch.
 When the match has been succeessfully backfilled updated matchmaker data will be sent to
 the OnUpdateGameSession callback.
 */
 AWS_GAMELIFT_API StartMatchBackfillOutcome StartMatchBackfill(const Aws::GameLift::Server::Model::StartMatchBackfillRequest &startMatchBackfillRequest);
 
 /**
-Reports to Amazon GameLift Servers that we need to backfill a match using FlexMatch.
+Reports to GameLift that we need to backfill a match using FlexMatch.
 When the match has been succeessfully backfilled updated matchmaker data will be sent to
 the OnUpdateGameSession callback.
 */
 AWS_GAMELIFT_API StartMatchBackfillOutcome StartMatchBackfill(const Aws::GameLift::Server::Model::StartMatchBackfillRequest &startMatchBackfillRequest);
 
 /**
-Reports to Amazon GameLift Servers that we need to stop a request to backfill a match using FlexMatch.
+Reports to GameLift that we need to stop a request to backfill a match using FlexMatch.
 */
 AWS_GAMELIFT_API GenericOutcome StopMatchBackfill(const Aws::GameLift::Server::Model::StopMatchBackfillRequest &request);
 
 /**
-Reports to Amazon GameLift Servers that we need to backfill a match using FlexMatch.
+Reports to GameLift that we need to backfill a match using FlexMatch.
 When the match has been succeessfully backfilled updated matchmaker data will be sent to
 the OnUpdateGameSession callback.
 */
@@ -314,9 +228,9 @@ AWS_GAMELIFT_API GenericOutcome UpdatePlayerSessionCreationPolicy(Aws::GameLift:
 AWS_GAMELIFT_API AwsStringOutcome GetGameSessionId();
 
 /**
-Gets the time remaining before Amazon GameLift Servers will shut down the server process. Use this method in your
+Gets the time remaining before Gamelift will shut down the server process. Use this method in your
 onProcessTerminate() callback implementation to learn when the process will be terminated.
-@return The server's terminationTime in epoch seconds. Value will be -1 if Amazon GameLift Servers is not scheduled
+@return The server's terminationTime in epoch seconds. Value will be -1 if GameLift is not scheduled
 to terminate the server process.
 */
 AWS_GAMELIFT_API AwsLongOutcome GetTerminationTime();
@@ -369,13 +283,6 @@ AWS_GAMELIFT_API GetComputeCertificateOutcome GetComputeCertificate();
  * error for customer managed hardware.
  */
 AWS_GAMELIFT_API GetFleetRoleCredentialsOutcome GetFleetRoleCredentials(const Aws::GameLift::Server::Model::GetFleetRoleCredentialsRequest &request);
-
-/**
-Queries the container discovery server and returns network information for all containers
-running on the same instance. Only supported on container fleets.
-@return ListContainersNetworkInfoOutcome containing container names, IPs, IDs, and group types.
-*/
-AWS_GAMELIFT_API ListContainersNetworkInfoOutcome ListContainersNetworkInfo();
 
 } // namespace Server
 } // namespace GameLift

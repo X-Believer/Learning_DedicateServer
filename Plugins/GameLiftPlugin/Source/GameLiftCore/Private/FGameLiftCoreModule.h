@@ -28,7 +28,6 @@ public:
 	virtual TSharedRef<IGameLiftCoreProc> MakeRunner() override;
 	virtual IAWSScenariosDeployer& GetScenarioDeployer() override;
 	virtual IGameLiftAnywhereHandler& GetGameLiftAnywhereHandler() override;
-	virtual IGameLiftContainersHandler& GetGameLiftContainersHandler() override;
 
 	//~ End IGameLiftCoreModule Interface
 
@@ -47,7 +46,6 @@ private:
 	TSharedRef<IAWSScenariosDeployer> Deployer;
 	TSharedRef<IAWSBootstrapProfile> ProfileBootstrap;
 	TSharedRef<IGameLiftAnywhereHandler> AnywhereHandler;
-	TSharedRef<IGameLiftContainersHandler> ContainersHandler;
 
 	bool bShowDetails;
 };

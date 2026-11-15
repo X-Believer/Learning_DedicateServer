@@ -20,7 +20,7 @@ namespace Internal {
 using namespace Aws::GameLift::Server::Model;
 
 /**
- * Interface for a class that handles Messages from the Amazon GameLift Servers WebSocket.
+ * Interface for a class that handles Messages from the GameLift WebSocket.
  * Currently Implemented by GameLiftServerState
  */
 class IGameLiftMessageHandler {

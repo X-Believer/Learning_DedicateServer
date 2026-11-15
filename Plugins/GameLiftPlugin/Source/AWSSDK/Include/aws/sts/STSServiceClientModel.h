@@ -26,8 +26,6 @@
 #include <aws/sts/model/GetCallerIdentityResult.h>
 #include <aws/sts/model/GetFederationTokenResult.h>
 #include <aws/sts/model/GetSessionTokenResult.h>
-#include <aws/sts/model/GetCallerIdentityRequest.h>
-#include <aws/sts/model/GetSessionTokenRequest.h>
 /* End of service model headers required in STSClient header */
 
 namespace Aws
@@ -61,7 +59,7 @@ namespace Aws
 
   namespace STS
   {
-    using STSClientConfiguration = Aws::Client::GenericClientConfiguration;
+    using STSClientConfiguration = Aws::Client::GenericClientConfiguration<false>;
     using STSEndpointProviderBase = Aws::STS::Endpoint::STSEndpointProviderBase;
     using STSEndpointProvider = Aws::STS::Endpoint::STSEndpointProvider;
 
